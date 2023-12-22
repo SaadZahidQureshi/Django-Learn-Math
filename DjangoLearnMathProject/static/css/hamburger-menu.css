@@ -1,0 +1,55 @@
+
+
+.ham-burger-menu{
+    height: 7vh;
+    display: none;
+}
+
+
+@media (max-width: 540px) {
+    .nav-sm-d-none{
+        display: none !important;
+    }
+    .ham-burger-menu{
+        display: flex;
+    }
+    .logo-container-sm-d-none{
+        display: none;
+    }
+    .nav-link{
+        margin: 4px;
+        padding: 0px;
+    }
+    .nav-item{
+        font-size: 12px;
+        
+    }
+    .popuz-quiz-btn{
+        padding: 8px 4px;
+    }
+
+
+    .main-container{
+        position: relative;
+        padding: 0;
+    }
+    .nav-slid-sm{
+        position: absolute;
+        margin-top: 0px;
+        top: 0;
+        left: 50px;
+    }
+    /* .translate-right-left{
+        border: 1px solid red;
+        position: absolute;
+        margin-top: 0px;
+        top: 0;
+        left: 50px; 
+        transform: translateX(0%);
+        transition: transform 0.3s ease-in-out;
+    }
+         */
+
+
+
+}

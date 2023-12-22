@@ -1,0 +1,124 @@
+
+
+.main-container{
+    width: 100%;
+    height: 100vh;
+}
+.main-content{
+    width: 75%;
+}
+.content-container-height-width{
+    height: 90vh;
+}
+.w-sm-80{
+    width: 90%;
+}
+.profile-settings-main-heading{
+    font-size: 48px;
+    color: #743FCB;
+    font-weight: 700;
+}
+.public-profile{
+    font-size: 35px;
+    color: #743FCB;
+}
+.profile-img{
+    width: 116px;
+    height: 116px;
+}
+.change-pic{
+    padding: 6px;
+    border-radius: 5px;
+    background: #743FCB;
+    color: #FFF;
+}
+.delete-pic{
+    padding: 4px 9px;
+    border-radius: 5px;
+    border: 1px solid #743FCB;
+    background: #FFF;
+    color: #743FCB;
+}
+.profile-settings__reset-password{
+    color: #743FCB;
+    font-size: 35px;
+}
+.follow-the-following{
+    color: #232740;
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-control{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #743FCB;
+    padding-left: 40px;
+    font-size: 16px;
+}
+.input-svg{
+    top:15px;
+    left: 9px;
+}
+.bit-wide{
+    width: 20px;
+    height: 20px;
+}
+.row label{
+    color: #232740;
+    font-size: 16px;
+}
+.save-changes{
+    width: 100%;
+    height: 56px;
+    border-radius: 5px;
+    background: #743FCB;
+    color: #FFF;
+    font-size: 18px;
+}
+.w-sm-50{
+    width: 50%;
+}
+.rounded-50{
+    border-radius: 50%;
+}
+
+@media (max-width: 540px) {
+    .main-content{
+        width: 100%;
+    }
+    .main-container > nav{
+        display: none !important;
+    }
+    
+    .profile-settings-main-heading{
+        text-align: center;
+        font-size: 28px;
+    }
+    .profile-settings__reset-password{
+        margin-top: 10%;
+        text-align: left;
+    }
+    .public-profile{
+        font-size: 22px;
+    }
+    .profile-settings__reset-password{
+        font-size: 22px;
+    }
+    .profile-img-buttons{
+        flex-direction: column;
+    }
+    .profile-img-buttons__buttons{
+        flex-direction: row !important;
+        gap: 2 !important;
+    }
+    .w-sm-80{
+        width: 100%;
+    }
+    .w-sm-50{
+        width: 100%;
+    }
+}

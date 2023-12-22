@@ -1,0 +1,70 @@
+.main-content{
+    width: 75%;
+}
+
+.varification-heading{
+    color: #743FCB;
+    font-size: 48px;
+    font-weight: 700;
+}
+.varification-message{
+    font-size: 16px;
+    line-height: normal;
+    text-align: justify;
+}
+.input-control{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #743FCB;
+    padding-left: 40px;
+}
+.input-svg{
+    top:14px;
+    left: 9px;
+}
+.width-inpu-svg{
+    width: 20px;
+    height: 20px;
+  }
+.submit-input-control{
+  border-radius: 5px;
+  background: #743FCB;
+  width: 100%;
+  height: 56px;
+  border: none;
+  color: #FFF;
+  font-size: 18px;
+}
+.forgot-password p{
+    color: #743FCB;
+  }
+@media (max-width: 540px) {
+    #column-without-form{
+        display: none !important;
+    }
+    #svg-bottom-right{
+        display: none;
+    }
+    #svg-top-left{
+        display: none ;
+    }
+    .main-content{
+        width: 100%;
+        
+    }
+
+    .varification-heading{
+      font-size: 28px;
+    }
+    .varification-message{
+      font-size: 14px;
+    }
+    .current-email{
+      font-size: 14px;
+    }
+    .submit-input-control{
+      font-size: 16px;
+    }
+    
+}

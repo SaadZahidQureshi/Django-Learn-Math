@@ -1,0 +1,137 @@
+
+
+
+
+
+.main-container__width{
+    width: 92%;
+}
+
+.categories-container{
+    width: 94%;
+}
+/* home page style  */
+
+.banner__width{
+    width: 92%;
+    height: 20vh;
+}
+.banner__background-color{
+    background-color: #743FCB;
+}
+
+.banner__background-img{
+    background-image: url(../assets/svg/banner-background-svg.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px), right;
+    background-size: contain;
+}
+.banner_heading{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+}
+.banner-img-1{
+    position: absolute;
+    top: 0;
+    left: 15px;
+}
+.banner__text{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.banner__button{
+    display: inline-flex;
+    padding: 8px 32px 8px 33px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: #FFF;
+    color: #232740;
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.categories{
+    color: #743FCB;
+    font-size: 35px;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+.content{
+    width: 92%;
+}
+.categories__desc{
+    color: #232740;
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
+/* .card{
+    width: 27rem;
+    cursor: pointer;
+} */
+.card-title{
+    color: #232740;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.card-text{
+    color: #232740;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@media (max-width: 540px) {
+
+    .banner_heading{
+        font-size: 18px;
+    }
+    .banner__text{
+        font-size: 14px;
+    }
+    .banner__button{
+        padding: 11px 16px 10px 15px;
+        font-size: 12px;
+    }
+    .categories{
+        font-size: 28px;
+    }
+    .categories__desc{
+        font-size: 14px;
+    }
+    /* .card{
+
+        width: 22.3rem;
+    } */
+    .card-title{
+        font-size: 16px;
+    }
+    .card-text{
+        font-size: 12px;
+    }
+    .banner__background-img{
+        background-position: calc(100% - 10px) calc(100% - 10px);
+    }
+
+    
+}
