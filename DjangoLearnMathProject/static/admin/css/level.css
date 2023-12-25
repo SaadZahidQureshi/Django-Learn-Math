@@ -1,0 +1,10 @@
+
+.dropdown-toggle{
+    border: 1px solid #743FCB;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.dropdown-menu{
+    min-width: 40%;
+}

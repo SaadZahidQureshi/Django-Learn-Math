@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+ 
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/category.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/users.css">
+  <link rel="stylesheet" href="../css/question.css">
+  <title>Questions</title>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+
+
+        <div class="row ">
+
+            <!-- sidebar -->
+            <div class="col-1 p-0 m-0 bg-sidebar border  ">
+              <div class="d-flex flex-column align-items-center ">
+                <!-- wanna show these two column vertically  -->
+                <div
+                  class="logo-height w-100 d-flex justify-content-center align-items-center "
+                >
+                  <a class="text-decoration-none text-dark" href="#">Logo</a>
+                </div>
+    
+                <div
+                  class="w-100 d-flex justify-content-center "
+                >
+                  <div class="d-flex flex-column gap-4 nav-height margintop-nav">
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/dashboard.html?id=0"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 18 18"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1 10H7C7.55 10 8 9.55 8 9V1C8 0.45 7.55 0 7 0H1C0.45 0 0 0.45 0 1V9C0 9.55 0.45 10 1 10ZM1 18H7C7.55 18 8 17.55 8 17V13C8 12.45 7.55 12 7 12H1C0.45 12 0 12.45 0 13V17C0 17.55 0.45 18 1 18ZM11 18H17C17.55 18 18 17.55 18 17V9C18 8.45 17.55 8 17 8H11C10.45 8 10 8.45 10 9V17C10 17.55 10.45 18 11 18ZM10 1V5C10 5.55 10.45 6 11 6H17C17.55 6 18 5.55 18 5V1C18 0.45 17.55 0 17 0H11C10.45 0 10 0.45 10 1Z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/users.html?id=1"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 53"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M30.7943 14.1109C30.4814 32.5768 9.66806 32.5768 9.35508 14.1109C9.35508 7.69473 13.5803 3 19.9965 3C26.5691 3 30.7943 7.69473 30.7943 14.1109ZM38.1494 42.2792V44.4701C38.1494 52.2947 2 52.2947 2 44.4701V42.2792C2 34.6112 6.69473 30.0729 12.7979 28.1951V28.508C12.7979 33.6722 27.0386 33.6722 27.3515 28.6645C33.4547 30.6989 38.1494 35.3936 38.1494 42.2792ZM19.9965 11.92C19.0575 11.92 18.1186 11.7635 17.1796 11.4505C16.3972 11.1375 13.5803 10.0421 12.9544 10.5116C9.82455 12.546 13.5803 16.6147 10.7635 16.9277C12.7979 30.0729 27.3515 30.0729 29.3859 16.9277C26.5691 16.6147 30.3249 12.546 27.1951 10.5116C26.5691 10.0421 23.7523 11.1375 22.9698 11.4505C22.0309 11.7635 21.0919 11.92 19.9965 11.92Z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/category.html?id=2"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 40"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_1_8447)">
+                            <path d="M37.5 10L20 0L2.5 10L20 20.0001L37.5 10Z" />
+                            <path
+                              d="M20 34.9998L6.875 27.5L2.5 30L20 40L37.5 30L33.125 27.5L20 34.9998Z"
+                            />
+                            <path
+                              d="M20 24.9998L6.875 17.5L2.5 20L20 30L37.5 20L33.125 17.5L20 24.9998Z"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1_8447">
+                              <rect width="40" height="40" fill="" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/level.html?id=3"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 40"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M28.75 15.625L21.25 19.375V30H28.75V15.625Z" />
+                          <path d="M11.25 30H18.75V20.625L11.25 24.375V30Z" />
+                          <path d="M31.25 14.375V30H40V10L31.25 14.375Z" />
+                          <path d="M8.75 25.625L0 30H8.75V25.625Z" />
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/question.html?id=4"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 40"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_1_8169)">
+                            <path
+                              d="M19.9999 3.33301C16.7036 3.33301 13.4812 4.31049 10.7404 6.14185C7.9996 7.9732 5.86339 10.5762 4.60193 13.6216C3.34047 16.6671 3.01042 20.0182 3.6535 23.2512C4.29659 26.4842 5.88394 29.4539 8.21481 31.7848C10.5457 34.1157 13.5154 35.703 16.7484 36.3461C19.9814 36.9892 23.3325 36.6591 26.378 35.3977C29.4234 34.1362 32.0264 32 33.8577 29.2592C35.6891 26.5184 36.6666 23.296 36.6666 19.9997C36.6666 17.811 36.2355 15.6437 35.3979 13.6216C34.5603 11.5995 33.3327 9.7622 31.785 8.21456C30.2374 6.66692 28.4001 5.43926 26.378 4.60168C24.3559 3.7641 22.1886 3.33301 19.9999 3.33301ZM19.9999 29.9997C19.6703 29.9997 19.3481 29.9019 19.074 29.7188C18.7999 29.5357 18.5863 29.2754 18.4601 28.9708C18.334 28.6663 18.301 28.3312 18.3653 28.0079C18.4296 27.6846 18.5883 27.3876 18.8214 27.1545C19.0545 26.9214 19.3515 26.7627 19.6748 26.6984C19.9981 26.6341 20.3332 26.6671 20.6377 26.7932C20.9423 26.9194 21.2026 27.133 21.3857 27.4071C21.5688 27.6811 21.6666 28.0034 21.6666 28.333C21.6666 28.775 21.491 29.199 21.1784 29.5115C20.8659 29.8241 20.442 29.9997 19.9999 29.9997ZM21.6666 21.3997V23.333C21.6666 23.775 21.491 24.199 21.1784 24.5115C20.8659 24.8241 20.442 24.9997 19.9999 24.9997C19.5579 24.9997 19.134 24.8241 18.8214 24.5115C18.5089 24.199 18.3333 23.775 18.3333 23.333V19.9997C18.3333 19.5576 18.5089 19.1337 18.8214 18.8212C19.134 18.5086 19.5579 18.333 19.9999 18.333C20.4944 18.333 20.9777 18.1864 21.3889 17.9117C21.8 17.637 22.1204 17.2465 22.3096 16.7897C22.4988 16.3329 22.5484 15.8302 22.4519 15.3453C22.3554 14.8603 22.1173 14.4149 21.7677 14.0652C21.4181 13.7156 20.9726 13.4775 20.4877 13.381C20.0027 13.2846 19.5 13.3341 19.0432 13.5233C18.5864 13.7125 18.196 14.033 17.9213 14.4441C17.6465 14.8552 17.4999 15.3386 17.4999 15.833C17.4999 16.275 17.3243 16.699 17.0118 17.0115C16.6992 17.3241 16.2753 17.4997 15.8333 17.4997C15.3912 17.4997 14.9673 17.3241 14.6547 17.0115C14.3422 16.699 14.1666 16.275 14.1666 15.833C14.1622 14.7502 14.4594 13.6875 15.0247 12.764C15.59 11.8404 16.4013 11.0925 17.3676 10.6038C18.3339 10.1152 19.4172 9.90521 20.4961 9.99733C21.575 10.0894 22.607 10.4801 23.4765 11.1254C24.346 11.7708 25.0187 12.6454 25.4193 13.6515C25.8199 14.6575 25.9326 15.7551 25.7448 16.8215C25.5569 17.888 25.0759 18.881 24.3556 19.6896C23.6354 20.4982 22.7043 21.0903 21.6666 21.3997Z"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1_8169">
+                              <rect width="40" height="40" fill="" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/profile.html?id=5"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 42"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_1_8175)">
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M26.6098 39.31H2.08224C0.296431 39.1737 -0.132981 37.889 0.0306045 36.4067C1.00871 27.6697 10.8102 30.1981 14.7499 26.6508C16.7129 32.4301 24.9228 32.6447 26.7666 26.6508C27.8503 27.6288 29.9974 28.2115 32.1683 28.7226C32.2773 28.7499 32.3898 28.7737 32.5091 28.801C29.8611 30.4196 27.7787 32.9174 26.9472 35.8376C26.6064 37.0371 26.5007 38.2059 26.6098 39.31ZM37.3212 30.2765L39.7205 32.1268C40.0374 32.3721 40.0954 32.8288 39.8534 33.1457L39.2297 33.926L35.6786 31.1863L36.3022 30.406C36.5442 30.0925 37.0043 30.0345 37.3212 30.2765ZM34.7345 40.029C33.9166 40.4038 33.1021 40.7752 32.2842 41.1467C30.3654 42.0224 30.4268 42.4347 30.7233 40.4379L31.1902 37.2961L31.1868 37.2927L35.1196 31.8849L38.6708 34.6245L34.7345 40.0324V40.029ZM31.7968 37.7629L34.1279 39.5621C33.5894 39.8075 33.0544 40.0528 32.5193 40.2948C31.2583 40.8672 31.2992 41.1398 31.4935 39.8279L31.7968 37.7629ZM14.6987 20.8545C15.4451 22.0369 16.2255 23.2466 17.1934 24.136C18.1272 24.9879 19.2587 25.5672 20.7548 25.5706C22.377 25.574 23.5596 24.9743 24.5241 24.0747C25.526 23.1376 26.3133 21.8529 27.0937 20.5717L29.1863 17.1232C29.5748 16.2304 29.7179 15.6375 29.6293 15.2865C29.5748 15.0787 29.3464 14.9764 28.9545 14.9594C28.8727 14.956 28.7875 14.956 28.7023 14.956C28.6103 14.9594 28.5115 14.9662 28.4092 14.973C28.3513 14.9764 28.3002 14.973 28.2491 14.9628C28.065 14.973 27.8708 14.9594 27.6765 14.9321L28.3922 11.7597C23.0723 12.5979 19.0951 8.64856 13.4753 10.9691L13.8808 14.7072C13.6593 14.7209 13.4412 14.7106 13.2435 14.6834C10.0161 14.789 14.0614 19.8425 14.6987 20.8545ZM29.677 14.0087C30.1916 14.1654 30.5222 14.4926 30.6585 15.0207C30.8085 15.6068 30.6449 16.4315 30.1473 17.5594C30.1371 17.5798 30.1303 17.6003 30.1167 17.6207L28.0003 21.1067C27.1823 22.4493 26.3576 23.7987 25.25 24.8312C24.1049 25.9046 22.694 26.6167 20.765 26.6099C18.9656 26.6065 17.6058 25.9182 16.4948 24.8993C15.152 23.6658 8.95622 15.9135 11.7235 14.0462C11.8599 13.9576 12.0098 13.8792 12.1734 13.8179C12.0507 12.2163 12.0098 10.1956 12.0848 8.50545C12.1257 8.10676 12.2041 7.70466 12.3131 7.30257C12.7868 5.60559 13.9797 4.23915 15.4519 3.30207C16.2664 2.78412 17.1559 2.39225 18.0829 2.13327C18.6725 1.9663 17.5819 0.0784991 18.1886 0.0205702C21.1365 -0.282704 25.9111 2.40928 27.9696 4.63784C28.9988 5.75212 29.6498 7.23442 29.7895 9.19037L29.677 14.0087Z"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1_8175">
+                              <rect width="40" height="41.8723" fill="" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </a>
+                    </div>
+    
+                    <div class="d-flex">
+                      <a
+                        class="nav-link rounded-border bg-color"
+                        href="../html/login.html?id=6"
+                        onclick="toggleActive(this)"
+                      >
+                        <svg
+                          class="sidebar__link-icon def-color"
+                          viewBox="0 0 40 40"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_1_8179)">
+                            <path
+                              d="M35.0001 0H16.6667C15.3419 0.00395682 14.0724 0.532012 13.1356 1.46884C12.1988 2.40566 11.6707 3.67513 11.6667 5V15H26.6667C27.9928 15 29.2646 15.5268 30.2023 16.4645C31.14 17.4021 31.6667 18.6739 31.6667 20C31.6667 21.3261 31.14 22.5979 30.2023 23.5355C29.2646 24.4732 27.9928 25 26.6667 25H11.6667V35C11.6707 36.3249 12.1988 37.5943 13.1356 38.5312C14.0724 39.468 15.3419 39.996 16.6667 40H35.0001C36.3249 39.996 37.5944 39.468 38.5312 38.5312C39.4681 37.5943 39.9961 36.3249 40.0001 35V5C39.9961 3.67513 39.4681 2.40566 38.5312 1.46884C37.5944 0.532012 36.3249 0.00395682 35.0001 0V0Z"
+                            />
+                            <path
+                              d="M5.68328 21.6663H26.6666C27.1086 21.6663 27.5326 21.4907 27.8451 21.1782C28.1577 20.8656 28.3333 20.4417 28.3333 19.9997C28.3333 19.5576 28.1577 19.1337 27.8451 18.8211C27.5326 18.5086 27.1086 18.333 26.6666 18.333H5.68328L7.84994 16.183C8.16378 15.8692 8.3401 15.4435 8.3401 14.9997C8.3401 14.5558 8.16378 14.1302 7.84994 13.8163C7.5361 13.5025 7.11045 13.3262 6.66661 13.3262C6.22277 13.3262 5.79712 13.5025 5.48328 13.8163L0.483276 18.8163C0.182231 19.1368 0.0146484 19.56 0.0146484 19.9997C0.0146484 20.4394 0.182231 20.8625 0.483276 21.183L5.48328 26.183C5.80242 26.4867 6.22608 26.656 6.66661 26.656C7.10713 26.656 7.5308 26.4867 7.84994 26.183C8.1622 25.8683 8.33741 25.443 8.33741 24.9997C8.33741 24.5563 8.1622 24.131 7.84994 23.8163L5.68328 21.6663Z"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1_8179">
+                              <rect width="40" height="40" fill="" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-11  h-100">
+                <!-- dashboard heading -->
+                <div class="row p-2 bg-sidebar shadow-sm heading-container-height align-items-center justify-content-center">
+                    <div class="col-6 d-flex justify-content-end ">
+                        <div class= "">
+                            <h1 class="dashboard__heading">Questions</h1>
+                        </div>
+                    </div>
+                    <div class="col d-flex justify-content-center ">
+                        <div class="w-75 d-flex justify-content-end">
+                            <div class="">
+                                <a class="new-category text-decoration-none text-light " href="../html/add-question.html?id=4" ><p class="m-0 p-0">Add New Question</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- add new question alert -->
+                <div class="row alert alert-success-add-question alert-success border-0 d-none  bg-color-alert" role="alert">
+
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="">
+                      <div class="d-flex justify-content-center align-items-center">
+                        <div class="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                            <path d="M17 0.6875C13.7737 0.6875 10.6198 1.64421 7.93727 3.43665C5.25469 5.22909 3.16388 7.77676 1.92922 10.7575C0.694568 13.7382 0.371526 17.0181 1.00095 20.1824C1.63037 23.3467 3.18398 26.2533 5.46533 28.5347C7.74667 30.816 10.6533 32.3696 13.8176 32.9991C16.9819 33.6285 20.2618 33.3054 23.2425 32.0708C26.2232 30.8361 28.7709 28.7453 30.5634 26.0627C32.3558 23.3802 33.3125 20.2263 33.3125 17C33.3125 12.6737 31.5939 8.52451 28.5347 5.46532C25.4755 2.40613 21.3264 0.6875 17 0.6875ZM25.8594 10.745L15.7006 22.3606C15.6479 22.4206 15.583 22.4687 15.5103 22.5017C15.4376 22.5347 15.3586 22.5518 15.2788 22.5519C15.1551 22.5531 15.0345 22.5136 14.9356 22.4394L8.22501 17.2756C8.16628 17.2306 8.11701 17.1744 8.08 17.1103C8.04298 17.0462 8.01896 16.9754 8.0093 16.902C7.99963 16.8286 8.00452 16.7541 8.02368 16.6826C8.04283 16.6111 8.07589 16.544 8.12094 16.4853C8.16601 16.4266 8.22219 16.3773 8.28629 16.3403C8.3504 16.3033 8.42116 16.2793 8.49455 16.2696C8.56794 16.2599 8.64251 16.2648 8.71401 16.284C8.78551 16.3031 8.85253 16.3362 8.91126 16.3812L15.2 21.2244L25.01 9.97437C25.0588 9.9186 25.118 9.87298 25.1844 9.84011C25.2508 9.80725 25.323 9.78777 25.3969 9.78281C25.4708 9.77785 25.545 9.78749 25.6152 9.81119C25.6853 9.83489 25.7502 9.87218 25.8059 9.92094C25.8617 9.96969 25.9073 10.029 25.9402 10.0953C25.9731 10.1617 25.9925 10.2339 25.9975 10.3078C26.0025 10.3817 25.9928 10.4559 25.9691 10.5261C25.9454 10.5963 25.9081 10.6611 25.8594 10.7169V10.745Z" fill="#28A745"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="d-flex flex-column">
+                        <div class="">
+                          <h5 class="alert-heading">Success!</h5>
+                        </div>
+                        <div class="">
+                          <p class="alert-body mb-0">1 Question is added successfully. Move ahead to next Questions.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                 <!-- update question alert -->
+                 <div class="row alert alert-success-update-question alert-success border-0 d-none  bg-color-alert" role="alert">
+
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="">
+                      <div class="d-flex justify-content-center align-items-center">
+                        <div class="">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                            <path d="M17 0.6875C13.7737 0.6875 10.6198 1.64421 7.93727 3.43665C5.25469 5.22909 3.16388 7.77676 1.92922 10.7575C0.694568 13.7382 0.371526 17.0181 1.00095 20.1824C1.63037 23.3467 3.18398 26.2533 5.46533 28.5347C7.74667 30.816 10.6533 32.3696 13.8176 32.9991C16.9819 33.6285 20.2618 33.3054 23.2425 32.0708C26.2232 30.8361 28.7709 28.7453 30.5634 26.0627C32.3558 23.3802 33.3125 20.2263 33.3125 17C33.3125 12.6737 31.5939 8.52451 28.5347 5.46532C25.4755 2.40613 21.3264 0.6875 17 0.6875ZM25.8594 10.745L15.7006 22.3606C15.6479 22.4206 15.583 22.4687 15.5103 22.5017C15.4376 22.5347 15.3586 22.5518 15.2788 22.5519C15.1551 22.5531 15.0345 22.5136 14.9356 22.4394L8.22501 17.2756C8.16628 17.2306 8.11701 17.1744 8.08 17.1103C8.04298 17.0462 8.01896 16.9754 8.0093 16.902C7.99963 16.8286 8.00452 16.7541 8.02368 16.6826C8.04283 16.6111 8.07589 16.544 8.12094 16.4853C8.16601 16.4266 8.22219 16.3773 8.28629 16.3403C8.3504 16.3033 8.42116 16.2793 8.49455 16.2696C8.56794 16.2599 8.64251 16.2648 8.71401 16.284C8.78551 16.3031 8.85253 16.3362 8.91126 16.3812L15.2 21.2244L25.01 9.97437C25.0588 9.9186 25.118 9.87298 25.1844 9.84011C25.2508 9.80725 25.323 9.78777 25.3969 9.78281C25.4708 9.77785 25.545 9.78749 25.6152 9.81119C25.6853 9.83489 25.7502 9.87218 25.8059 9.92094C25.8617 9.96969 25.9073 10.029 25.9402 10.0953C25.9731 10.1617 25.9925 10.2339 25.9975 10.3078C26.0025 10.3817 25.9928 10.4559 25.9691 10.5261C25.9454 10.5963 25.9081 10.6611 25.8594 10.7169V10.745Z" fill="#28A745"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <div class="d-flex flex-column">
+                        <div class="">
+                          <h5 class="alert-heading">Success!</h5>
+                        </div>
+                        <div class="">
+                          <p class="alert-body mb-0">1 Question is Updated successfully. Move ahead to next Questions.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+
+                <div class="row justify-content-center margintop">
+                    <div class="col-11 p-0">
+                        <div class="">
+                            <div class="d-flex flex-column">
+                                <div class="">
+                                    <h2 class="user-title m-0 p-0">Questions</h2>
+                                </div>
+                                <div>
+                                    <h3 class="user-title-desc m-0 p-0">11 results found</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- search bar  -->
+                <div class="row justify-content-center mt-3 gap-2">
+                    
+                    <div class="col-3 d-none">
+                        <div class="">
+                            <div class="d-flex flex-column">
+                                <div class="">
+                                    <h2 class="user-title m-0 p-0">Levels</h2>
+                                </div>
+                                <div>
+                                    <h3 class="user-title-desc m-0 p-0">11 results found</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 d-flex justify-content-center align-items-center ">
+
+                        <div class=" h-75 w-100 position-relative d-flex align-items-center">
+                            <div class="w-100 searchbar-height d-flex align-items-center">
+                                <input class="search-border search-border-search-btns w-100 h-100 ps-5 pe-3" type="search" name="search-bar" id="searchbar" placeholder="Search question..">
+                            </div>
+
+                            <div class="position-absolute svg-position">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-size" viewBox="0 0 17 17" fill="none">
+                                    <path d="M12.4813 12.5054C12.7551 12.2335 13.194 12.2335 13.4678 12.5054L15.2773 13.9661H15.3087C15.6748 14.3362 15.6748 14.9361 15.3087 15.3061C14.9426 15.6762 14.3491 15.6762 13.983 15.3061L12.4813 13.5851L12.4243 13.5208C12.3182 13.3864 12.2595 13.2189 12.2595 13.0453C12.2595 12.8427 12.3393 12.6484 12.4813 12.5054ZM7.49245 1.41699C9.10386 1.41699 10.6493 2.06401 11.7887 3.21571C12.9282 4.36741 13.5683 5.92944 13.5683 7.55819C13.5683 10.9499 10.848 13.6994 7.49245 13.6994C4.13687 13.6994 1.41663 10.9499 1.41663 7.55819C1.41663 4.1665 4.13687 1.41699 7.49245 1.41699Z" fill="#C4C4C4"/>
+                                  </svg>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+                    <div class="col-6 d-flex justify-content-start align-items-center gap-2">
+                        
+                        <div class=" w-100">
+                          <div class="dropdown w-100">
+                            <button class=" d-flex gap-2 p-2 rounded-1 searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2">
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                <g clip-path="url(#clip0_1_8791)">
+                                  <path d="M14.0625 3.75L7.5 0L0.9375 3.75L7.5 7.50003L14.0625 3.75Z" fill="#565656"/>
+                                  <path d="M7.5 13.1249L2.57812 10.3125L0.9375 11.25L7.5 15L14.0625 11.25L12.4219 10.3125L7.5 13.1249Z" fill="#565656"/>
+                                  <path d="M7.5 9.37494L2.57812 6.5625L0.9375 7.5L7.5 11.25L14.0625 7.5L12.4219 6.5625L7.5 9.37494Z" fill="#565656"/>
+                                </g>
+                                <defs>
+                                  <clipPath id="clip0_1_8791">
+                                    <rect width="15" height="15" fill="white"/>
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                            </div>
+                            <div class="w-100">
+                                <!-- here in this element i want to show selected value -->
+                                <p class="m-0 p-0 text-dark" id="category">Select Category</p>
+                            </div>
+                        </button>
+                            <div class="dropdown-content year-list" >
+                                <!-- list items here -->
+                            </div>
+                        </div>
+                            <!-- <button class="searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                        <g clip-path="url(#clip0_1_8791)">
+                                          <path d="M14.0625 3.75L7.5 0L0.9375 3.75L7.5 7.50003L14.0625 3.75Z" fill="#565656"/>
+                                          <path d="M7.5 13.1249L2.57812 10.3125L0.9375 11.25L7.5 15L14.0625 11.25L12.4219 10.3125L7.5 13.1249Z" fill="#565656"/>
+                                          <path d="M7.5 9.37494L2.57812 6.5625L0.9375 7.5L7.5 11.25L14.0625 7.5L12.4219 6.5625L7.5 9.37494Z" fill="#565656"/>
+                                        </g>
+                                        <defs>
+                                          <clipPath id="clip0_1_8791">
+                                            <rect width="15" height="15" fill="white"/>
+                                          </clipPath>
+                                        </defs>
+                                      </svg>
+                                </div>
+                                <div class="">
+                                    <p class="m-0 p-0 text-dark">Select Category</p>
+                                </div>
+                            </button> -->
+                        </div>
+
+                        <div class=" w-100 ">
+                          <div class="dropdown w-100">
+                            <button class=" d-flex align-items-center justify-content-center  p-2 rounded-1 searchbar-height w-100 border-0 search-border-search-btns bg-sidebar ">
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M11.5 6.25L8.5 7.75V12H11.5V6.25Z" fill="#565656"/>
+                                <path d="M4.5 12H7.5V8.25L4.5 9.75V12Z" fill="#565656"/>
+                                <path d="M12.5 5.75V12H16V4L12.5 5.75Z" fill="#565656"/>
+                                <path d="M3.5 10.25L0 12H3.5V10.25Z" fill="#565656"/>
+                              </svg>
+                            </div>
+                            <div class="w-75">
+                                <!-- here in this element i want to show selected value -->
+                                <p class="m-0 p-0 text-dark" id="level">Select level</p>
+                            </div>
+                        </button>
+                            <div class="dropdown-content dropdown-content-level year-list" >
+                                <!-- list items here -->
+                            </div>
+                        </div>
+                            <!-- <button class="searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M11.5 6.25L8.5 7.75V12H11.5V6.25Z" fill="#565656"/>
+                                        <path d="M4.5 12H7.5V8.25L4.5 9.75V12Z" fill="#565656"/>
+                                        <path d="M12.5 5.75V12H16V4L12.5 5.75Z" fill="#565656"/>
+                                        <path d="M3.5 10.25L0 12H3.5V10.25Z" fill="#565656"/>
+                                      </svg>
+                                </div>
+                                <div class="">
+                                    <p class="m-0 p-0 text-dark">Select level</p>
+                                </div>
+                            </button> -->
+                        </div>
+                        
+                        
+                        <div class=" w-100 ">
+                            <button data-target="datePickerButton1" class=" date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z" fill="#565656"/>
+                                      </svg>
+                                </div>
+                                Starting Date
+                                <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
+                            </button>
+                        </div>
+
+                        <div class="w-100 ">
+                            <button data-target="datePickerButton2" class="date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
+                                <div class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z" fill="#565656"/>
+                                      </svg>
+                                </div>
+                                Ending Date
+                                <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
+
+                            </button>
+                        </div>
+
+                         <!-- Date picker container -->
+                          <div class="date-picker-container">
+                            <!-- Calendar container -->
+                            <div class="calendar-container" id="calendar">
+                              <div class="calendar-header">
+
+
+                              <svg  onclick="prevMonth()" width="25" height="25" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <circle cx="21" cy="21" r="21" fill="white"/>
+                                  <g clip-path="url(#clip0_1_24424)">
+                                  <path d="M24.5098 12.8701L22.7298 11.1001L12.8398 21.0001L22.7398 30.9001L24.5098 29.1301L16.3798 21.0001L24.5098 12.8701Z" fill="#232740"/>
+                                  </g>
+                                  <defs>
+                                  <clipPath id="clip0_1_24424">
+                                  <rect width="24" height="24" fill="white" transform="translate(7 9)"/>
+                                  </clipPath>
+                                  </defs>
+                              </svg>
+                                  
+                              <span id="current-month-year"></span>
+                                
+                              <svg onclick="nextMonth()" width="25" height="25" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="21" cy="21" r="21" transform="matrix(-1 0 0 1 42 0)" fill="white"/>
+                              <g clip-path="url(#clip0_1_24429)">
+                              <path d="M17.4902 12.8701L19.2702 11.1001L29.1602 21.0001L19.2602 30.9001L17.4902 29.1301L25.6202 21.0001L17.4902 12.8701Z" fill="#232740"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_1_24429">
+                              <rect width="24" height="24" fill="white" transform="matrix(-1 0 0 1 35 9)"/>
+                              </clipPath>
+                              </defs>
+                              </svg>
+
+                              </div>
+                              <div class="border-blue">
+                                <!-- <ul class="list-unstyled d-flex justify-content-evenly align-items-center m-0">
+                                  <li class="">S</li>
+                                  <li class="">M</li>
+                                  <li class="">T</li>
+                                  <li class="">W</li>
+                                  <li class="">T</li>
+                                  <li class="">F</li>
+                                  <li class="">S</li>
+                                </ul>
+                                <hr class="m-0 p-0"> -->
+                                <!-- Calendar will be generated using JavaScript -->
+                                <ul class="calendar" id="calendar-list"></ul>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <!-- table container -->
+                <div class="row justify-content-center mt-3">
+                    <div class="col p-0">
+                        <div class="">
+
+                            <div class="">
+                                <table class="table table-hover table-borderless">
+                                    <thead>
+                                        <tr>
+                                          <th class="table-head">ID</th>
+                                          <th class="table-head">Question</th>
+                                          <th class="table-head">Level</th>
+                                          <th class="table-head">Category</th>
+                                          <th class="table-head">Date Time</th>
+                                          <th class="table-head">Actions</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr class="tr shadow-sm ">
+                                          <td >001451</td>
+                                          <td>Find the average velocity over the interval [7,16].</td>
+                                          <td>22</td>
+                                          <td>Trignometry</td>
+                                          <td>20/14/2021</td>
+                                          <td>
+                                            <div class="d-flex justify-content-center gap-1">
+                                                <div class="">
+                                                    <a class="action-btns action-btns-view" href="../html/question-details.html?id=4">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                            <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                            <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                          </svg>
+                                                    </a>
+                                                </div>
+                                                <div class="">
+                                                    <a class="action-btns action-btns-view" href="../html/update-question.html?id=4">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                            <g clip-path="url(#clip0_1_8245)">
+                                                              <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                            </g>
+                                                            <defs>
+                                                              <clipPath id="clip0_1_8245">
+                                                                <rect width="25" height="25" fill="white"/>
+                                                              </clipPath>
+                                                            </defs>
+                                                          </svg>
+                                                    </a>
+                                                </div>
+                                                <div class="">
+                                                    <a class="action-btns action-btns-remove" href="#" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <g clip-path="url(#clip0_1_7717)">
+                                                              <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                            </g>
+                                                            <defs>
+                                                              <clipPath id="clip0_1_7717">
+                                                                <rect width="24" height="24" fill="white"/>
+                                                              </clipPath>
+                                                            </defs>
+                                                          </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+
+                                        <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+  
+                                          <tr class="tr shadow-sm ">
+                                              <td>001451</td>
+                                              <td>Find the average velocity over the interval [7,16].</td>
+                
+                                              <td>22</td>
+                                              <td>Trignometry</td>
+                                              <td>20/14/2021</td>
+                                              <td>
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                                <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <g clip-path="url(#clip0_1_8245)">
+                                                                  <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_8245">
+                                                                    <rect width="25" height="25" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-remove" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <g clip-path="url(#clip0_1_7717)">
+                                                                  <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_7717">
+                                                                    <rect width="24" height="24" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                          </tr>
+
+                                          <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+  
+                                          <tr class="tr shadow-sm ">
+                                              <td>001451</td>
+                                              <td>Find the average velocity over the interval [7,16].</td>
+                
+                                              <td>22</td>
+                                              <td>Trignometry</td>
+                                              <td>20/14/2021</td>
+                                              <td>
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                                <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <g clip-path="url(#clip0_1_8245)">
+                                                                  <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_8245">
+                                                                    <rect width="25" height="25" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-remove" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <g clip-path="url(#clip0_1_7717)">
+                                                                  <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_7717">
+                                                                    <rect width="24" height="24" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                          </tr>
+
+                                          <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+  
+                                          <tr class="tr shadow-sm ">
+                                              <td>001451</td>
+                                              <td>Find the average velocity over the interval [7,16].</td>
+                
+                                              <td>22</td>
+                                              <td>Trignometry</td>
+                                              <td>20/14/2021</td>
+                                              <td>
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                                <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <g clip-path="url(#clip0_1_8245)">
+                                                                  <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_8245">
+                                                                    <rect width="25" height="25" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-remove" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <g clip-path="url(#clip0_1_7717)">
+                                                                  <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_7717">
+                                                                    <rect width="24" height="24" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                          </tr>
+
+                                          <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+  
+                                          <tr class="tr shadow-sm ">
+                                              <td>001451</td>
+                                              <td>Find the average velocity over the interval [7,16].</td>
+                
+                                              <td>22</td>
+                                              <td>Trignometry</td>
+                                              <td>20/14/2021</td>
+                                              <td>
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                                <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <g clip-path="url(#clip0_1_8245)">
+                                                                  <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_8245">
+                                                                    <rect width="25" height="25" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-remove" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <g clip-path="url(#clip0_1_7717)">
+                                                                  <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_7717">
+                                                                    <rect width="24" height="24" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                          </tr>
+
+                                          <tr class="tr shadow-sm ">
+                                            <td>001451</td>
+                                            <td>Find the average velocity over the interval [7,16].</td>
+            
+                                            <td>22</td>
+                                            <td>Trignometry</td>
+                                            <td>20/14/2021</td>
+                                            <td>
+                                              <div class="d-flex justify-content-center align-items-center gap-1">
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                              <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-view" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                              <g clip-path="url(#clip0_1_8245)">
+                                                                <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_8245">
+                                                                  <rect width="25" height="25" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                                  <div class="">
+                                                      <a class="action-btns action-btns-remove" href="">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                              <g clip-path="url(#clip0_1_7717)">
+                                                                <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                              </g>
+                                                              <defs>
+                                                                <clipPath id="clip0_1_7717">
+                                                                  <rect width="24" height="24" fill="white"/>
+                                                                </clipPath>
+                                                              </defs>
+                                                            </svg>
+                                                      </a>
+                                                  </div>
+                                              </div>
+                                            </td>
+                                          </tr>
+  
+                                          <tr class="tr shadow-sm ">
+                                              <td>001451</td>
+                                              <td>Find the average velocity over the interval [7,16].</td>
+                
+                                              <td>22</td>
+                                              <td>Trignometry</td>
+                                              <td>20/14/2021</td>
+                                              <td>
+                                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
+                                                                <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-view" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                                                <g clip-path="url(#clip0_1_8245)">
+                                                                  <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_8245">
+                                                                    <rect width="25" height="25" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="action-btns action-btns-remove" href="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <g clip-path="url(#clip0_1_7717)">
+                                                                  <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
+                                                                </g>
+                                                                <defs>
+                                                                  <clipPath id="clip0_1_7717">
+                                                                    <rect width="24" height="24" fill="white"/>
+                                                                  </clipPath>
+                                                                </defs>
+                                                              </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                              </td>
+                                          </tr>
+
+                                        
+                                      </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- pagination -->
+                <div class="row justify-content-center">
+                    <div class="col-11 d-flex justify-content-end p-0">
+              
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                              <li class="page-item">
+                                <a class="page-link text-dark border-0 prev" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+                              </li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">1</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">2</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">3</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">4</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">5</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">6</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">7</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">8</a></li>
+                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">9</a></li>
+                              <li class="page-item">
+                                <a class="page-link next border-0" href="#">Next</a>
+                              </li>
+                            </ul>
+                          </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<!--  data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" -->
+
+ <!-- Modal level successfully delete-->
+ <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content ps-4 pe-4">
+      <div class="modal-body">
+
+          <div class="row p-0">
+              <div class="col d-flex justify-content-end p-0">
+                  <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
+              </div>
+          </div>
+        <div class=" d-flex flex-column align-items-center justify-content-center">
+          <div class="">
+              <img src="../assets/svgs/delete svg.svg" alt="">
+          </div>
+          <!-- <div class=""><h1 class="modal-marks">Want to Delete?</h1></div> -->
+          
+          <div class="d-flex justify-content-center align-items-center">
+              
+              <div class="mt-2">
+                  <h1 class="modal-head m-0 p-0">Want to Delete?</h1>
+              </div>
+          
+            </div>
+
+          <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure you want to delete a question? In case of deletion you will loss all the information in that question.</p></div>
+
+          <div class="mt-3 pt-1">
+                <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/datePicker.js"></script>
+<script src="../js/categorySelector.js"></script>
+<script src="../js/selectLevel.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+  ></script>
+</html>

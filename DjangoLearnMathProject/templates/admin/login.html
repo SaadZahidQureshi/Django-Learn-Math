@@ -1,0 +1,101 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{%static 'user/css/login.css'%}">
+    <link rel="stylesheet" href="{% static 'user/css/common.css' %}">
+  <title>Admin Login</title>
+
+  <style>
+    
+  </style>
+
+</head>
+<body>
+
+    <div class="row m-0 p-0">
+        <div class="col login-top-left-svg ">
+            <div class="main-container  d-flex justify-content-center align-items-center">
+                
+                <div class="">
+                    <img src="../assets/svgs/admin-login-left-side-svg.svg" alt="">
+                </div>
+
+            </div>
+        </div>
+        <div class="col ">
+            <div class="main-container d-flex justify-content-center align-items-center ">
+
+                <div class=" content d-flex flex-column justify-content-center ">
+                  
+                  <form action="../html/Home.html">
+                      <div class="text-center pt-4">
+                            <h2 class="sign-up">Welcome</h2>
+                        </div>
+                      
+                        <div class="row">
+                          <div class="col">
+                            <div class="text-center ">
+                              <img class="profile-img" src="../assets/svgs/profile-img-svg.svg" alt="profile-img" />
+                            </div> 
+                          </div>
+                        </div>
+                
+                        <div class="row">
+                          <div class="col">
+                            <div class="mb-1 mt-3">
+                              <p class="want-to-be-part p-0 m-0">Login to your account</p>
+                            </div>
+                          </div>
+                        </div>
+                
+                      <div class="row">
+                        <div class="col">
+                          <div class="position-relative mt-2 pb-0">
+                            <input class="input-control" type="email" name="email" id="input-email" placeholder="Email">
+                            <img class="input-svg bit-wide position-absolute" src="../assets/svgs/email-svg.svg" alt="email-icon">
+                          </div>
+                        </div>
+                      </div>
+                
+                      <div class="row">
+                        <div class="col">
+                          <div class="position-relative mt-3 pb-0">
+                            <input class="input-control" type="password" name="password" id="input-password" placeholder="Password">
+                            <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="password-icon">
+                          </div>
+                        </div>
+                      </div>
+                
+                      <div class="row">
+                        <div class="col">
+                          <div class=" mt-3">
+                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none" href="../html/dashboard.html" type="submit" name="login-btn" id="submit-btn" >Login</a>
+                          </div>
+                        </div>
+                      </div>
+
+                  </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+        
+
+</body>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"
+  ></script>
+</html>

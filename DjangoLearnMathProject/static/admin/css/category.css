@@ -1,0 +1,27 @@
+.new-category{
+
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 45px;
+    /* padding: 15px 38px 16px 38px; */
+    border-radius: 5px;
+    background: #743FCB;
+    box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.10)
+    
+}
+.upload-text{
+    color: rgba(35, 39, 64, 0.30);
+}
+
+.color-svg{
+    fill: #743FCB;
+}
+.dropdown-menu{
+    width: 36% ;
+}
+.category-img{
+    
+}

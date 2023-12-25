@@ -1,0 +1,111 @@
+
+
+.top-container-height-width{
+    width: 200px !important;
+    height: 250px;
+
+}
+.margin-btween{
+    margin: 60px !important;
+}
+
+.dashboar-head-container--categories{
+    background-color: #F7A94A;
+    padding: 36px 61px;
+}
+.dashboar-head-container--users{
+    background-color: #F14336;
+    padding: 36px 61px;
+}
+.dashboar-head-container--questions{
+    background-color: #28B446;
+    padding: 36px 61px;
+}
+.dashboar-head-container__title{
+    color: #FFF;
+    font-weight: 600;
+
+}
+.dashboar-head-container__icons {
+    width: 71px;
+    height: 71px;
+   
+}
+.dashboar-head-container__icons path{
+    fill: white;
+}
+.dashboar-head-container__desc{
+    color: #FFF;
+}
+
+.dashboard__roundslider--success{
+    font-size: 20px;
+    font-weight: 700;
+    color: #28B446;
+}
+.dashboard__roundslider--danger{
+    font-size: 20px;
+    font-weight: 700;
+    color: #F14336;
+}
+.line-graph-container-title{
+    line-height: 20px;
+    font-weight: 700;
+}
+.chart-container{
+    height: 30vh;
+    width: 100%;
+    /* width: 30%; */
+    /* border: 1px solid red */
+
+}
+#myDonutChart{
+    width: 100% !important;
+    height: 100% !important;
+    /* border: 1px solid red */
+}
+#myLineChart{
+    width: 100% !important;
+    height: 100% !important;
+}
+#myBarChart{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+ .dropdown{
+    display: inline-block;
+}
+.dropbtn{
+    text-decoration: none;
+    width: 130px;
+    border: none;
+    background-color: #F2EFF6;
+    color: black;
+}
+.dropdown-content{
+    display: none;
+    width: 130px;
+    max-height: 200px; /* Set a maximum height for the dropdown content */
+    overflow-y: auto; /* Add a scrollbar for overflow */
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    position: absolute;
+    z-index: 1;
+}
+.dropdown-content li{
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 7px 10px;
+    text-align: center;
+    /* scrollbar-width: none; */
+
+}
+.dropdown-content li:hover{
+    background-color:rgba(116, 63, 203, 1);
+    color: white;
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+}

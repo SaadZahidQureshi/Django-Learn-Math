@@ -1,0 +1,24 @@
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="22" height="22" fill="#E5E5E5"/>
+<g id="Login" clip-path="url(#clip0_0_1)">
+<rect width="1440" height="1024" transform="translate(-756 -497)" fill="white"/>
+<g id="Group 36">
+<rect id="Rectangle 15" x="-11.5" y="-13.5" width="499" height="49" rx="4.5" fill="white" stroke="#743FCB"/>
+<g id="email 1" clip-path="url(#clip1_0_1)">
+<g id="Layer 2">
+<g id="email">
+<path id="Vector" d="M17.4167 3.66699H4.58337C3.85403 3.66699 3.15456 3.95672 2.63883 4.47245C2.12311 4.98817 1.83337 5.68765 1.83337 6.41699V15.5837C1.83337 16.313 2.12311 17.0125 2.63883 17.5282C3.15456 18.0439 3.85403 18.3337 4.58337 18.3337H17.4167C18.1461 18.3337 18.8455 18.0439 19.3613 17.5282C19.877 17.0125 20.1667 16.313 20.1667 15.5837V6.41699C20.1667 5.68765 19.877 4.98817 19.3613 4.47245C18.8455 3.95672 18.1461 3.66699 17.4167 3.66699ZM17.4167 5.50033L11.4584 9.59783C11.319 9.67828 11.1609 9.72063 11 9.72063C10.8391 9.72063 10.6811 9.67828 10.5417 9.59783L4.58337 5.50033H17.4167Z" fill="#743FCB"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_1">
+<rect width="1440" height="1024" fill="white" transform="translate(-756 -497)"/>
+</clipPath>
+<clipPath id="clip1_0_1">
+<rect width="22" height="22" fill="white"/>
+</clipPath>
+</defs>
+</svg>

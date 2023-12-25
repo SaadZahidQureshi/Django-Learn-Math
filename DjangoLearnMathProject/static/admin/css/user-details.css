@@ -1,0 +1,31 @@
+.botm__border{
+    /* border: 1px solid red !important; */
+    border-bottom: 1px solid whitesmoke;
+}
+
+.user-detail__heading{
+    font-size: 20px;
+    color: #743FCB;
+}
+.user-details__desc{
+    font-size: 14px;
+    color: #414040;
+}
+.color-bg{
+    color: black;
+    /* color:rgba(116, 63, 203, 0.10);; */
+}
+.w-90{
+    width: 90%;
+}
+.user-delete{
+    border-radius: 5px;
+    font-size: 18px;
+    background: #F14336;
+}
+
+
+/* .modal{
+    width: 669px;
+    height: 306px;
+} */

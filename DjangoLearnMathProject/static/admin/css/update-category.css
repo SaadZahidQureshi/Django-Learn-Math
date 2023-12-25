@@ -1,0 +1,38 @@
+
+.border-user-defind{
+    border: 1px solid #743FCB ;
+    
+}
+.height{
+    height: 50px;
+}
+.border-radius{
+    border-radius: 5px;
+}
+.border-radius-hover:hover{
+    border:1px solid #743FCB;
+}
+.dropdown-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+.dropdown-menu{
+    width: 33%;
+}
+.update-category-btn{
+    font-size: 18px
+}
+.height-90{
+    height: 90%;
+}
+.view-category-btn{
+    border: 1px solid rgba(116, 63, 203, 0.10);
+    background: rgba(116, 63, 203, 0.05);
+}
+.delete-category-btn{
+    background: #F14336;
+}

@@ -1,0 +1,182 @@
+@font-face {
+    font-family: Noto Sans;
+    src: url(../../user/assets/fonts/Noto_Sans/NotoSans-Regular.ttf);
+}
+@font-face {
+    font-family: Roboto;
+    src: url(../../user/assets/fonts/Roboto/Roboto-Regular.ttf);
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+}
+
+
+.sidebar__link-icon{
+    width: 40px;
+    height: 40px;
+    /* height: 25px;
+    width: 25px; */
+}
+.def-color{
+    fill: #565656;
+}
+.rounded-border{
+    border-radius: 18px;
+    /* border-radius: 10px; */
+}
+.bg-color{
+    background-color: rgba(116, 63, 203, 0.05);
+}
+.bg-sidebar{
+    background-color: #F9F9F9;
+}
+.nav-link{
+    padding: 17px;
+    /* padding: 11px 17px ; */
+    /* border: 1px solid red; */
+}
+.nav-link:hover svg{
+    fill: white;
+}
+.nav-link:hover{
+    background-color: #743FCB;
+}
+
+.active-side-bar-menu{
+    background-color: #743FCB;
+}
+.active-svg-color{
+    fill: white;
+}
+.active .def-color {
+    fill: white;
+}
+.logo-height{
+    height: 10vh;
+}
+.logo-svg{
+    height: 40px;
+    width: 40px;
+}
+.nav-height{
+    height: 100vh;
+}
+
+
+.dashboard__heading{
+    font-size: 35px;
+    color: #743FCB;
+    font-weight: 700;
+}
+
+
+/* modal style */
+
+.modal-head{
+    font-size: 35px;
+    font-weight: 700;
+    color: #414040;
+}
+
+.modal-message{
+    color: #000;
+}
+.modal-button{
+    border-radius: 5px;
+    background: #F14336;
+    padding: 8px 45px;
+    
+}
+.modal-btn-ok{
+    background: #743FCB;
+}
+
+.alert-heading{
+    color: #28A745;
+    font-size: 12px;
+}
+
+.alert-body{
+    font-size: 12px;
+}
+.bg-color-alert{
+    background: #F3FAF2 !important;
+    box-shadow: 0px 0px 40px 3px rgba(0, 0, 0, 0.03) !important;
+    border-top: 1px solid #4F9147 !important;
+}
+
+
+/* Style for the date picker container */
+.date-picker-container {
+    position: relative;
+    display: inline-block;
+   
+}
+
+/* Style for the button */
+.date-picker-button {
+    padding: 8px;
+    cursor: pointer;
+}
+
+/* Style for the calendar container */
+.calendar-container {
+    border-radius: 10px;
+    position: absolute;
+    top: 35px;
+    right: 0;
+
+    z-index: 1000;
+    display:none;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the calendar header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #743FCB;
+    color: white;
+    border-top-right-radius:10px; 
+    border-top-left-radius:10px; 
+}
+/* Style for the calendar */
+.calendar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    text-align: center;
+}
+.border-blue{
+    border: 1px solid #743FCB;
+    border-bottom-right-radius:10px; 
+    border-bottom-left-radius:10px; 
+}
+.bold{
+    font-weight: 600;
+}
+.current-day{
+    background-color: #743FCB;
+    color: white;
+}
+/* Style for each calendar item */
+.calendar li {
+    display: inline-block;
+    width: 10%;
+    padding: 3px;
+    margin: 4px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50%;
+}
+.calendar li:hover{
+    background-color: #743FCB;
+    color: white;
+}
