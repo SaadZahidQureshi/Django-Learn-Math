@@ -1,3 +1,6 @@
+{% load static %}
+{% comment %} {% include 'main/includes/messages.html' %} {% endcomment %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +12,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/code-verify.css">
+    <link rel="stylesheet" href="{% static 'user/css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'user/css/code-verify.css'%}">
   <title>Code Verify</title>
 </head>
 <body >
@@ -19,10 +22,10 @@
     
 
       <div class="position-relative top-0 start-0 w-25" id="svg-top-left">
-        <img class="position-absolute w-50" src="../assets/svg/varification-code-page-top-left-svg.svg" alt="svg-top-left">
+        <img class="position-absolute w-50" src="{% static 'user/assets/svg/varification-code-page-top-left-svg.svg'%}" alt="svg-top-left">
       </div>
       <div class="position-absolute bottom-0 end-0 " id="svg-bottom-right">
-          <img src="../assets/svg/varification-code-page-bottom-right-svg.svg" alt="bottom-right-svg">
+          <img src="{% static 'user/assets/svg/varification-code-page-bottom-right-svg.svg'%}" alt="bottom-right-svg">
       </div>
 
     
@@ -32,7 +35,7 @@
             
     
             <div class="mt-5">
-                <img class="mt-5 " src="../assets/svg/varification-code-page-left-svg.svg" alt="left-hero-img-code-verify-page">
+                <img class="mt-5 " src="{% static 'user/assets/svg/varification-code-page-left-svg.svg'%}" alt="left-hero-img-code-verify-page">
             </div>
            
           </div>
@@ -48,21 +51,36 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form action="../html/Signup.html">
+                <form method='POST' action="{% url 'codeVerify'%}">
+                 {% csrf_token %}
                 <div class="position-relative mt-2">
                   <input
                     class="input-control"
-                    type="email"
-                    name="varification-email"
+                    type="text"
+                    name="input-otp"
                     id="varification-email"
                     placeholder="Enter Code"
                   />
                   <img
                     class="input-svg width-inpu-svg position-absolute"
-                    src="../assets/svg/verification-code-svg.svg"
+                    src="{% static 'user/assets/svg/verification-code-svg.svg'%}"
                     alt="varification-email-svg"
                   />
                 </div>
+                {% comment %} {% if message %}
+                  <div class="alert alert-danger mt-2">
+                    {{ message }}
+                  </div>
+                {% endif %} {% endcomment %}
+
+                {% if messages %}
+                <ul class="messages alert alert-danger mt-2">
+                  {% for message in messages %}
+                    <li{% if message.tags %} class="list-unstyled text-danger {{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              
                 <div class="mt-5">
                   <input
                     class="submit-input-control"
@@ -75,7 +93,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="position-relative mt-1 forgot-password text-end pb-0">
-                      <a class="text-decoration-none" href="../html/Reset-Password.html"><p>Resend Code</p></a>
+                      <a class="text-decoration-none" href="{% url 'codeVerify'%}"><p>Resend Code</p></a>
                     </div>
                   </div>
                 </div>

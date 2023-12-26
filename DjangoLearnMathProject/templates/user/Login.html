@@ -45,11 +45,11 @@
         <div class="text-center pt-4">
             <h2 class="login">Login</h2>
         </div>
-        <form action="{% url "index" %}">
+        <form action="{% url "login" %}">
         <div class="row">
           <div class="col">
             <div class="text-center ">
-              <img class="profile-img" src="{% static 'user/assets/svg/profile 1-blue.svg'%}" alt="profile-img" />
+              <img class="profile-img" src="{% static 'user/assets/svg/profile1-blue.svg'%}" alt="profile-img" />
             </div> 
           </div>
         </div>
@@ -119,7 +119,7 @@
     <div class="row">
       <div class="col">
         <div class=" mt-4 ">
-          <a href="{% url 'signup'%}" class="text-decoration-none submit-input-control d-flex justify-content-center align-items-center"><p class="p-0 m-0" >Sign Up</p></a>
+          <a href="{% url 'emailVerify'%}" class="text-decoration-none submit-input-control d-flex justify-content-center align-items-center"><p class="p-0 m-0" >Sign Up</p></a>
           <!-- <a class="submit-input-control" type="submit" name="sign-up-btn" id="submit-btn" value="Sign Up">Sign Up</a> -->
         </div>
       </div>

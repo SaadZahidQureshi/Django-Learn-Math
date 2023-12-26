@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +10,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/email-verify.css">
+    <link rel="stylesheet" href="{% static 'user/css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'user/css/email-verify.css'%}">
     <title>Email verification</title>
   </head>
   <body>
@@ -28,32 +29,34 @@
         <div class="">
           <p class="current-email m-0 p-0">Current Email</p>
         </div>
-        <form action="../html/Code-Verify.html">
-        <div class="position-relative mt-2">
-          <input
-            class="input-control"
-            type="email"
-            name="varification-email"
-            id="varification-email"
-            placeholder="Enter email to verify"
-          />
-          <img
-            class="input-svg width-inpu-svg position-absolute"
-            src="../assets/svg/varification-email-svg.svg"
-            alt="varification-email-svg"
-          />
-        </div>
-        <div class="mt-5 w-100 h-100">
-          <!-- <a href="" id="email-varification-btn" class="submit-input-control w-100 text-decoration-none h-100">Verify</a> -->
-          <input
+        <form action="{% url 'emailVerify'%}" method='POST'>
+          {% csrf_token %}
+          <div class="position-relative mt-2">
+            <input
+              class="input-control"
+              type="email"
+              name="email"
+              id="varification-email"
+              placeholder="Enter email to verify"
+              required
+            />
+            <img
+              class="input-svg width-inpu-svg position-absolute"
+              src="{% static 'user/assets/svg/varification-email-svg.svg'%}"
+              alt="varification-email-svg"
+            />
+          </div>
+          <div class="mt-5 w-100 h-100">
+            <!-- <a href="" id="email-varification-btn" class="submit-input-control w-100 text-decoration-none h-100">Verify</a> -->
+            <input
 
-            class="submit-input-control"
-            type="submit"
-            name="varify-email"
-            id="email-varification-btn"
-            value="Verify"
-          />
-        </div>
+              class="submit-input-control"
+              type="submit"
+              name="varify-email"
+              id="email-varification-btn"
+              value="Verify"
+            />
+          </div>
       </form>
       </div>
     </div>

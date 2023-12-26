@@ -43,11 +43,12 @@
         <div class="text-center pt-4">
             <h2 class="sign-up">Sign Up</h2>
         </div>
-        <form action="{% url 'login'%}">
+        <form method='POST' action="{% url 'signup'%}">
+          {% csrf_token %}
         <div class="row">
           <div class="col">
             <div class="text-center ">
-              <img class="profile-img" src="{% static 'user/assets/svg/profile 1-blue.svg'%}" alt="profile-img" />
+              <img class="profile-img" src="{% static 'user/assets/svg/profile1-blue.svg'%}" alt="profile-img" />
             </div> 
           </div>
         </div>
@@ -63,7 +64,7 @@
         <div class="row">
           <div class="col">
             <div class="position-relative m-0 pb-0 mt-1">
-              <input class="input-control" type="text" name="name" id="input-name" placeholder="Name">
+              <input class="input-control" type="text" name="name" id="input-name" placeholder="Name" required>
               <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/Group 9-name.svg'%}" alt="name-icon">
             </div>
           </div>
@@ -72,7 +73,7 @@
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="email" name="email" id="input-email" placeholder="Email">
+            <input class="input-control" type="email" name="email" id="input-email" placeholder="Email" value=''>
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/email.svg'%}" alt="email-icon">
           </div>
         </div>
@@ -81,7 +82,7 @@
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="password" name="password" id="input-password" placeholder="Password">
+            <input class="input-control" type="password" name="password" id="input-password" placeholder="Password" required>
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/password.svg'%}" alt="password-icon">
           </div>
         </div>
@@ -90,7 +91,7 @@
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="password" name="confirm-password" id="input-confirm-password" placeholder="Confirm Password">
+            <input class="input-control" type="password" name="confirm-password" id="input-confirm-password" placeholder="Confirm Password" required>
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/confirm-password.svg'%}" alt="confirm-password-icon">
           </div>
         </div>
