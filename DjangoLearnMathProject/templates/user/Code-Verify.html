@@ -53,7 +53,25 @@
                 </div>
                 <form method='POST' action="{% url 'codeVerify'%}">
                  {% csrf_token %}
-                <div class="position-relative mt-2">
+                 <div class="position-relative mt-2 d-none">
+                  <input
+                    class="input-control"
+                    type="email"
+                    name="input-email"
+                    id="varification-email"
+                    value={{email}}
+                  />
+                  <img
+                    class="input-svg width-inpu-svg position-absolute"
+                    src="{% static 'user/assets/svg/verification-code-svg.svg'%}"
+                    alt="varification-email-svg"
+                  />
+                </div>
+                
+
+                <!-- {{email}} -->
+                
+                 <div class="position-relative mt-2">
                   <input
                     class="input-control"
                     type="text"

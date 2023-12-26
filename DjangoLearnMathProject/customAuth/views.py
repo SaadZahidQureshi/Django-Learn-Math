@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from customAuth.models import UserVerification, Users
 from django.contrib import messages
 import random
+import yagmail
 
 # Create your views here.
 
@@ -32,27 +33,43 @@ def emailVerify(request):
             generated_otp = ''.join(random.choice('0123456789') for i in range(6))
             UserVerification.objects.create(email=input_email,otp=generated_otp, is_verified=False)
 
-            # Send OTP to the user's email
-            subject = 'Your OTP for Email Verification'
-            message = f'Your OTP is: {generated_otp}. Enter this code on the website to verify your email.'
-            from_email = 'saadzahid133204@gmail.com'  # Replace with your email address
 
-            send_mail(subject, message, from_email, [input_email], fail_silently=False)
-        return render(request, 'user/Code-verify.html')
+            # Send OTP to the user's email
+            # subject = 'Your OTP for Email Verification'
+            # message = f'Your OTP is: {generated_otp}. Enter this code on the website to verify your email.'
+            # from_email = 'saadzahid133204@gmail.com'  # Replace with your email address
+
+            # send_mail(subject, message, from_email, [input_email], fail_silently=False)
+
+            
+            # Create a yagmail SMTP client
+            # yag = yagmail.SMTP('saadzahid133204@gmail.com', 'SaadZahid@133204')
+            # yag.send(to=input_email, subject=subject, contents=message)
+            # yag.close()
+            print(input_email)
+        return render(request, 'user/Code-verify.html', {'email': input_email})
     return render(request, 'user/Email-verify.html')
 
 def codeVerify(request):
     if(request.method == 'POST'):
         user_otp = request.POST.get('input-otp')
-        # print(user_otp)
+        user_email = request.POST.get('input-email')
+        print(user_otp)
+        print(user_email)
         try:
-            user_verification = UserVerification.objects.get(otp=user_otp, is_verified=False)
+            user_verification = UserVerification.objects.filter(email=user_email).values()
+            record = user_verification.get()
+            print(record)
         except UserVerification.DoesNotExist:
             messages.error(request, 'Invalid OTP. Please try again.')
             return render(request, 'user/Code-verify.html',{'message': messages.get_messages(request)})
-        user_verification.is_verified = True
-        user_verification.save()
-        return render( request, 'user/signup.html')
+        
+        if(record['otp'] == user_otp):
+            user_verification.is_verified = True
+            user_verification.save()
+            return render( request, 'user/signup.html')
+        else:
+            return render(request, 'user/Code-verify.html')
     return render(request, 'user/Code-verify.html')
 
 def profileSetting(request):
