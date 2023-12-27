@@ -51,14 +51,32 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form method='POST' action="{% url 'codeVerify'%}">
+                <form method='POST' action="{% url 'codeVerify'%}" id='otp-form'>
                  {% csrf_token %}
-                <div class="position-relative mt-2">
+                 <div class="position-relative mt-2 d-none">
+                  <input
+                    class="input-control"
+                    type="email"
+                    name="input-email"
+                    id="varification-email"
+                    value={{email}}
+                  />
+                  <img
+                    class="input-svg width-inpu-svg position-absolute"
+                    src="{% static 'user/assets/svg/verification-code-svg.svg'%}"
+                    alt="varification-email-svg"
+                  />
+                </div>
+                
+
+                <!-- {{email}} -->
+                
+                 <div class="position-relative mt-2">
                   <input
                     class="input-control"
                     type="text"
                     name="input-otp"
-                    id="varification-email"
+                    id="input-otp"
                     placeholder="Enter Code"
                   />
                   <img
@@ -67,20 +85,24 @@
                     alt="varification-email-svg"
                   />
                 </div>
-                {% comment %} {% if message %}
+                <!-- {% comment %} {% if message %}
                   <div class="alert alert-danger mt-2">
                     {{ message }}
                   </div>
-                {% endif %} {% endcomment %}
+                {% endif %} {% endcomment %} -->
 
-                {% if messages %}
+                <!-- {% if messages %}
                 <ul class="messages alert alert-danger mt-2">
                   {% for message in messages %}
-                    <li{% if message.tags %} class="list-unstyled text-danger {{ message.tags }}"{% endif %}>{{ message }}</li>
+                    <li {% if message.tags %} class="list-unstyled text-danger {{ message.tags }}"{% endif %}>{{ message }}</li>
                   {% endfor %}
                 </ul>
-              {% endif %}
+                {% endif %} -->
               
+                <ul class="alert alert-danger mt-2 d-none">
+                  <li class="list-unstyled text-danger ">Invalid OTP. Please try again.</li>
+                </ul>
+
                 <div class="mt-5">
                   <input
                     class="submit-input-control"
@@ -90,6 +112,8 @@
                     value="Send"
                   />
                 </div>
+
+                <a href="" class="d-none"  id="trigermodal" data-bs-toggle="modal" data-bs-target="#popup-successfully-done-modal">sdfsd</a>
                 <div class="row">
                   <div class="col">
                     <div class="position-relative mt-1 forgot-password text-end pb-0">
@@ -104,6 +128,54 @@
       </div>
   </div>
 </body>
+
+  <!--  data-bs-toggle="modal" data-bs-target="#popup-successfully-done-modal" -->
+
+ <!-- Modal user successfully delete-->
+ <div class="modal fade"  id="popup-successfully-done-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="modal-body p-4">
+        <div class=" d-flex flex-column align-items-center justify-content-center">
+          <!-- <div class=""><h2 class="modal-marks">Popup Quiz successfully Done</h2></div> -->
+          
+          <div class="d-flex justify-content-center align-items-center gap-2">
+              <div class="me-2">
+                  <div class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="49" height="48" viewBox="0 0 49 48" fill="none">
+                      <path d="M48.2189 18.5684V47.4063H1V18.5684" fill="#FDF9EA"/>
+                      <path d="M48.2189 18.5684V47.4063H1V18.5684" stroke="#A6BCC0" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M24.5662 1L1 18.665L24.5662 33.3544L48.1325 18.6333L24.5662 1Z" fill="#F2F2F2" stroke="#A6BCC0" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.24585 4.66455V20.4043L24.3374 31.6814H24.7985L42.972 20.3275V4.66455H6.24585Z" fill="#F1A92C" stroke="#F4BA00"/>
+                      <path d="M1.01575 47.3965L8.86976 42.1597L16.7238 36.9229L1.01575 47.3965ZM48.175 47.3968L32.4952 36.9229L48.175 47.3968Z" fill="#FFF593"/>
+                      <path d="M48.175 47.3968L32.4952 36.9229M1.01575 47.3965L16.7238 36.9229L8.86976 42.1597L1.01575 47.3965Z" stroke="#A6BCC0" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M1 18.665L24.5662 33.3544L48.1325 18.6333" stroke="#A6BCC0" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M29.8294 12.7197L21.2536 21.7725L29.8294 12.7197ZM21.2575 21.7395L16.7397 17.1944L21.2575 21.7395Z" fill="#D5FFF6"/>
+                      <path d="M21.2575 21.7395L16.7397 17.1944M29.8294 12.7197L21.2536 21.7725L29.8294 12.7197Z" stroke="#71C837" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+              </div>
+              <div>
+                  <div class="">
+                    <h1 class="modal-head text-dark m-0 p-0">Email Verified</h1>
+                  </div>
+              </div>
+          
+            </div>
+
+          <div class="text-center mt-3"><p class="modal-message">Your email address has ben verified and reigstered</p></div>
+
+          <div class="">
+                <button type="button" class="modal-button" id="ok-modal-button" data-bs-dismiss="modal">Ok</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="{% static 'user/js/main.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
