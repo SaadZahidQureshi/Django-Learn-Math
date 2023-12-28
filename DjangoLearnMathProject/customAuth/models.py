@@ -13,7 +13,7 @@ class UserVerification(TimeStampMixin, models.Model):
     userverification_id=models.AutoField(primary_key=True, null=False)
     email=models.EmailField(unique=True, blank=False, null=False)
     otp= models.IntegerField()
-    is_verified= models.BooleanField()
+    is_verified= models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.email)

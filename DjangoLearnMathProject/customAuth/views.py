@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from customAuth.models import UserVerification, Users
 from django.contrib import messages
+from .forms import EmailVerificationForm, CodeVerificationForm
 import random
+from django.conf import settings
 
 # Create your views here.
 
@@ -19,36 +21,46 @@ def forgotPassword(request):
     return render(request ,'user/Reset-Password.html')
 
 def emailVerify(request):
-    if(request.method == 'POST'):
-        input_email = request.POST.get('email')
-        if(input_email == ''):
-            return render(request, 'user/Email-verify.html' )
-        else:
+    if (request.method == 'POST'):
+        form = EmailVerificationForm(request.POST)
+        if form.is_valid():
+            print("Form is saved successfully")
             generated_otp = ''.join(random.choice('0123456789') for i in range(6))
-            UserVerification.objects.create(email=input_email,otp=generated_otp, is_verified=False)
+            instance = form.save(commit=False)
+            instance.otp = generated_otp
+            instance.save()
+            
+            input_email = form.cleaned_data['email']
+            UserVerification.objects.create(email = input_email, otp = generated_otp)
+            sendEmail(generated_otp,input_email)
+            return render(request,'user/Code-Verify.html',{'email':input_email})
+        else:
+            print(form.errors)
+    else:
+        form = EmailVerificationForm()
+    return render(request, 'user/Email-verify.html', {'form': form})
 
-            # Send OTP to the user's email
-            subject = 'Your OTP for Email Verification'
-            message = f'Your OTP is: {generated_otp}. Enter this code on the website to verify your email.'
-            from_email = 'saadzahid133204@gmail.com'  # Replace with your email address
-
-            send_mail(subject, message, from_email, [input_email], fail_silently=False)
-        return render(request, 'user/Code-verify.html')
-    return render(request, 'user/Email-verify.html')
 
 def codeVerify(request):
     if(request.method == 'POST'):
-        user_otp = request.POST.get('input-otp')
-        # print(user_otp)
-        try:
-            user_verification = UserVerification.objects.get(otp=user_otp, is_verified=False)
-        except UserVerification.DoesNotExist:
-            messages.error(request, 'Invalid OTP. Please try again.')
-            return render(request, 'user/Code-verify.html',{'message': messages.get_messages(request)})
-        user_verification.is_verified = True
-        user_verification.save()
-        return render( request, 'user/signup.html')
-    return render(request, 'user/Code-verify.html')
+        form = CodeVerificationForm(request.POST)
+        print('success-1')
+        if form.is_valid():
+            print('success-2')
+            input_email = form.cleaned_data['email']
+            input_otp = form.cleaned_data['otp']
+            user_record =UserVerification.objects.get(email=input_email)
+            print(user_record)
+            if(user_record.otp == input_otp):
+                return JsonResponse({'success': True, 'email': input_email})
+            else:
+                return JsonResponse({'success': False})
+            # return render(request, 'user/Signup.html',{'email': input_email})
+        else:
+            print(form.errors)
+    else:
+        form = CodeVerificationForm()
+    return render(request, 'user/Code-verify.html', {'form': form})
 
 def signup(request):
     if(request.method == 'POST'):
@@ -67,7 +79,7 @@ def signup(request):
             pass
 
         return render(request, 'user/Login.html')
-    return render(request, 'user/Signup.html',{'email':n})
+    return render(request, 'user/Signup.html')
 
 def sendEmail(generated_otp,input_email):
     # Send OTP to the user's email

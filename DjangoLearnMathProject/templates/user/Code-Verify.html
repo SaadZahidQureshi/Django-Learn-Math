@@ -57,9 +57,11 @@
                   <input
                     class="input-control"
                     type="email"
-                    name="input-email"
+                    name="email"
                     id="varification-email"
-                    value={{email}}
+                    value = '{{email}}'
+                        
+                    
                   />
                   <img
                     class="input-svg width-inpu-svg position-absolute"
@@ -75,9 +77,13 @@
                   <input
                     class="input-control"
                     type="text"
-                    name="input-otp"
+                    name="otp"
                     id="input-otp"
                     placeholder="Enter Code"
+                    
+                    {% if form.is_bound %}
+                        value="{{ form.otp.value }}"
+                    {% endif %}
                   />
                   <img
                     class="input-svg width-inpu-svg position-absolute"
@@ -85,6 +91,9 @@
                     alt="varification-email-svg"
                   />
                 </div>
+                {% for err in form.email.errors %}
+                    <small class="text-danger">{{ err }}</small>
+                {% endfor %}
                 <!-- {% comment %} {% if message %}
                   <div class="alert alert-danger mt-2">
                     {{ message }}
@@ -99,9 +108,9 @@
                 </ul>
                 {% endif %} -->
               
-                <ul class="alert alert-danger mt-2 d-none">
+                {% comment %} <ul class="alert alert-danger mt-2 d-none">
                   <li class="list-unstyled text-danger ">Invalid OTP. Please try again.</li>
-                </ul>
+                </ul> {% endcomment %}
 
                 <div class="mt-5">
                   <input

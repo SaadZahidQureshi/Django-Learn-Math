@@ -39,12 +39,21 @@
               id="varification-email"
               placeholder="Enter email to verify"
               required
+              {% if form.is_bound %}
+                  value="{{ form.email.value }}"
+              {% endif %}
+              
+              
             />
             <img
               class="input-svg width-inpu-svg position-absolute"
               src="{% static 'user/assets/svg/varification-email-svg.svg'%}"
               alt="varification-email-svg"
             />
+
+            {% for err in form.email.errors %}
+                <small class="text-danger">{{ err }}</small>
+            {% endfor %}
           </div>
           <div class="mt-5 w-100 h-100">
             <!-- <a href="" id="email-varification-btn" class="submit-input-control w-100 text-decoration-none h-100">Verify</a> -->
