@@ -57,7 +57,7 @@
                   <input
                     class="input-control"
                     type="email"
-                    name="email"
+                    name="content"
                     id="varification-email"
                     value = '{{email}}'
                         
@@ -77,12 +77,12 @@
                   <input
                     class="input-control"
                     type="text"
-                    name="otp"
+                    name="code"
                     id="input-otp"
                     placeholder="Enter Code"
                     
                     {% if form.is_bound %}
-                        value="{{ form.otp.value }}"
+                        value="{{ form.code.value }}"
                     {% endif %}
                   />
                   <img
@@ -91,7 +91,7 @@
                     alt="varification-email-svg"
                   />
                 </div>
-                {% for err in form.email.errors %}
+                {% for err in form.code.errors %}
                     <small class="text-danger">{{ err }}</small>
                 {% endfor %}
                 <!-- {% comment %} {% if message %}

@@ -1,40 +1,56 @@
-from django.db import models
-from datetime import datetime
-# Create your models here.
 
-class TimeStampMixin(models.Model):
+from django.core.validators import MaxLengthValidator
+from datetime import timedelta
+from django.utils import timezone
+# from typing_extensions import OrderedDict
+from django.db import models
+from django.db.models.base import Model
+from enum import Enum
+# from customAuth import helpers
+from customAuth.CharFieldSizes import CharFieldSizes
+# from api.jwtauth import helpers
+# from api.core.models import CharFieldSizes, CustomResponse, GlobalResponseMessages, BaseModel
+
+
+class OTPtypes(Enum):
+    CREATE_USER = 'create'
+    FORGOT_PASSWORD = 'forgot'
+    UPDATE_EMAIL = 'update_email'
+    UPDATE_PHONE = 'update_phone'
+
+    @staticmethod
+    def get_enum_set():
+        return set(item.value for item in OTPtypes)
+
+    @staticmethod
+    def choices():
+        return [(item.value, item.value) for item in OTPtypes]
+    
+    @classmethod
+    def profile_choices(cls):
+        return [(cls.UPDATE_PHONE.value, cls.UPDATE_PHONE.value), (cls.UPDATE_EMAIL.value, cls.UPDATE_EMAIL.value)]
+
+class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
 
-class UserVerification(TimeStampMixin, models.Model):
-    userverification_id=models.AutoField(primary_key=True, null=False)
-    email=models.EmailField(unique=True, blank=False, null=False)
-    otp= models.IntegerField()
-    is_verified= models.BooleanField(default=False)
+class OTP(BaseModel):
+    code = models.CharField(max_length=CharFieldSizes.SMALL)
+    content = models.CharField(max_length=CharFieldSizes.XX_LARGE)
+    verification_token = models.CharField(max_length=CharFieldSizes.XXX_LARGE)
+    timeout = models.DateTimeField()
+    type = models.CharField(max_length=CharFieldSizes.SMALL)
+    used = models.BooleanField(default=False)
+  
+    # def __init__(self, *args, **kwargs) -> None:
+    #     super().__init__(*args, **kwargs)
+    #     self.verification_token = helpers.get_otp_verified_token(otp=self.code, content=self.content)
 
-    def __str__(self):
-        return str(self.email)
-    
-class Users(TimeStampMixin,models.Model):
-    user_id = models.AutoField(primary_key=True, null=False, blank=False)
-    user_email = models.EmailField(unique=True, blank=False, null=False)
-    user_name = models.CharField(max_length=100, blank=False)
-    user_password = models.CharField(max_length=100, blank=False)
-    user_image_url = models.URLField(null=True)
-    is_active = models.BooleanField(null=True)
-    is_admin = models.BooleanField(default=False)
-    is_verified = models.ForeignKey(UserVerification, on_delete= models.CASCADE)
+    def get_key(self):
+        return '_'.join([str(self.type), self.content])
 
-    def __str__(self):
-        return str(self.user_id)
-
-    @property
-    def is_verified(self):
-        verifciation_instance = UserVerification.objects.filter(email=self.user_email).first()
-
-        if verifciation_instance:
-            return verifciation_instance.is_verified
-        return False
+    def __str__(self) -> str:
+        return self.content

@@ -1,6 +1,5 @@
 from django.contrib import admin
+from customAuth.models import OTP
 
-from .models import Users,UserVerification
 # Register your models here.
-admin.site.register(Users)
-admin.site.register(UserVerification)
+admin.site.register(OTP)

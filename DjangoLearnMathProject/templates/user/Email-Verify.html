@@ -35,12 +35,12 @@
             <input
               class="input-control"
               type="email"
-              name="email"
+              name="content"
               id="varification-email"
               placeholder="Enter email to verify"
-              required
+              
               {% if form.is_bound %}
-                  value="{{ form.email.value }}"
+                  value="{{ form.content.value }}"
               {% endif %}
               
               
@@ -51,7 +51,7 @@
               alt="varification-email-svg"
             />
 
-            {% for err in form.email.errors %}
+            {% for err in form.content.errors %}
                 <small class="text-danger">{{ err }}</small>
             {% endfor %}
           </div>
@@ -61,7 +61,7 @@
 
               class="submit-input-control"
               type="submit"
-              name="varify-email"
+              name=""
               id="email-varification-btn"
               value="Verify"
             />
