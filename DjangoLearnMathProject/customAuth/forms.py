@@ -9,7 +9,6 @@ import re
 
 
 class OTPForm(forms.ModelForm):
-    # email = forms.EmailField()
     class Meta:
         model = OTP
         fields = ["content"]
@@ -21,51 +20,34 @@ class OTPForm(forms.ModelForm):
         except ValidationError:
             raise ValidationError("Enter a valid email address.")
         return content
-        
-        # def clean_code(self):
-        #     code = self.cleaned_data['code']
-        #     if not re.match(r'^\d{4}$', code):
-        #         raise forms.ValidationError('OTP must be a 4-digit number.')
-        #     return code
-        
+    
+    def save(self, commit=True, *args, **kwargs):
+        # Extract additional parameters from kwargs
+        email = kwargs.pop('email', None)
+        generated_otp = kwargs.pop('generated_otp', None)
+        token = kwargs.pop('token', None)
+        timeout = kwargs.pop('timeout',None)
+        # Call the superclass's save method to save the form data
+        instance = super(OTPForm, self).save(commit=False)
 
-        # def clean(self):
-        #     cleaned_data = super().clean()
-        #     content = cleaned_data.get('content')
-        #     code = cleaned_data.get('code')
+        # Save additional parameters to the instance
+        instance.content = email
+        instance.code = generated_otp
+        instance.verification_token = token
+        instance.timeout = timeout
 
-        #     token = helpers.get_otp_verified_token(code=code, content=content)
-            
-
-                  
-
-
-    def __init__(self,  *args, **kwargs):
-        self.otp =kwargs.pop('generated_otp', None)
-        super(OTPForm,self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        obj = super(OTPForm, self).save(commit=False)
-        obj.code = self.otp
-        obj.timeout = datetime.datetime.now() + datetime.timedelta(minutes=2)
         if commit:
-            obj.save()
-        return obj
+            instance.save()
+        return instance
     
 
-
-
-
-
 class SecondOTPForm(forms.ModelForm):
-    # email = forms.EmailField()
     class Meta:
         model = OTP
         fields = ["content","code"]
     
     def clean_content(self):
         content = self.cleaned_data['content']
-        print(content)
         try:
             validate_email(content)
         except ValidationError:
@@ -74,19 +56,18 @@ class SecondOTPForm(forms.ModelForm):
     
     def clean_code(self):
         code = self.cleaned_data['code']
-        print(code)
-        print('testing...')
         if not re.match(r'^\d{4}$', code):
+            # here it prints error statement but no raising the error 
             raise forms.ValidationError('OTP must be a 4-digit number.')
         return code
     
 
-    def clean(self):
-        cleaned_data = super().clean()
-        content = cleaned_data.get('content')
-        code = cleaned_data.get('code')
-        token = helpers.get_otp_verified_token(code,content)
-        return token
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     content = cleaned_data.get('content')
+    #     code = cleaned_data.get('code')
+    #     token = helpers.get_otp_verified_token(code,content)
+    #     return token
 
     
 

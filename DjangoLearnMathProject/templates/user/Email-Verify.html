@@ -34,7 +34,7 @@
           <div class="position-relative mt-2">
             <input
               class="input-control"
-              type="email"
+              type="text"
               name="content"
               id="varification-email"
               placeholder="Enter email to verify"
@@ -52,7 +52,7 @@
             />
 
             {% for err in form.content.errors %}
-                <small class="text-danger">{{ err }}</small>
+                <small class="text-danger ">{{ err }}</small>
             {% endfor %}
           </div>
           <div class="mt-5 w-100 h-100">

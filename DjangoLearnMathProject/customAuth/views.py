@@ -1,47 +1,53 @@
 from django.shortcuts import render,redirect
-from django.http import JsonResponse
-from customAuth.sendEmail import Email
 from .forms import OTPForm, SecondOTPForm
+from customAuth.sendEmail import Email
+from django.urls import reverse
 from customAuth import helpers
+import datetime
 import random
 
 
 
 # Create your views here.
 def emailVerify(request):
-    if (request.method == 'POST'):
-        generated_otp = ''.join(random.choice('0123456789') for i in range(4))
-        form = OTPForm(request.POST,generated_otp = generated_otp)
+    if (request.method == 'POST'):  
+        form = OTPForm(request.POST)
         if form.is_valid():
             input_email = form.cleaned_data['content']
-            print(input_email)
+            generated_otp = ''.join(random.choice('0123456789') for i in range(4))
+            token = helpers.get_otp_verified_token(generated_otp,input_email)
+            timeout =  datetime.datetime.now() + datetime.timedelta(minutes=2)
             Email.send(generated_otp,input_email)
-            form.save()
-            # print(form.save())
-            return render(request,'user/Code-Verify.html',{'email':input_email})
+            form.save(email=input_email, generated_otp=generated_otp, token=token, timeout = timeout)
+            return redirect(reverse('codeVerify') + f'?email={input_email}')
         else:
-            print(form.errors)
+            return render(request, 'user/Email-verify.html', {'form': form})
     else:
         form = OTPForm()
     return render(request, 'user/Email-verify.html', {'form': form})
     
 def codeVerify(request):
+    input_email = request.GET.get('email','')
     if(request.method == 'POST'):
-        print('sucess-1,', request.POST)
         form = SecondOTPForm(request.POST)
-        print('sucess-2')
         if form.is_valid():
-            print('sucess-3')
-            print(form.cleaned_data)
-            helpers.get_otp_verified_token
-        return redirect('signup')
-
+            code = form.cleaned_data['code']
+            content = form.cleaned_data['content']
+            is_verified = helpers.otp_verify(code, content)
+            if is_verified:
+                return redirect(reverse('signup')+ f'?email={input_email}')
+            else:
+                return render(request, 'user/Code-verify.html', {'form': form,'email':input_email})
+        else:
+            return render(request, 'user/Code-verify.html', {'form': form,'email':input_email})
     else:
         form = SecondOTPForm()
-    return render(request, 'user/Code-verify.html', {'form': form})
+    return render(request, 'user/Code-verify.html', {'form': form,'email':input_email})
 
 
 def signup(request):
+    input_email = request.GET.get('email','')
+
     # if(request.method == 'POST'):
     #     input_name= request.POST.get('input-name')
     #     input_email =request.POST.get('input-email')
@@ -58,4 +64,4 @@ def signup(request):
     #         pass
 
     #     return render(request, 'user/Login.html')
-    return render(request, 'user/Signup.html')
+    return render(request, 'user/Signup.html', {'email':input_email})

@@ -51,7 +51,7 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form method='POST' action="{% url 'codeVerify'%}" id='otp-form'>
+                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}" id='otp-form'>
                  {% csrf_token %}
                  <div class="position-relative mt-2 d-none">
                   <input
@@ -71,7 +71,7 @@
                 </div>
                 
 
-                <!-- {{email}} -->
+               <!-- {{email}} -->
                 
                  <div class="position-relative mt-2">
                   <input
@@ -80,7 +80,9 @@
                     name="code"
                     id="input-otp"
                     placeholder="Enter Code"
-                    
+                    {% if form.code.errors %}
+                        class="input-error" 
+                    {% endif %}
                     {% if form.is_bound %}
                         value="{{ form.code.value }}"
                     {% endif %}
@@ -92,7 +94,8 @@
                   />
                 </div>
                 {% for err in form.code.errors %}
-                    <small class="text-danger">{{ err }}</small>
+                <div class="alert alert-danger mt-2">{{ err }}</div>
+                    <!-- <small class="text-danger">{{ err }}</small> -->
                 {% endfor %}
                 <!-- {% comment %} {% if message %}
                   <div class="alert alert-danger mt-2">
@@ -108,9 +111,9 @@
                 </ul>
                 {% endif %} -->
               
-                {% comment %} <ul class="alert alert-danger mt-2 d-none">
+                <!-- {% comment %} <ul class="alert alert-danger mt-2 d-none">
                   <li class="list-unstyled text-danger ">Invalid OTP. Please try again.</li>
-                </ul> {% endcomment %}
+                </ul> {% endcomment %} -->
 
                 <div class="mt-5">
                   <input
