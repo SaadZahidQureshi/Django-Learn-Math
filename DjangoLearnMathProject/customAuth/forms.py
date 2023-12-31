@@ -1,9 +1,9 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from customAuth.models import OTP
-from customAuth import helpers
+# from django import User
+from customAuth.models import OTP, User
 from django import forms
-import datetime
 import re
 
 
@@ -70,5 +70,44 @@ class SecondOTPForm(forms.ModelForm):
     #     return token
 
     
+class UserForm(forms.ModelForm):
+    username = forms.CharField()
+    password=forms.CharField()
+    confirm_password=forms.CharField()
+    class Meta:
+        model=User
+        fields=('username','email','password')
+
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        username = cleaned_data.get('username')
+        if ('@', '.', '-', '+') in username:
+            self.add_error('username', 'Symbols @/./-/+ are not allowed in username.')
+        return cleaned_data
+    
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError("password and confirm_password does not match")
+        
+        return cleaned_data
+    
 
 
+class CustomAuthenticationForm(forms.ModelForm):
+    # email = forms.EmailField(required=True, label='Email')
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+    
+    def clean_content(self):
+        content = self.cleaned_data['email']
+        print(content)
+        try:
+            validate_email(content)
+        except ValidationError:
+            raise ValidationError("Enter a valid email address.")
+        return content

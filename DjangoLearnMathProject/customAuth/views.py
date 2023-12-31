@@ -1,5 +1,7 @@
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render,redirect
-from .forms import OTPForm, SecondOTPForm
 from customAuth.sendEmail import Email
 from django.urls import reverse
 from customAuth import helpers
@@ -16,7 +18,7 @@ def emailVerify(request):
             input_email = form.cleaned_data['content']
             generated_otp = ''.join(random.choice('0123456789') for i in range(4))
             token = helpers.get_otp_verified_token(generated_otp,input_email)
-            timeout =  datetime.datetime.now() + datetime.timedelta(minutes=2)
+            timeout =  datetime.datetime.now() + datetime.timedelta(minutes=99)
             Email.send(generated_otp,input_email)
             form.save(email=input_email, generated_otp=generated_otp, token=token, timeout = timeout)
             return redirect(reverse('codeVerify') + f'?email={input_email}')
@@ -33,11 +35,14 @@ def codeVerify(request):
         if form.is_valid():
             code = form.cleaned_data['code']
             content = form.cleaned_data['content']
-            is_verified = helpers.otp_verify(code, content)
-            if is_verified:
-                return redirect(reverse('signup')+ f'?email={input_email}')
+            response = helpers.otp_verify(code, content)
+    
+            if response['status'] == 200:
+                # token = response["token"]
+                # &access_token={token}
+                return redirect(reverse('signup') + f'?email={content}')
             else:
-                return render(request, 'user/Code-verify.html', {'form': form,'email':input_email})
+                return render(request, 'user/Code-verify.html', {'form': form,'email':input_email,'message':response['message']})
         else:
             return render(request, 'user/Code-verify.html', {'form': form,'email':input_email})
     else:
@@ -47,21 +52,51 @@ def codeVerify(request):
 
 def signup(request):
     input_email = request.GET.get('email','')
+    # input_email = request.GET.get('access_token','')
+    if (request.method == 'POST'):
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            return render(request, 'user/Signup.html', {'form': form, 'email': input_email})
+    else:
+        form = UserForm() 
+    return render(request, 'user/Signup.html', {'form': form, 'email': input_email})
 
-    # if(request.method == 'POST'):
-    #     input_name= request.POST.get('input-name')
-    #     input_email =request.POST.get('input-email')
-    #     input_password= request.POST.get('input-password')
-    #     input_confirm_password= request.POST.get('input-confirm-password')
-    #     print(input_name, input_email,input_password, input_confirm_password)
 
-    #     obj = UserVerification.objects.filter(email =input_email).first()
-    #     print(obj.is_verified)
-    #     # verification =obj.is_verified
-    #     if(input_password == input_confirm_password):
-    #         Users.objects.create(user_name = input_name, user_email= input_email, user_password= input_password, is_verified=obj )
-    #     else:
-    #         pass
+# def login(request):
 
-    #     return render(request, 'user/Login.html')
-    return render(request, 'user/Signup.html', {'email':input_email})
+#     if(request.method == 'POST'):
+#         form = AuthenticationForm(request.POST)
+#         if form.is_valid():
+#             content = form.cleaned_data['email']
+#             password = form.cleaned_data['password']
+#             is_exist = helpers.check_user(content, password)
+
+#     return render(request, 'user/login.html')
+
+
+def login(request):
+    print("reached in login function")
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request.POST)
+        print('test ...')
+        if form.is_valid():
+            print('clean data ',form.cleaned_data)
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  # Redirect to your home page or any other desired page
+    else:
+        form = CustomAuthenticationForm()
+
+    return render(request, 'user/Login.html', {'form': form})
+
+def forgotPassword(request):
+    pass
+
+def index(request):
+    return render(request, 'user/Home.html')
