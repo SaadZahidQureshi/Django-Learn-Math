@@ -3,7 +3,11 @@ from . import views
 
 
 urlpatterns = [
+<<<<<<< HEAD
     path('login/', views.user_login, name='login'),
+=======
+    path('login/', views.login, name='login'),
+>>>>>>> a526412e62215d3a24d9cb5174500ca384eeba44
     path("forgotPassword/", views.forgotPassword, name="forgotPassword"),
     path('index/', views.index, name='index'),
     path("signup/", views.signup, name="signup"),
