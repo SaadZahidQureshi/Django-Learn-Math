@@ -1,5 +1,10 @@
 from django.contrib import admin
-from customAuth.models import OTP
+from customAuth.models import OTP, User
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
+
+
+
 admin.site.register(OTP)
+admin.site.register(User)

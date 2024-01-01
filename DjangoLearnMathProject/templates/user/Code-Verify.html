@@ -51,7 +51,7 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form method='POST' action="{% url 'codeVerify'%}" id='otp-form'>
+                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}" id='otp-form'>
                  {% csrf_token %}
                  <div class="position-relative mt-2 d-none">
                   <input
@@ -71,7 +71,7 @@
                 </div>
                 
 
-                <!-- {{email}} -->
+               <!-- {{email}} -->
                 
                  <div class="position-relative mt-2">
                   <input
@@ -80,7 +80,9 @@
                     name="code"
                     id="input-otp"
                     placeholder="Enter Code"
-                    
+                    {% if form.code.errors %}
+                        class="input-error" 
+                    {% endif %}
                     {% if form.is_bound %}
                         value="{{ form.code.value }}"
                     {% endif %}
@@ -92,25 +94,18 @@
                   />
                 </div>
                 {% for err in form.code.errors %}
-                    <small class="text-danger">{{ err }}</small>
+                <div class="alert alert-danger mt-2">{{ err }}</div>
                 {% endfor %}
-                <!-- {% comment %} {% if message %}
-                  <div class="alert alert-danger mt-2">
-                    {{ message }}
-                  </div>
-                {% endif %} {% endcomment %} -->
 
-                <!-- {% if messages %}
-                <ul class="messages alert alert-danger mt-2">
-                  {% for message in messages %}
-                    <li {% if message.tags %} class="list-unstyled text-danger {{ message.tags }}"{% endif %}>{{ message }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %} -->
+                {% if message %}
+                <div class="alert alert-danger mt-2">
+                  {{message}} <a href="{% url 'emailVerify' %}" class=" text-danger">click here </a>
+                </div>
+                {% endif %}
               
-                {% comment %} <ul class="alert alert-danger mt-2 d-none">
+                <!-- {% comment %} <ul class="alert alert-danger mt-2 d-none">
                   <li class="list-unstyled text-danger ">Invalid OTP. Please try again.</li>
-                </ul> {% endcomment %}
+                </ul> {% endcomment %} -->
 
                 <div class="mt-5">
                   <input
@@ -184,7 +179,7 @@
 
 </div>
 
-<script src="{% static 'user/js/main.js'%}"></script>
+<!-- <script src="{% static 'user/js/main.js'%}"></script> -->
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

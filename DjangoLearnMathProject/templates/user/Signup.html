@@ -43,8 +43,10 @@
         <div class="text-center pt-4">
             <h2 class="sign-up">Sign Up</h2>
         </div>
-        <form method='POST' action="{% url 'signup'%}">
+        <form method='POST' action="{% url 'signup'%}?email={{email}}">
           {% csrf_token %}
+          <!-- <p class="" >{{token}}</p>
+          <input class="d-none" type="text" value="{{token}}"> -->
         <div class="row">
           <div class="col">
             <div class="text-center ">
@@ -64,38 +66,56 @@
         <div class="row">
           <div class="col">
             <div class="position-relative m-0 pb-0 mt-1">
-              <input class="input-control" type="text" name="input-name" id="input-name" placeholder="Name" required>
+              <input class="input-control" type="text" name="name" id="input-name" placeholder="Name" >
               <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/Group 9-name.svg'%}" alt="name-icon">
             </div>
           </div>
       </div>
+      {% for err in form.name.errors %}
+        <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+          <small class="text-danger">{{ err }}</small>
+      {% endfor %}
 
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="email" name="input-email" id="input-email" placeholder="Email" value={{email}} readonly>
+            <input class="input-control" type="email" name="email" id="email" placeholder="Email" value={{email}} readonly>
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/email.svg'%}" alt="email-icon">
           </div>
         </div>
       </div>
 
+      {% for err in form.email.errors %}
+      <small class="text-danger">{{ err }}</small>
+      {% endfor %}
+
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="password" name="input-password" id="input-password" placeholder="Password" required>
+            <input class="input-control" type="password" name="password" id="input-password" placeholder="Password" >
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/password.svg'%}" alt="password-icon">
           </div>
         </div>
       </div>
 
+      {% for err in form.password.errors %}
+        <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+          <small class="text-danger">{{ err }}</small>
+      {% endfor %}
+
+
       <div class="row">
         <div class="col">
           <div class="position-relative mt-3 pb-0">
-            <input class="input-control" type="password" name="input-confirm-password" id="input-confirm-password" placeholder="Confirm Password" required>
+            <input class="input-control" type="password" name="confirm_password" id="input-confirm-password" placeholder="Confirm Password" >
             <img class="input-svg bit-wide position-absolute" src="{% static 'user/assets/svg/confirm-password.svg'%}" alt="confirm-password-icon">
           </div>
         </div>
       </div>
+      {% for err in form.password.errors %}
+        <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+          <small class="text-danger">{{ err }}</small>
+      {% endfor %}
 
       <div class="row">
         <div class="col">
@@ -123,7 +143,7 @@
           </div>
         </div>
       </div>
-    </form>
+        </form>
       
 
 

@@ -1,15 +1,25 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from customAuth.models import OTP
-from customAuth import helpers
+from customAuth.models import OTP, User
 from django import forms
-import datetime
 import re
 
+class StandardForm(forms.ModelForm):
+    def save(self, commit= True, *args, **kwargs):
+        instance = super().save(False)
+        model_fields = []
+        for field in self._meta.model._meta.get_fields():
+            model_fields.append(field.name)
 
+        for key, value in kwargs.items():
+            if key in model_fields:
+                setattr(instance,key,value)
 
-class OTPForm(forms.ModelForm):
-    # email = forms.EmailField()
+        if commit:
+            instance.save()
+        return instance
+        
+class OTPForm(StandardForm):
     class Meta:
         model = OTP
         fields = ["content"]
@@ -21,51 +31,14 @@ class OTPForm(forms.ModelForm):
         except ValidationError:
             raise ValidationError("Enter a valid email address.")
         return content
-        
-        # def clean_code(self):
-        #     code = self.cleaned_data['code']
-        #     if not re.match(r'^\d{4}$', code):
-        #         raise forms.ValidationError('OTP must be a 4-digit number.')
-        #     return code
-        
-
-        # def clean(self):
-        #     cleaned_data = super().clean()
-        #     content = cleaned_data.get('content')
-        #     code = cleaned_data.get('code')
-
-        #     token = helpers.get_otp_verified_token(code=code, content=content)
-            
-
-                  
-
-
-    def __init__(self,  *args, **kwargs):
-        self.otp =kwargs.pop('generated_otp', None)
-        super(OTPForm,self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        obj = super(OTPForm, self).save(commit=False)
-        obj.code = self.otp
-        obj.timeout = datetime.datetime.now() + datetime.timedelta(minutes=2)
-        if commit:
-            obj.save()
-        return obj
     
-
-
-
-
-
-class SecondOTPForm(forms.ModelForm):
-    # email = forms.EmailField()
+class SecondOTPForm(StandardForm):
     class Meta:
         model = OTP
         fields = ["content","code"]
     
     def clean_content(self):
         content = self.cleaned_data['content']
-        print(content)
         try:
             validate_email(content)
         except ValidationError:
@@ -74,20 +47,55 @@ class SecondOTPForm(forms.ModelForm):
     
     def clean_code(self):
         code = self.cleaned_data['code']
-        print(code)
-        print('testing...')
         if not re.match(r'^\d{4}$', code):
+            # here it prints error statement but no raising the error 
             raise forms.ValidationError('OTP must be a 4-digit number.')
         return code
-    
+       
+class UserForm(StandardForm):
+    # password=forms.CharField()
+    confirm_password=forms.CharField()
+    class Meta:
+        model=User
+        fields=('name','email','password')
+
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise forms.ValidationError("Enter a valid email address.")
+        return email
+
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        if any(symbol in name for symbol in ['@', '.', '-', '+']):
+            raise forms.ValidationError('Symbols @/./-/+ are not allowed in username.')
+        return name
+
 
     def clean(self):
-        cleaned_data = super().clean()
-        content = cleaned_data.get('content')
-        code = cleaned_data.get('code')
-        token = helpers.get_otp_verified_token(code,content)
-        return token
-
+        cleaned_data = super(UserForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+        print(password, confirm_password)
+        if password != confirm_password:
+            raise forms.ValidationError(
+                "password and confirm_password does not match"
+            )
     
+class CustomAuthenticationForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField()
 
-
+    def clean_content(self):
+        email = self.cleaned_data['email']
+        print(email)
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise forms.ValidationError("Enter a valid email address.")
+        return email
+    
