@@ -1,6 +1,8 @@
+import json
 from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render,redirect
+from django.http import JsonResponse
 from customAuth.sendEmail import Email
 from customAuth.models import User
 from django.urls import reverse
@@ -16,13 +18,9 @@ def emailVerify(request):
     if (request.method == 'POST'):  
         form = OTPForm(request.POST)
         if form.is_valid():
-            input_email = form.cleaned_data['content']
-            generated_otp = ''.join(random.choice('0123456789') for i in range(4))
-            token = helpers.get_otp_verified_token(generated_otp,input_email)
-            timeout =  datetime.datetime.now() + datetime.timedelta(minutes=5)
-            Email.send(generated_otp,input_email)
-            form.save(code=generated_otp, verification_token=token, timeout = timeout)
-            return redirect(reverse('codeVerify') + f'?email={input_email}')
+            response= helpers.send_email_save_record(request)
+            print(response)
+            return redirect(reverse('codeVerify') + f'?email={response["email"]}'+ f"&timeout={response['timeout']}")
         else:
             return render(request, 'user/Email-verify.html', {'form': form})
     else:
@@ -31,22 +29,19 @@ def emailVerify(request):
     
 def codeVerify(request):
     input_email = request.GET.get('email','')
-    context = {'email': input_email}
-
+    timeout = request.GET.get('timeout')
+    token = request.GET.get('token', None)
+    context = {'email': input_email, 'timeout':timeout}
     form = SecondOTPForm()
-
     if(request.method == 'POST'):
         form = SecondOTPForm(request.POST)
         context['form'] = form
         if form.is_valid():
-            code = form.cleaned_data['code']
-            content = form.cleaned_data['content']
-            response = helpers.otp_verify(code, content)
-    
+            response = helpers.otp_verify(request)
             if response['status'] == 200:
-                # token = response["token"]
-                # &access_token={token}
-                return redirect(reverse('signup') + f'?email={content}')
+                token = response["token"]
+                content = response['content']
+                return redirect(reverse('signup') + f'?email={content}'+f"&token={token}")
             context['message'] = response['message']
 
     return render(request, 'user/Code-verify.html', context=context)
@@ -54,15 +49,23 @@ def codeVerify(request):
 
 def signup(request):
     input_email = request.GET.get('email','')
-    # input_email = request.GET.get('access_token','')
+    token = request.GET.get('token', None)
+    context ={
+        'email': request.GET.get('email',''),
+        'token': request.GET.get('token', None)
+    }
+    # print(request.GET)
     if (request.method == 'POST'):
+        print('test-1')
         form = UserForm(request.POST)
         if form.is_valid():
+            print('test-2')
             email = form.cleaned_data['email']
             name =form.cleaned_data['name']
             response = helpers.checkEmail(email)
             message = response['message']
             if response['status'] == 200:
+                print('test-3')
                 password = form.cleaned_data['password']
                 user = User(email=email,name=name)
                 user.set_password(password)
@@ -71,12 +74,17 @@ def signup(request):
             else:
                 return render(request, 'user/Signup.html', {'form': form, 'email': input_email, 'message': message})
         else:
-            return render(request, 'user/Signup.html', {'form': form, 'email': input_email})
+            return render(request, 'user/Signup.html', {'form': form, 'email': input_email, 'token': token})
     else:
         form = UserForm() 
-    return render(request, 'user/Signup.html', {'form': form, 'email': input_email})
+    return render(request, 'user/Signup.html', {'form': form, 'email': input_email, 'token': token})
 
 
+def resendOTP(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = json.loads(request.body)
+        email = data.get('email')
+        expiration_timestamp = data.get('expiration_timestamp')
 
 def user_login(request):
     if request.method == 'POST':

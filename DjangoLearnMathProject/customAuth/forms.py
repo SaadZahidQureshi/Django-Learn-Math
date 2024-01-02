@@ -25,6 +25,8 @@ class OTPForm(StandardForm):
         fields = ["content"]
     
     def clean_content(self):
+        print(self)
+        print(self.cleaned_data)
         content = self.cleaned_data['content']
         try:
             validate_email(content)
@@ -38,6 +40,7 @@ class SecondOTPForm(StandardForm):
         fields = ["content","code"]
     
     def clean_content(self):
+        print(self)
         content = self.cleaned_data['content']
         try:
             validate_email(content)
@@ -53,7 +56,7 @@ class SecondOTPForm(StandardForm):
         return code
        
 class UserForm(StandardForm):
-    # password=forms.CharField()
+    password=forms.CharField()
     confirm_password=forms.CharField()
     class Meta:
         model=User
@@ -61,6 +64,7 @@ class UserForm(StandardForm):
 
 
     def clean_email(self):
+        print('test-7')
         email = self.cleaned_data.get('email')
         try:
             validate_email(email)
@@ -70,6 +74,7 @@ class UserForm(StandardForm):
 
 
     def clean_name(self):
+        print("test-6")
         name = self.cleaned_data.get('name')
         if any(symbol in name for symbol in ['@', '.', '-', '+']):
             raise forms.ValidationError('Symbols @/./-/+ are not allowed in username.')
@@ -77,14 +82,20 @@ class UserForm(StandardForm):
 
 
     def clean(self):
+        print('test-4')
         cleaned_data = super(UserForm, self).clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
         print(password, confirm_password)
-        if password != confirm_password:
+        
+        if (password != confirm_password):
+            print('test-5')
             raise forms.ValidationError(
                 "password and confirm_password does not match"
             )
+        else:
+            if(len(password) < 6):
+                raise forms.ValidationError('Password too short.')
     
 class CustomAuthenticationForm(forms.Form):
     email = forms.EmailField()

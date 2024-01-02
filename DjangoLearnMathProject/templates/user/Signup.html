@@ -43,10 +43,12 @@
         <div class="text-center pt-4">
             <h2 class="sign-up">Sign Up</h2>
         </div>
-        <form method='POST' action="{% url 'signup'%}?email={{email}}">
+        <form method='POST' action="{% url 'signup'%}?email={{email}}&token={{token}}">
           {% csrf_token %}
-          <!-- <p class="" >{{token}}</p>
-          <input class="d-none" type="text" value="{{token}}"> -->
+          <p class="d-none" >{{token}}</p>
+
+          {{context}}
+          {% comment %} <input class="d-none" type="text" value="{{token}}"> {% endcomment %}
         <div class="row">
           <div class="col">
             <div class="text-center ">
@@ -98,10 +100,12 @@
         </div>
       </div>
 
-      {% for err in form.password.errors %}
-        <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
-          <small class="text-danger">{{ err }}</small>
+      {% if form.errors %}
+      {% for err in form.non_field_errors %}
+      <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+        <small class="text-danger">{{ err }}</small>
       {% endfor %}
+  {% endif %}
 
 
       <div class="row">
@@ -112,10 +116,12 @@
           </div>
         </div>
       </div>
-      {% for err in form.password.errors %}
+    {% if form.errors %}
+        {% for err in form.non_field_errors %}
         <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
           <small class="text-danger">{{ err }}</small>
-      {% endfor %}
+        {% endfor %}
+    {% endif %}
 
       <div class="row">
         <div class="col">

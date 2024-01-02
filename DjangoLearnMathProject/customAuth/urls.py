@@ -10,6 +10,7 @@ urlpatterns = [
     path("emailVerify/", views.emailVerify, name="emailVerify"),
     path("codeVerify/", views.codeVerify, name="codeVerify"),
     path ('profileSetting/', views.profileSetting, name='profileSetting'),
+    path('resendOTP/', views.resendOTP, name='resendOTP')
     # path('delete_profile_picture/', views.delete_profile_picture, name='delete_profile_picture'),
 
 ]
