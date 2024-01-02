@@ -1,11 +1,9 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from customAuth.CharFieldSizes import CharFieldSizes
 from django.db import models
+import datetime
 from enum import Enum
-# from customAuth import helpers
-from customAuth.CharFieldSizes import CharFieldSizes
-# from api.jwtauth import helpers
-# from api.core.models import CharFieldSizes, CustomResponse, GlobalResponseMessages, BaseModel
+
 
 
 class OTPtypes(Enum):
@@ -25,10 +23,11 @@ class OTPtypes(Enum):
     @classmethod
     def profile_choices(cls):
         return [(cls.UPDATE_PHONE.value, cls.UPDATE_PHONE.value), (cls.UPDATE_EMAIL.value, cls.UPDATE_EMAIL.value)]
-
+            # print(datetime.datetime.now().time() , stored_timeout.time())
+            # print(datetime.datetime.now().time() < stored_timeout.time())
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(default = datetime.datetime.now())
+    updated_at = models.DateTimeField(default = datetime.datetime.now())
 
     class Meta:
         abstract = True
@@ -46,3 +45,36 @@ class OTP(BaseModel):
 
     def __str__(self) -> str:
         return self.content
+    
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+class User(AbstractUser, BaseModel):
+    username = None
+    name = models.CharField(max_length = CharFieldSizes.XX_LARGE)
+    email = models.EmailField(unique=True)
+    profile_image = models.ImageField(upload_to="profiles")
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    objects = UserManager()
+
