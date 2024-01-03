@@ -60,10 +60,11 @@
         </div>
 
 
-        
-
+      
         <div class="text-center pt-4">
+          {% if not request.user.is_authenticated  %}
             <h2 class="login">Login</h2>
+            {% endif %}
         </div>
         <form action="{% url 'login' %}" method="POST">
           {% csrf_token %}

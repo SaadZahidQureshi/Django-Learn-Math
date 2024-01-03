@@ -4,6 +4,7 @@ from customAuth.models import OTP, User
 from django import forms
 import re
 
+
 class StandardForm(forms.ModelForm):
     def save(self, commit= True, *args, **kwargs):
         instance = super().save(False)
@@ -18,22 +19,39 @@ class StandardForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-        
+
+
 class OTPForm(StandardForm):
     class Meta:
         model = OTP
         fields = ["content"]
     
     def clean_content(self):
-        print(self)
-        print(self.cleaned_data)
+        # super().clean()
+        # print("from otpform ------->", self)
+        # print(self.cleaned_data)
         content = self.cleaned_data['content']
         try:
             validate_email(content)
         except ValidationError:
             raise ValidationError("Enter a valid email address.")
         return content
-    
+
+
+class OTPForm1(forms.Form):
+    # Everything as before.
+    content = forms.EmailField()
+
+    def clean_content(self):
+        data = self.cleaned_data["content"]
+        if "fred@example.com" not in data:
+            raise ValidationError("You have forgotten about Fred!")
+
+        # Always return a value to use as the new cleaned data, even if
+        # this method didn't change it.
+        return data
+
+
 class SecondOTPForm(StandardForm):
     class Meta:
         model = OTP
@@ -64,7 +82,6 @@ class UserForm(StandardForm):
 
 
     def clean_email(self):
-        print('test-7')
         email = self.cleaned_data.get('email')
         try:
             validate_email(email)
@@ -74,7 +91,6 @@ class UserForm(StandardForm):
 
 
     def clean_name(self):
-        print("test-6")
         name = self.cleaned_data.get('name')
         if any(symbol in name for symbol in ['@', '.', '-', '+']):
             raise forms.ValidationError('Symbols @/./-/+ are not allowed in username.')
@@ -82,20 +98,20 @@ class UserForm(StandardForm):
 
 
     def clean(self):
-        print('test-4')
         cleaned_data = super(UserForm, self).clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
-        print(password, confirm_password)
         
+        if((password or confirm_password )== None):
+            raise forms.ValidationError('This field is required!')
+
         if (password != confirm_password):
-            print('test-5')
             raise forms.ValidationError(
                 "password and confirm_password does not match"
             )
         else:
             if(len(password) < 6):
-                raise forms.ValidationError('Password too short.')
+                raise forms.ValidationError('Password too short. Must be at least 6 characters')
     
 class CustomAuthenticationForm(forms.Form):
     email = forms.EmailField()
@@ -103,7 +119,6 @@ class CustomAuthenticationForm(forms.Form):
 
     def clean_content(self):
         email = self.cleaned_data['email']
-        print(email)
         try:
             validate_email(email)
         except ValidationError:

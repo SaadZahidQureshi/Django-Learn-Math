@@ -47,7 +47,7 @@ def send_email_save_record(request):
     input_email = form.clean_content()
     generated_otp = ''.join(random.choice('0123456789') for i in range(4))
     token = get_token(generated_otp,input_email)
-    timeout =  datetime.datetime.now() + datetime.timedelta(minutes=2)
+    timeout =  datetime.datetime.now() + datetime.timedelta(minutes=5)
     Email.send(generated_otp,input_email)
     form.save(code=generated_otp, verification_token=token, timeout = timeout)
     response={

@@ -7,6 +7,7 @@ cssutils==2.9.0
 Django==5.0
 idna==3.6
 lxml==4.9.4
+pillow==10.2.0
 premailer==3.10.0
 requests==2.31.0
 sqlparse==0.4.4

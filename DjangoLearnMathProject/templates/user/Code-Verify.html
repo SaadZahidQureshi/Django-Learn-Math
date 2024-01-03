@@ -82,12 +82,12 @@
                     name="code"
                     id="input-otp"
                     placeholder="Enter Code"
-                    {% if form.code.errors %}
+                    {% comment %} {% if form.code.errors %}
                         class="input-error" 
                     {% endif %}
                     {% if form.is_bound %}
                         value="{{ form.code.value }}"
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                   />
                   <img
                     class="input-svg width-inpu-svg position-absolute"
