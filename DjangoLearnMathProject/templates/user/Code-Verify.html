@@ -51,7 +51,7 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}&timeout={{timeout}}" id='otp-form'>
+                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}" id='otp-form'>
                  {% csrf_token %}
                  <div class="position-relative mt-2 d-none">
                   <input
@@ -70,7 +70,7 @@
                   />
                 </div>
 
-                <p class="d-none" id="timeout">{{timeout}}</p>
+                {% comment %} <p class="d-none" id="timeout">{{timeout}}</p> {% endcomment %}
                 
 
                <!-- {{email}} -->
@@ -123,7 +123,8 @@
                 <div class="row">
                   <div class="col">
                     <div class="position-relative mt-1 forgot-password text-end pb-0">
-                      <a class="text-decoration-none d-none" id="resendbtn" href="{% url 'codeVerify'%}"><p>Resend Code</p></a>
+                      <button class="text-decoration-none border-0 bg-transparent" type="button" id="resendLink" onclick="resendOTP()">Resend Code</button>
+                      <!-- <a class="text-decoration-none " id="resendLink" onclick="resendOTP()" href="{% url 'codeVerify'%}"><p>Resend Code</p></a> -->
                     </div>
                   </div>
                 </div>

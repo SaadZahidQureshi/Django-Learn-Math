@@ -27,29 +27,26 @@ class OTPForm(StandardForm):
         fields = ["content"]
     
     def clean_content(self):
-        # super().clean()
-        # print("from otpform ------->", self)
-        # print(self.cleaned_data)
-        content = self.cleaned_data['content']
+        content = self.data['content']
         try:
             validate_email(content)
         except ValidationError:
             raise ValidationError("Enter a valid email address.")
         return content
+    
 
+# class OTPForm1(forms.Form):
+#     # Everything as before.
+#     content = forms.EmailField()
 
-class OTPForm1(forms.Form):
-    # Everything as before.
-    content = forms.EmailField()
+#     def clean_content(self):
+#         data = self.cleaned_data["content"]
+#         if "fred@example.com" not in data:
+#             raise ValidationError("You have forgotten about Fred!")
 
-    def clean_content(self):
-        data = self.cleaned_data["content"]
-        if "fred@example.com" not in data:
-            raise ValidationError("You have forgotten about Fred!")
-
-        # Always return a value to use as the new cleaned data, even if
-        # this method didn't change it.
-        return data
+#         # Always return a value to use as the new cleaned data, even if
+#         # this method didn't change it.
+#         return data
 
 
 class SecondOTPForm(StandardForm):
@@ -58,7 +55,6 @@ class SecondOTPForm(StandardForm):
         fields = ["content","code"]
     
     def clean_content(self):
-        print(self)
         content = self.cleaned_data['content']
         try:
             validate_email(content)

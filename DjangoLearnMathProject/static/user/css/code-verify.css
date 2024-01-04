@@ -39,6 +39,15 @@
 .forgot-password p{
     color: #743FCB;
   }
+
+#resendLink{
+  color: #743FCB;
+}
+.disabled {
+  pointer-events: none;
+  color: gray !important;
+}
+
 @media (max-width: 540px) {
     #column-without-form{
         display: none !important;

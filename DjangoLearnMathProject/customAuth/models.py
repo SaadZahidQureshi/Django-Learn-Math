@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from customAuth.CharFieldSizes import CharFieldSizes
 from django.db import models
-import datetime
 from enum import Enum
 
 
@@ -26,8 +25,8 @@ class OTPtypes(Enum):
             # print(datetime.datetime.now().time() , stored_timeout.time())
             # print(datetime.datetime.now().time() < stored_timeout.time())
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(default = datetime.datetime.now())
-    updated_at = models.DateTimeField(default = datetime.datetime.now())
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
 
     class Meta:
         abstract = True

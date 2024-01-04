@@ -9,106 +9,89 @@ function showError(){
   // document.getElementsByClassName('justify-center-sm')
 }
 
-// // user email verification modal show
 
-// let otpForm = document.getElementById('otp-form')
-// let successModal = document.getElementById('trigermodal');
-// let errorAlert = document.querySelector('.alert')
-// let inputOpt = document.getElementById('input-otp')
-// // console.log(inputOpt)
-// otpForm.addEventListener('submit', function (event){
-//   event.preventDefault()
+var resendBtn = document.getElementById('resendLink');
+        // Function to add "disabled" class to the anchor tag and start the countdown
+  function disableLinkAndStartCountdown(countdownTime) {
+    var resendLink = document.getElementById('resendLink');
+    resendLink.classList.add('disabled');
 
-//   var formData =new FormData(otpForm);
+    // Update the link text with the countdown
+    function updateCountdown() {
+        resendLink.innerHTML = 'Resend OTP in ' + countdownTime + ' seconds';
+        countdownTime--;
 
-//   fetch('http://127.0.0.1:8000/auth/codeVerify/', {
-//     method: 'POST',
-//     body : formData,
-//   })
-//   .then(response => response.json())
-//   .then(data =>{
-//     // console.log(data),.
-//     if (data.success){
-//       successModal.click()
-//     }
-//     else{
-//       errorAlert.classList.remove('d-none')
-
-//     }
-//   })
-//   .catch(error => console.error(error))
-// })
-// document.getElementById('ok-modal-button').addEventListener('click', function(){
-//   window.location.href= 'http://127.0.0.1:8000/auth/signup/'
-// })
-
-
-email = document.getElementById('varification_email')
-timeout = document.getElementById('timeout').textContent
-resendbtn = document.getElementById('resendbtn')
-
-console.log(resendbtn)
-console.log(email.value)
-console
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function(){
-
-
-
-  function getCurrentDateTime() {
-    const currentDate = new Date();
-    
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = currentDate.getDate().toString().padStart(2, '0');
-  
-    const hours = currentDate.getHours().toString().padStart(2, '0');
-    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-    const seconds = currentDate.getSeconds().toString().padStart(2, '0');
-    const milliseconds = currentDate.getMilliseconds().toString().padStart(3, '0');
-  
-    // Generate microseconds separately
-    const microseconds = (Math.floor(Math.random() * 1000000)).toString().padStart(6, '0');
-  
-    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}${microseconds}`;
-    
-    return formattedDateTime;
-  }
-  
-
-  console.log('time save in db : ',timeout)
-  currentime = getCurrentDateTime();
-  console.log('current time ',currentime )
-  console.log(currentime > timeout)
-  console.log(timeout - currentime)
-
-  if(currentime>= timeout){
-    resendbtn.classList.remove('d-none')
-  }
-
-
-
-  resendbtn.addEventListener('click', function(){
-    const data = {
-      'eamil': email,
-      'expiry': timeout
+        // If the countdown reaches 0, remove the "disabled" class
+        if (countdownTime < 0) {
+            resendLink.classList.remove('disabled');
+            resendLink.innerHTML = 'Resend OTP';              
+            
+        } else {
+            // Call the function recursively after 1 second
+            setTimeout(updateCountdown, 1000);
+        }
     }
 
+    // Start the countdown
+    updateCountdown();
+}
 
-    fetch('{% url "resendOTP" %}'),{
-      method : 'POST',
-      headers : {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': '{{ csrf_token }}'
-      },
-      body: JSON.stringify(data)
+// Function to simulate the OTP resend process (replace this with your actual resend logic)
+function resendOTP() {
+    // Simulate the OTP resend process, replace this with your actual logic
+    // For example, you can make an API call to resend the OTP here
+    // ...
+
+    email = document.getElementById('varification_email').value
+    console.log(email)
+
+    getNewOTP(email)
+  // resendOTP(email)
+
+
+
+    // Get the last saved timestamp from localStorage
+    var savedTimestamp = localStorage.getItem('timestamp');
+    print('save time stamp',savedTimestamp)
+    // Calculate the time difference between now and the saved timestamp
+    var currentTime = new Date().getTime();
+    var elapsedTime = savedTimestamp ? Math.floor((currentTime - parseInt(savedTimestamp)) / 1000) : 0;
+
+    // Set the initial countdown time (180 seconds) minus the elapsed time
+    var countdownTime = 20 - elapsedTime;
+
+    // Save the current timestamp to localStorage
+    localStorage.setItem('timestamp', currentTime);
+
+    // After successfully resending, disable the link and start the countdown
+    disableLinkAndStartCountdown(countdownTime);
+}
+
+// Initially check if there is a countdown time in localStorage and start the countdown
+var storedCountdownTime = localStorage.getItem('timestamp');
+if (storedCountdownTime !== null) {
+    var currentTime = new Date().getTime();
+    var elapsedTime = Math.floor((currentTime - parseInt(storedCountdownTime)) / 1000);
+    var remainingCountdownTime = 20 - elapsedTime;
+
+    // Check if the remaining countdown time is greater than 0
+    if (remainingCountdownTime > 0) {
+        disableLinkAndStartCountdown(remainingCountdownTime);
+    } else {
+        localStorage.removeItem('timestamp'); // Remove expired timestamp
     }
-  })
+}
 
 
 
-})
+function getNewOTP(email) {
+  // Send email to Django view using AJAX
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'resendOTP/', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function () {
+      var response = JSON.parse(xhr.responseText);
+      alert(response.message);
+  };
+  xhr.send('email=' + email);
+}
