@@ -63,7 +63,9 @@ class SecondOTPForm(StandardForm):
         return content
     
     def clean_code(self):
-        code = self.cleaned_data['code']
+        code = self.data['code']
+        code  = code.strip()
+        print(code)
         if not re.match(r'^\d{4}$', code):
             # here it prints error statement but no raising the error 
             raise forms.ValidationError('OTP must be a 4-digit number.')
@@ -121,3 +123,6 @@ class CustomAuthenticationForm(forms.Form):
             raise forms.ValidationError("Enter a valid email address.")
         return email
     
+
+
+# class UpdateUserForm(forms.ModelForm):

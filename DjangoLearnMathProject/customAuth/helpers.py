@@ -9,8 +9,6 @@ import random
 
 
 def otp_verify(request):
-    print('otp verification request data : ',request.POST)
-    # form = SecondOTPForm(request.POST)
     content= request.POST.get('content', None)
     provided_otp = request.POST.get('code', None)
     email_exist = OTP.objects.filter(content=content).exists()
@@ -18,13 +16,6 @@ def otp_verify(request):
             stored_otp = OTP.objects.filter(content=content).order_by('-created_at').first().code
             stored_timeout = OTP.objects.filter(content=content).order_by('-created_at').first().timeout
             token = OTP.objects.filter(content=content).order_by('-created_at').first().verification_token
-
-            # record = OTP.objects.filter(content=content).order_by()
-            # token = OTP.objects.filter(content=content).order_by('-created_at').first().
-            # print('stored otp ->', stored_otp)
-            # print('stored time ->', timezone.localtime(stored_timeout))
-            # print('current time ->', datetime.datetime.now().time() )
-
             convertedtime = timezone.localtime(stored_timeout)
             if(datetime.datetime.now().time() < convertedtime.time()):
                 if(stored_otp == provided_otp):
@@ -81,7 +72,6 @@ def save_user(form):
 
 
 
-
 def check_and_create_user(request):
     print(request)
     pass
@@ -92,3 +82,9 @@ def resend_OTP_email(email):
     token = get_token(generated_otp,email)
     timeout =  datetime.datetime.now() + datetime.timedelta(minutes=3)
     Email.send(generated_otp,email)
+    form = OTPForm()
+    form.save(content = email, code=generated_otp, verification_token=token, timeout = timeout)
+    response={
+        'email': email,
+    }
+    return response

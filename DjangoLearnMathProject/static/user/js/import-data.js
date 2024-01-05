@@ -14,6 +14,9 @@ function importData() {
             let reader = new FileReader();
             // Set the onload handler to set the selected image to the 'profile-img' element
             reader.onload = function (e) {
+                // let profileImginput = document.querySelector('#profile_image');
+                // console.log(profileImginput)
+                // console.log(e.target.result)
                 profileImg.src = e.target.result;
             };
 
@@ -28,16 +31,13 @@ function importData() {
 
 function deletePic(){
     let profileImg = document.querySelector('.profile-img');
-    // profileImg.src = "./static/user/assets/svg/profile%201-blue.svg";
 
-    fetch('http://127.0.0.1:8000/learnmath/delete_profile_picture/', {
+    fetch('http://127.0.0.1:8000/auth/delete_profile_picture/', {
         method: 'POST',
         credentials: 'same-origin',  // Include this line for CSRF protection
     })
     .then(response => response.json())
     .then(data => {
-        // Update image source with the default image URL
-        // console.log(data.default_image_url)
         profileImg.src = data.default_image_url;
     })
     .catch(error => {
@@ -45,7 +45,3 @@ function deletePic(){
     });
 }
 
-// profileImg.src = '{% static 'user/assets/svg/profile 1-blue.svg'%}';
-
-
-/* <img class="profile-img rounded-50" src="/static/user/assets/svg/profile%201-blue.svg" alt="profile-img"></img> */

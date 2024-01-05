@@ -2,6 +2,8 @@ import json
 from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from customAuth.models import User
@@ -25,9 +27,9 @@ def emailVerify(request):
         form = OTPForm()
     return render(request, 'user/Email-verify.html', {'form': form})
     
+
 def codeVerify(request):
     key =  request.session.get('veri1',None)
-    print('code verify key ',key)
     if key:
         input_email = request.GET.get('email','')
         timeout = request.GET.get('timeout')
@@ -79,7 +81,6 @@ def signup(request):
     return redirect('emailVerify')
 
 
-
 def user_login(request):
     if request.method == 'POST':
         form = CustomAuthenticationForm(request.POST)
@@ -112,10 +113,23 @@ def index(request):
     return render(request, 'user/Home.html')
 
 
-
 @login_required(login_url='login')
 def profileSetting(request):
+    print(request.GET)
+    if request.method == 'POST':
+        print(request.POST)
+        # print(request.user.password)
+        stored_password = request.user.password
+        input_password = request.POST.get('current_password', None)
+        check = check_password(input_password,stored_password)
+        if check:
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            new_password = request.POST.get('new_password')
+            confirm_new_password = request.POST.get('confirm_new_password')
+            print(name, email, new_password, confirm_new_password)
     return render(request, 'user/Profile-setting.html')
+
 
 @login_required(login_url='login')
 def user_logout(request):
@@ -125,8 +139,19 @@ def user_logout(request):
 
 
 def resendOTP(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        helpers.resend_OTP_email(email)
+    if request.method == 'GET':
+        email =request.GET.get('email', None)
+        if email is not None and len(email) > 0 :
+            response_data  = helpers.resend_OTP_email(email)
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({'error': 'Email not None'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
 
 
+
+@csrf_exempt
+def delete_profile_picture(request):
+    default_image_url =  '/static/user/assets/svg/profile1-blue.svg'
+    return JsonResponse({'default_image_url': default_image_url})

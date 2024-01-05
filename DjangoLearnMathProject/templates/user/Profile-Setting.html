@@ -82,8 +82,9 @@
         
           
           <div class=" w-sm-80 ">
-            <form action="#">
-            <div class="row  m-0 p-0 mt-5 mt-sm-0 ms-sm-3 justify-content-sm-center">
+            <form action="{% url 'profileSetting' %}" method='POST' enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row  m-0 p-0 mt-5 mt-sm-0 ms-sm-3 justify-content-sm-center">
               <div class="col-sm-6 d-flex justify-content-center justify-content-sm-start ">
                 <div class="main-content">
                   <div>
@@ -99,7 +100,9 @@
                           class="profile-img rounded-50"
                           src="{% static 'user/assets/svg/profile1-blue.svg'%}"
                           alt="profile-img"
+                          
                         />
+                        <input class="d-none" type="file" name="profile_image" id="profile_image" >
                       </div>
                       <div class=""> 
                         <!-- event.preventDefault(); -->
@@ -121,6 +124,8 @@
                               type="text"
                               name="name"
                               id="input-name"
+                              
+                              value='{{ request.user.name }}'
                               placeholder="Name"
                             />
                             <img
@@ -128,6 +133,7 @@
                               src="{% static 'user/assets/svg/Group 9-name.svg'%}"
                               alt="name-icon"
                             />
+                            
                           </div>
                         </div>
                       </div>
@@ -141,6 +147,7 @@
                               name="email"
                               id="input-email"
                               placeholder="Email"
+                              value='{{ request.user.email }}'
                             />
                             <img
                               class="input-svg bit-wide position-absolute"
@@ -178,10 +185,11 @@
                             <div class="position-relative mt-1 pb-0">
                               <input
                                 class="input-control"
-                                type="password"
-                                name="current-password"
+                                type="text"
+                                name="current_password"
                                 id="input-current-password"
                                 placeholder="Current Password"
+                                {% comment %} value='{{ request.user.password }}' {% endcomment %}
                               />
                               <img
                                 class="input-svg bit-wide position-absolute"
@@ -199,7 +207,7 @@
                               <input
                                 class="input-control"
                                 type="password"
-                                name="new-password"
+                                name="new_password"
                                 id="input-new-password"
                                 placeholder="New Password"
                               />
@@ -221,7 +229,7 @@
                               <input
                                 class="input-control"
                                 type="password"
-                                name="confirm-new-password"
+                                name="confirm_new_password"
                                 id="input-confirm-new-password"
                                 placeholder="Confirm New Password"
                               />
