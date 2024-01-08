@@ -29,8 +29,10 @@
         <div class="">
           <p class="current-email m-0 p-0">Current Email</p>
         </div>
-        <form action="{% url 'emailVerify'%}" method='POST'>
+        <form action="{% url 'emailVerify'%}?type={{acc_type}}" method='POST'>
           {% csrf_token %}
+
+          <input type="text" class='d-none' value='{{acc_type}}'>
           <div class="position-relative mt-2">
             <input
               class="input-control"

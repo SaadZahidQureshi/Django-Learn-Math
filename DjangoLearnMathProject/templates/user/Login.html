@@ -127,7 +127,7 @@
       <div class="row">
         <div class="col">
           <div class="position-relative mt-1 forgot-password text-end pb-0">
-            <a class="text-decoration-none" href="{% url 'forgotPassword'%}"><p>Forgot Password ?</p></a>
+            <a class="text-decoration-none" href="{% url 'emailVerify'%}?type=forgot" name = 'forgot'><p>Forgot Password ?</p></a>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
     <div class="row">
       <div class="col">
         <div class=" mt-4 ">
-          <a href="{% url 'emailVerify'%}" class="text-decoration-none submit-input-control d-flex justify-content-center align-items-center"><p class="p-0 m-0" >Sign Up</p></a>
+          <a href="{% url 'emailVerify'%}?type=create" class="text-decoration-none submit-input-control d-flex justify-content-center align-items-center"><p class="p-0 m-0" >Sign Up</p></a>
           <!-- <a class="submit-input-control" type="submit" name="sign-up-btn" id="submit-btn" value="Sign Up">Sign Up</a> -->
         </div>
       </div>

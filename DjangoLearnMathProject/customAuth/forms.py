@@ -6,19 +6,19 @@ import re
 
 
 class StandardForm(forms.ModelForm):
-    def save(self, commit= True, *args, **kwargs):
-        instance = super().save(False)
-        model_fields = []
-        for field in self._meta.model._meta.get_fields():
-            model_fields.append(field.name)
-
-        for key, value in kwargs.items():
-            if key in model_fields:
-                setattr(instance,key,value)
-
+    def save(self,commit=True,**kwargs):
+        ins = super().save(commit=False)
+        used_arguments = kwargs
+        if 'commit' in used_arguments:
+            used_arguments.pop('commit')
+        for arg, value in used_arguments.items():
+            if hasattr(ins, arg):
+                setattr(ins, arg, value)
+            else:
+                raise ValueError(f"{arg} does not exists in {ins.__class__.__name__}")
         if commit:
-            instance.save()
-        return instance
+            ins.save()
+        return ins
 
 
 class OTPForm(StandardForm):
@@ -34,20 +34,6 @@ class OTPForm(StandardForm):
             raise ValidationError("Enter a valid email address.")
         return content
     
-
-# class OTPForm1(forms.Form):
-#     # Everything as before.
-#     content = forms.EmailField()
-
-#     def clean_content(self):
-#         data = self.cleaned_data["content"]
-#         if "fred@example.com" not in data:
-#             raise ValidationError("You have forgotten about Fred!")
-
-#         # Always return a value to use as the new cleaned data, even if
-#         # this method didn't change it.
-#         return data
-
 
 class SecondOTPForm(StandardForm):
     class Meta:
@@ -71,6 +57,7 @@ class SecondOTPForm(StandardForm):
             raise forms.ValidationError('OTP must be a 4-digit number.')
         return code
        
+
 class UserForm(StandardForm):
     password=forms.CharField()
     confirm_password=forms.CharField()
@@ -80,7 +67,7 @@ class UserForm(StandardForm):
 
 
     def clean_email(self):
-        email = self.cleaned_data.get('email')
+        email = self.data['email']
         try:
             validate_email(email)
         except ValidationError:
@@ -89,16 +76,15 @@ class UserForm(StandardForm):
 
 
     def clean_name(self):
-        name = self.cleaned_data.get('name')
+        name = self.data['name']
         if any(symbol in name for symbol in ['@', '.', '-', '+']):
             raise forms.ValidationError('Symbols @/./-/+ are not allowed in username.')
         return name
 
 
     def clean(self):
-        cleaned_data = super(UserForm, self).clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
+        password = self.data['password']
+        confirm_password = self.data['confirm_password']
         
         if((password or confirm_password )== None):
             raise forms.ValidationError('This field is required!')
@@ -111,12 +97,13 @@ class UserForm(StandardForm):
             if(len(password) < 6):
                 raise forms.ValidationError('Password too short. Must be at least 6 characters')
     
+
 class CustomAuthenticationForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField()
 
     def clean_content(self):
-        email = self.cleaned_data['email']
+        email = self.data['email']
         try:
             validate_email(email)
         except ValidationError:
@@ -124,5 +111,25 @@ class CustomAuthenticationForm(forms.Form):
         return email
     
 
+class UpdateUserForm(forms.ModelForm):
+        
+    class Meta:
+        model = User
+        fields =['name', 'email', 'profile_image']
+        
+    def clean_email(self):
+        email = self.data['email']
+        try:
+            validate_email(email)
+        except ValidationError:
+            raise forms.ValidationError("Enter a valid email address.")
+        return email
 
-# class UpdateUserForm(forms.ModelForm):
+
+    def clean_name(self):
+        name = self.data['name']
+        if any(symbol in name for symbol in ['@', '.', '-', '+']):
+            raise forms.ValidationError('Symbols @/./-/+ are not allowed in username.')
+        return name
+
+

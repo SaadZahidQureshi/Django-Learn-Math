@@ -134,8 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MEDIA SETTINGS
 import os
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
 # MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
 
@@ -146,3 +147,16 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'trydifferentwaysforpractice@gmail.com'
 EMAIL_HOST_PASSWORD = 'fajt ffzn zqxw ykth'
+
+
+from django.contrib.messages import constants as cs
+MESSAGE_TAGS = {
+    cs.SUCCESS:'alert-success',
+    cs.INFO:'alert-info',
+    cs.ERROR:'alert-danger'
+}
+
+
+
+
+

@@ -72,7 +72,7 @@ class User(AbstractUser, BaseModel):
     username = None
     name = models.CharField(max_length = CharFieldSizes.XX_LARGE)
     email = models.EmailField(unique=True)
-    profile_image = models.ImageField(upload_to="profile-images")
+    profile_image = models.ImageField(upload_to="profile_images", default='profile1-blue.svg')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()

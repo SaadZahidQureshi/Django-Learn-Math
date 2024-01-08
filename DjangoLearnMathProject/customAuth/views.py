@@ -1,34 +1,38 @@
-import json
-from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm
+from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm, UpdateUserForm
 from django.contrib.auth import login, authenticate,logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
+from django.contrib import messages
 from django.http import JsonResponse
 from customAuth.models import User
 from django.urls import reverse
 from customAuth import helpers
 
 
-
-
 # Create your views here.
 def emailVerify(request):
-    if (request.method == 'POST'):  
+    acc_type = request.GET.get('type', None)
+    print('before------',acc_type)
+    if (request.method == 'POST'):
+
         form = OTPForm(request.POST)
         if form.is_valid():
-            response= helpers.send_email_save_record(request)
+            response= helpers.send_email_save_record(request,acc_type)
             request.session['veri1'] = True
-            return redirect(reverse('codeVerify') + f'?email={response["email"]}')
+            print('after------',acc_type)
+
+            return redirect(reverse('codeVerify') + f'?email={response["email"]}&type={acc_type}')
         else:
             return render(request, 'user/Email-verify.html', {'form': form})
     else:
         form = OTPForm()
-    return render(request, 'user/Email-verify.html', {'form': form})
+    return render(request, 'user/Email-verify.html', {'form': form, 'acc_type': acc_type})
     
 
 def codeVerify(request):
+
     key =  request.session.get('veri1',None)
     if key:
         input_email = request.GET.get('email','')
@@ -48,11 +52,13 @@ def codeVerify(request):
                     request.session['veri2'] = True
                     return redirect(reverse('signup') + f'?email={content}'+f"&token={token}")
                 context['message'] = response['message']
+        # context['acc_type'] = acc_type
         return render(request, 'user/Code-verify.html', context=context)
     return redirect('emailVerify')
 
 
 def signup(request):
+
     key =request.session.get('veri2', None)
     if key:
         context ={
@@ -102,40 +108,58 @@ def user_login(request):
     return render(request, 'user/Login.html', {'form': form})
 
 
-
 def forgotPassword(request):
-    pass
-
+    print(request.POST)
+    return HttpResponse('comming soon')
 
 
 @login_required(login_url='login')
 def index(request):
     return render(request, 'user/Home.html')
 
-
 @login_required(login_url='login')
 def profileSetting(request):
-    print(request.GET)
-    if request.method == 'POST':
-        print(request.POST)
-        # print(request.user.password)
-        stored_password = request.user.password
-        input_password = request.POST.get('current_password', None)
-        check = check_password(input_password,stored_password)
-        if check:
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            new_password = request.POST.get('new_password')
-            confirm_new_password = request.POST.get('confirm_new_password')
-            print(name, email, new_password, confirm_new_password)
-    return render(request, 'user/Profile-setting.html')
+    user = request.user
+    form = UpdateUserForm()
 
+    if request.method == 'POST':
+        form = UpdateUserForm(request.POST, request.FILES, instance=user)
+
+        if form.is_valid():
+            old_password = request.POST.get('password', '')
+            
+            if old_password:
+                if check_password(old_password, user.password):
+                    new_password = request.POST['new_password']
+                    confirm_new_password = request.POST['confirm_new_password']
+
+                    if new_password == confirm_new_password:
+                        user.set_password(new_password)
+                        user.save()
+                        # Ensure the user stays logged in after the password change
+                        update_session_auth_hash(request, user)
+                        messages.success(request, 'Your password has been changed successfully')
+                        return redirect('profileSetting')
+                    else:
+                        messages.error(request, 'New passwords do not match')
+                        return redirect('profileSetting')
+                else:
+                    messages.error(request, 'Incorrect old password')
+                    return redirect('profileSetting')
+
+            form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect('profileSetting')
+        else:
+            messages.error(request, 'Error in the form submission')
+            print(form.errors)
+
+    return render(request, 'user/Profile-setting.html', {"form": form})
 
 @login_required(login_url='login')
 def user_logout(request):
     logout(request)
     return redirect('login')
-
 
 
 def resendOTP(request):
@@ -150,8 +174,11 @@ def resendOTP(request):
         return JsonResponse({'error': 'Invalid request method'})
 
 
-
-@csrf_exempt
+@login_required(login_url='login')
 def delete_profile_picture(request):
-    default_image_url =  '/static/user/assets/svg/profile1-blue.svg'
-    return JsonResponse({'default_image_url': default_image_url})
+    user = request.user
+    user.profile_image = 'profile1-blue.svg'
+    user.save()
+    messages.success(request,'Your profile Pic is updated successfully')
+    return redirect('profileSetting')
+    

@@ -20,6 +20,7 @@
       <link rel="stylesheet" href="{% static 'user/css/profile-setting.css'%}">
       <link rel="icon" type="image/x" href="{% static 'user/assets/svg/google.svg' %}">
       <title>Profile Setting</title>
+      
     </head>
     <body>
     
@@ -82,6 +83,11 @@
         
           
           <div class=" w-sm-80 ">
+            {% if messages %}
+              {% for message in messages  %}
+              <div class="d-flex justify-content-center "><p class= 'alert w-25 text-center index {{message.tags}}'>{{message}}</p></div>
+              {% endfor %}
+            {% endif %}
             <form action="{% url 'profileSetting' %}" method='POST' enctype="multipart/form-data">
               {% csrf_token %}
               <div class="row  m-0 p-0 mt-5 mt-sm-0 ms-sm-3 justify-content-sm-center">
@@ -98,19 +104,24 @@
                       <div class="mt-2">
                         <img
                           class="profile-img rounded-50"
-                          src="{% static 'user/assets/svg/profile1-blue.svg'%}"
+                          id='selectedImage'
+                          src="{{request.user.profile_image.url}}"
                           alt="profile-img"
                           
                         />
-                        <input class="d-none" type="file" name="profile_image" id="profile_image" >
+
                       </div>
                       <div class=""> 
                         <!-- event.preventDefault(); -->
                         <div class="d-flex flex-column align-items-center justify-content-between gap-2 profile-img-buttons__buttons">
-                          <button class="change-pic border-0" onclick="event.preventDefault(); return importData()">Change Picture</button>
+                          {% comment %} <input type="file" name="profile_image"  id=""> {% endcomment %}
+                          <div class="upload-btn-wrapper">
+                            <button class="btn">Upload a Pic</button>
+                            <input type="file" name="profile_image" onchange="displayImage(this)" />
+                        </div>
+                          {% comment %} <button class="change-pic border-0" onclick="event.preventDefault(); return importData()">Change Picture</button> {% endcomment %}
                           <!-- <a type="file" class="change-pic text-decoration-none" href="">Change Picture</a> -->
-                          <button class="delete-pic " onclick="event.preventDefault(); return deletePic()">Delete Picture</button>
-                          <!-- <a type="file" class="delete-pic text-decoration-none" href="" >Delete Picture</a> -->
+                          <a type="file" class="delete-pic text-decoration-none" href="{% url 'delete_profile_picture' %}" >Delete Picture</a>
                         </div>
                       </div>
                     </div>
@@ -133,7 +144,10 @@
                               src="{% static 'user/assets/svg/Group 9-name.svg'%}"
                               alt="name-icon"
                             />
-                            
+                            {% for err in form.name.errors %}
+                              <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+                                <small class="text-danger">{{ err }}</small>
+                            {% endfor %}
                           </div>
                         </div>
                       </div>
@@ -154,6 +168,10 @@
                               src="{%static 'user/assets/svg/email.svg' %}"
                               alt="email-icon"
                             />
+                            {% for err in form.email.errors %}
+                              <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+                                <small class="text-danger">{{ err }}</small>
+                            {% endfor %}
                           </div>
                         </div>
                       </div>
@@ -186,7 +204,7 @@
                               <input
                                 class="input-control"
                                 type="text"
-                                name="current_password"
+                                name="password"
                                 id="input-current-password"
                                 placeholder="Current Password"
                                 {% comment %} value='{{ request.user.password }}' {% endcomment %}
@@ -196,6 +214,7 @@
                                 src="{% static 'user/assets/svg/password.svg'%}"
                                 alt="password-icon"
                               />
+                              
                             </div>
                           </div>
                         </div>
@@ -216,6 +235,7 @@
                                 src="{%static 'user/assets/svg/confirm-password.svg'%}"
                                 alt="confirm-password-icon"
                               />
+                              
                             </div>
                           </div>
                         </div>
@@ -238,6 +258,7 @@
                                 src="{% static 'user/assets/svg/confirm-password.svg'%}"
                                 alt="confirm-password-icon"
                               />
+                              
                             </div>
                           </div>
                         </div>
@@ -261,8 +282,9 @@
 
       </div>
     
-    
     </body>
+
+
     <script src="{% static 'user/js/roundSlider.js'%}"></script>
     <script src="{% static 'user/js/import-data.js' %}"></script>
 
