@@ -41,7 +41,7 @@ class SecondOTPForm(StandardForm):
         fields = ["content","code"]
     
     def clean_content(self):
-        content = self.cleaned_data['content']
+        content = self.data['content']
         try:
             validate_email(content)
         except ValidationError:
@@ -86,7 +86,7 @@ class UserForm(StandardForm):
         password = self.data['password']
         confirm_password = self.data['confirm_password']
         
-        if((password or confirm_password )== None):
+        if((len(password) or len(confirm_password) )== 0):
             raise forms.ValidationError('This field is required!')
 
         if (password != confirm_password):
@@ -133,3 +133,23 @@ class UpdateUserForm(forms.ModelForm):
         return name
 
 
+class resetPasswordForm(StandardForm):
+
+    class Meta:
+        model = User
+        fields =['password']
+    
+    def clean(self):
+        password = self.data['password']
+        confirm_password = self.data['confirm_password']
+        
+        if((len(password) or len(confirm_password) )== 0):
+            raise forms.ValidationError('This field is required!')
+
+        if (password != confirm_password):
+            raise forms.ValidationError(
+                "password and confirm_password does not match"
+            )
+        else:
+            if(len(password) < 6):
+                raise forms.ValidationError('Password too short. Must be at least 6 characters')

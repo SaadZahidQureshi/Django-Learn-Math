@@ -10,8 +10,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'admin/css/login.css'%}">
-    <link rel="stylesheet" href="{% static 'admin/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'admin_dashboard/css/login.css'%}">
+    <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css' %}">
   <title>Admin Login</title>
 
   <style>
@@ -26,17 +26,36 @@
             <div class="main-container  d-flex justify-content-center align-items-center">
                 
                 <div class="">
-                    <img src="{% static 'admin/assets/svgs/admin-login-left-side-svg.svg'%}" alt="">
+                    <img src="{% static 'admin_dashboard/assets/svgs/admin-login-left-side-svg.svg'%}" alt="">
                 </div>
 
             </div>
         </div>
         <div class="col ">
+          <div class="row">
+            <div class="col">
+              <div class=" d-flex justify-content-center ">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show d-flex index w-25 mt-4 " role="alert">
+                  
+                  <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg>{{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div> 
+            </div>
+          </div>
             <div class="main-container d-flex justify-content-center align-items-center ">
 
                 <div class=" content d-flex flex-column justify-content-center ">
                   
-                  <form action="../html/Home.html">
+                  <form action="{%url 'login'%}" method='POST'>
+                    {% csrf_token %}
                       <div class="text-center pt-4">
                             <h2 class="sign-up">Welcome</h2>
                         </div>
@@ -44,7 +63,7 @@
                         <div class="row">
                           <div class="col">
                             <div class="text-center ">
-                              <img class="profile-img" src="{% static 'admin/assets/svgs/profile-img-svg.svg'%}" alt="profile-img" />
+                              <img class="profile-img" src="{% static 'admin_dashboard/assets/svgs/profile-img-svg.svg'%}" alt="profile-img" />
                             </div> 
                           </div>
                         </div>
@@ -60,25 +79,42 @@
                       <div class="row">
                         <div class="col">
                           <div class="position-relative mt-2 pb-0">
-                            <input class="input-control" type="email" name="email" id="input-email" placeholder="Email">
-                            <img class="input-svg bit-wide position-absolute" src="{%static 'admin/assets/svgs/email-svg.svg'%}" alt="email-icon">
+                            <input class="input-control" type="email" name="username" id="input-email" placeholder="Email">
+                            <img class="input-svg bit-wide position-absolute" src="{%static 'admin_dashboard/assets/svgs/email-svg.svg'%}" alt="email-icon">
                           </div>
                         </div>
+                        {% for err in form.username.errors %}
+                          <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+                            <small class="text-danger">{{ err }}</small>
+                        {% endfor %}
                       </div>
                 
                       <div class="row">
                         <div class="col">
                           <div class="position-relative mt-3 pb-0">
                             <input class="input-control" type="password" name="password" id="input-password" placeholder="Password">
-                            <img class="input-svg bit-wide position-absolute" src="{% static 'admin/assets/svgs/password-svg.svg'%}" alt="password-icon">
+                            <img class="input-svg bit-wide position-absolute" src="{% static 'admin_dashboard/assets/svgs/password-svg.svg'%}" alt="password-icon">
                           </div>
                         </div>
+                        {% for err in form.password.errors %}
+                          <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+                            <small class="text-danger">{{ err }}</small>
+                        {% endfor %}
+
+                        {% if form.errors %}
+                            {% for err in form.non_field_errors %}
+                            <!-- <div class="alert alert-danger mt-2">{{ err }}</div> -->
+                              <small class="text-danger">{{ err }}</small>
+                            {% endfor %}
+                        {% endif %}
                       </div>
+
                 
                       <div class="row">
                         <div class="col">
                           <div class=" mt-3">
-                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none" href="../html/dashboard.html" type="submit" name="login-btn" id="submit-btn" >Login</a>
+                            <button class="submit-input-control d-flex justify-content-center align-items-center border-0" type="submit" name="login-btn" id="submit-btn">Login</button>
+                            {% comment %} <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none" href="" type="submit" name="login-btn" id="submit-btn" >Login</a> {% endcomment %}
                           </div>
                         </div>
                       </div>

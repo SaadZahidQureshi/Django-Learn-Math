@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +10,12 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/category.css">
-  <link rel="stylesheet" href="../css/users.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="../css/profile.css">
-  <link rel="stylesheet" href="../css/user-details.css">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/profile.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/user-details.css'%}">
   <title>User Details</title>
 
 
@@ -60,7 +61,7 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/users.html?id=1"
+                          href="{% url 'users' %}?id=1"
                           onclick="toggleActive(this)"
                         >
                           <svg
@@ -229,33 +230,35 @@
                             <div class="col-4 d-flex justify-content-start">
                                 <div class="d-flex flex-column align-items-center">
                                     <div ><h3 class="user-detail__heading">ID</h3></div>
-                                    <div ><h5 class="user-details__desc">001451</h5></div>
+                                    <div ><h5 class="user-details__desc">{{user.id}}</h5></div>
                                 </div>
                             </div>
     
                             <div class="col-4 d-flex justify-content-center">
                                 <div class="d-flex flex-column align-items-center">
                                     <div ><h3 class="user-detail__heading">Username</h3></div>
-                                    <div ><h5 class="user-details__desc">DarleneRobertson</h5></div>
+                                    <div ><h5 class="user-details__desc">{{user.name}}</h5></div>
                                 </div>
                             </div>
     
                             <div class="col-4 d-flex justify-content-end">
                                 <div class="d-flex flex-column align-items-center">
                                     <div ><h3 class="user-detail__heading">Email</h3></div>
-                                    <div ><h5 class="user-details__desc">Darlane_rob23@gmail.com</h5></div>
+                                    <div ><h5 class="user-details__desc">{{user.email}}</h5></div>
                                 </div>
                             </div>
                         </div>
                         <hr class="w-90 color-bg">
                         
                         <div class="row  justify-content-between w-90 ">
+                            
+
                             <div class="col-4 d-flex justify-content-start">
-                                <div class="d-flex flex-column align-items-center">
-                                    <div ><h3 class="user-detail__heading">Category</h3></div>
-                                    <div ><h5 class="user-details__desc">001451</h5></div>
-                                </div>
-                            </div>
+                              <div class="d-flex flex-column align-items-center">
+                                  <div ><h3 class="user-detail__heading">No. of Levels</h3></div>
+                                  <div ><h5 class="user-details__desc">33</h5></div>
+                              </div>
+                          </div>
     
                             <div class="col-4 d-flex justify-content-center">
                                 <div class="d-flex flex-column align-items-center  ">
@@ -265,28 +268,30 @@
                             </div>
     
                             <div class="col-4 d-flex justify-content-end">
-                                <div class="d-flex flex-column align-items-center">
-                                    <div ><h3 class="user-detail__heading">No. of Levels</h3></div>
-                                    <div ><h5 class="user-details__desc">33</h5></div>
-                                </div>
-                            </div>
+                              <div class="d-flex flex-column align-items-center">
+                                  <div ><h3 class="user-detail__heading">Date Joined</h3></div>
+                                  <div ><h5 class="user-details__desc">{{user.date_joined}}</h5></div>
+                              </div>
+                          </div>
+                            
+
                         </div>
                         <hr class="w-90 color-bg">
 
                         <div class="row  justify-content-start w-90 ">
                             <div class="col-4 d-flex justify-content-start">
                                 <div class="d-flex flex-column align-items-center">
-                                    <div ><h3 class="user-detail__heading">ID</h3></div>
-                                    <div ><h5 class="user-details__desc">001451</h5></div>
+                                    <div ><h3 class="user-detail__heading">Last Login</h3></div>
+                                    <div ><h5 class="user-details__desc">{{user.last_login}}</h5></div>
                                 </div>
                             </div>
     
-                            <div class="col-4 d-flex justify-content-center">
+                            {% comment %} <div class="col-4 d-flex justify-content-center">
                                 <div class="d-flex flex-column align-items-center">
                                     <div ><h3 class="user-detail__heading">Username</h3></div>
                                     <div ><h5 class="user-details__desc">DarleneRobertson</h5></div>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
     
                             <!-- <div class="col-3">
                                 <div class="d-flex flex-column align-items-center">
@@ -301,7 +306,7 @@
                         <div class="row w-100">
                             <div class="col d-flex justify-content-center">
                               <div class="mt-4 w-50">
-                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none user-delete" href="#" type="submit" name="login-btn" id="submit-btn" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Delete</a>
+                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none user-delete" href="" type="submit" name="login-btn" id="submit-btn" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Delete</a>
                               </div>
                             </div>
                           </div>
@@ -320,6 +325,7 @@
 
  <!-- Modal user successfully delete-->
  <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered" style="width: 80%;">
       <div class="modal-content ps-4 pe-4">
         <div class="modal-body">
@@ -346,7 +352,10 @@
             <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this user? You will not able to recover this user again.</p></div>
 
             <div class="mt-3 pt-1">
-                  <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button>
+              {% comment %} {{user.id}} {% endcomment %}
+                  {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
+                  <a href="{% url 'user-delete' pk=user.id%}"  class="text-decoration-none modal-button border-0 text-light" >Delete</a>
+                  {% comment %} <button  >Delete</button> {% endcomment %}
             </div>
         </div>
         </div>
@@ -354,6 +363,11 @@
     </div>
   
   </div>
+
+
+
+
+
 
 <script src="../js/common.js"></script>
 <script

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,14 +13,14 @@
   <!-- <link rel="stylesheet" href="../../user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.css">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="../../user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.js"></script>
+  <script src="{% static 'user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="../css/dashboard.css">
-  <link rel="stylesheet" href="../css/users.css">
-  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/dashboard.css'%}">
+  <link rel="stylesheet" href="{% static  'admin_dashboard/css/users.css' %}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css' %}">
   <title>Dashboard</title>
 
 
@@ -49,7 +50,7 @@
                             </div>
     
                             <div class="d-flex">
-                                <a class="nav-link rounded-border bg-color " href="../html/users.html?id=1" >
+                                <a class="nav-link rounded-border bg-color " href="{% url 'users'%}?id=1" >
                                     <svg class="sidebar__link-icon def-color" viewBox="0 0 40 53"  xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M30.7943 14.1109C30.4814 32.5768 9.66806 32.5768 9.35508 14.1109C9.35508 7.69473 13.5803 3 19.9965 3C26.5691 3 30.7943 7.69473 30.7943 14.1109ZM38.1494 42.2792V44.4701C38.1494 52.2947 2 52.2947 2 44.4701V42.2792C2 34.6112 6.69473 30.0729 12.7979 28.1951V28.508C12.7979 33.6722 27.0386 33.6722 27.3515 28.6645C33.4547 30.6989 38.1494 35.3936 38.1494 42.2792ZM19.9965 11.92C19.0575 11.92 18.1186 11.7635 17.1796 11.4505C16.3972 11.1375 13.5803 10.0421 12.9544 10.5116C9.82455 12.546 13.5803 16.6147 10.7635 16.9277C12.7979 30.0729 27.3515 30.0729 29.3859 16.9277C26.5691 16.6147 30.3249 12.546 27.1951 10.5116C26.5691 10.0421 23.7523 11.1375 22.9698 11.4505C22.0309 11.7635 21.0919 11.92 19.9965 11.92Z" />
                                     </svg>                                        
@@ -118,7 +119,7 @@
                             </div>
     
                             <div class="d-flex">
-                                <a class="nav-link rounded-border bg-color" href="../html/login.html?id=6">
+                                <a class="nav-link rounded-border bg-color" href="{% url 'logout'%}">
                                     <svg class="sidebar__link-icon def-color" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_1_8179)">
                                         <path d="M35.0001 0H16.6667C15.3419 0.00395682 14.0724 0.532012 13.1356 1.46884C12.1988 2.40566 11.6707 3.67513 11.6667 5V15H26.6667C27.9928 15 29.2646 15.5268 30.2023 16.4645C31.14 17.4021 31.6667 18.6739 31.6667 20C31.6667 21.3261 31.14 22.5979 30.2023 23.5355C29.2646 24.4732 27.9928 25 26.6667 25H11.6667V35C11.6707 36.3249 12.1988 37.5943 13.1356 38.5312C14.0724 39.468 15.3419 39.996 16.6667 40H35.0001C36.3249 39.996 37.5944 39.468 38.5312 38.5312C39.4681 37.5943 39.9961 36.3249 40.0001 35V5C39.9961 3.67513 39.4681 2.40566 38.5312 1.46884C37.5944 0.532012 36.3249 0.00395682 35.0001 0V0Z"/>
@@ -295,11 +296,11 @@
     </div>
 </body>
 
-<script src="../js/lineGraph.js"></script>
-<script src="../js/yearSelector.js"></script>
-<script src="../js/barChartGraph.js"></script>
-<script src="../js/donutChart.js"></script>
-<script src="../js/common.js"></script>
+<script src="{% static 'admin_dashboard/js/lineGraph.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/yearSelector.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/barChartGraph.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/donutChart.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/common.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

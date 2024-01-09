@@ -1,14 +1,3 @@
-// var currentTime = new Date().getTime();
-// localStorage.setItem('timestamp', currentTime);
-// var savedTimestamp = localStorage.getItem('timestamp');
-// var elapsedTime = savedTimestamp ? Math.floor((currentTime - parseInt(savedTimestamp)) / 1000) : 0;
-// console.log(elapsedTime)
-// var countdownTime = 20 - elapsedTime;
-// console.log(countdownTime)
-// disableLinkAndStartCountdown(countdownTime);
-
-// Initially check if there is a countdown time in localStorage and start the countdown
-
 
 
 var storedCountdownTime = localStorage.getItem('timestamp');

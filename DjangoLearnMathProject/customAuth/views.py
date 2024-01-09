@@ -1,9 +1,9 @@
-from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm, UpdateUserForm
+from .forms import OTPForm, SecondOTPForm, UserForm, CustomAuthenticationForm, UpdateUserForm, resetPasswordForm
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
-from django.shortcuts import render,redirect,HttpResponse
+from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from customAuth.models import User
@@ -13,16 +13,23 @@ from customAuth import helpers
 
 # Create your views here.
 def emailVerify(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     acc_type = request.GET.get('type', None)
-    print('before------',acc_type)
     if (request.method == 'POST'):
-
         form = OTPForm(request.POST)
         if form.is_valid():
-            response= helpers.send_email_save_record(request,acc_type)
-            request.session['veri1'] = True
-            print('after------',acc_type)
 
+            response= helpers.send_email_save_record(request,acc_type)
+            context = {
+                'form': form,
+                'acc_type': acc_type
+            }
+            if response.__contains__('error'):
+                context['error'] = response['error']
+                return render(request, 'user/Email-verify.html', context)
+
+            request.session['veri1'] = True
             return redirect(reverse('codeVerify') + f'?email={response["email"]}&type={acc_type}')
         else:
             return render(request, 'user/Email-verify.html', {'form': form})
@@ -30,7 +37,6 @@ def emailVerify(request):
         form = OTPForm()
     return render(request, 'user/Email-verify.html', {'form': form, 'acc_type': acc_type})
     
-
 def codeVerify(request):
 
     key =  request.session.get('veri1',None)
@@ -48,16 +54,20 @@ def codeVerify(request):
                 if response['status'] == 200:
                     token = response["token"]
                     content = response['content']
+                    acc_type = response['acc_type']
                     request.session.pop('veri1',None)
                     request.session['veri2'] = True
+                    if(acc_type == 'forgot'):
+                        return redirect(reverse('resetPassword') + f'?email={content}')
                     return redirect(reverse('signup') + f'?email={content}'+f"&token={token}")
                 context['message'] = response['message']
         # context['acc_type'] = acc_type
         return render(request, 'user/Code-verify.html', context=context)
     return redirect('emailVerify')
 
-
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('index')
 
     key =request.session.get('veri2', None)
     if key:
@@ -70,24 +80,23 @@ def signup(request):
             form = UserForm(request.POST)
             context['form'] = form
             if form.is_valid():
-                # response =helpers.save_user(form)
                 email = form.cleaned_data['email']
                 name =form.cleaned_data['name']
                 response = helpers.checkEmail(email)
                 if response['status'] == 200:
-                    # helpers.
                     password = form.cleaned_data['password']
                     user = User(email=email,name=name)
                     user.set_password(password)
                     user.save()
                     request.session.pop('veri2', None)
                     return redirect('login')
-                context['message'] = response['message']           
+                context['message'] = response['message']          
         return render(request, 'user/Signup.html', context)
     return redirect('emailVerify')
 
-
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('index')
     if request.method == 'POST':
         form = CustomAuthenticationForm(request.POST)
         if form.is_valid():
@@ -106,12 +115,6 @@ def user_login(request):
     else:
         form = CustomAuthenticationForm()
     return render(request, 'user/Login.html', {'form': form})
-
-
-def forgotPassword(request):
-    print(request.POST)
-    return HttpResponse('comming soon')
-
 
 @login_required(login_url='login')
 def index(request):
@@ -161,7 +164,6 @@ def user_logout(request):
     logout(request)
     return redirect('login')
 
-
 def resendOTP(request):
     if request.method == 'GET':
         email =request.GET.get('email', None)
@@ -173,7 +175,6 @@ def resendOTP(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-
 @login_required(login_url='login')
 def delete_profile_picture(request):
     user = request.user
@@ -181,4 +182,25 @@ def delete_profile_picture(request):
     user.save()
     messages.success(request,'Your profile Pic is updated successfully')
     return redirect('profileSetting')
-    
+  
+def resetPassword(request):
+    key = request.session.get('veri2', None)
+    context={
+        'form': resetPasswordForm(),
+        'email' : request.GET.get('email', None)
+    }
+    if key:
+        if(request.method == 'POST'):
+            form = resetPasswordForm(request.POST)
+            if form.is_valid():
+                email = context['email']
+                # print(request.POST)
+                response =  helpers.reset_passwrod(request.POST, email)
+                if(response.__contains__('success')):
+                    context['success'] = response['success']
+                    return redirect('login')
+                    return render(request, 'user/Reset-Password.html', context)
+            context['form']= form
+        return render(request, 'user/Reset-Password.html', context)
+    else:
+        return redirect('emailVerify')

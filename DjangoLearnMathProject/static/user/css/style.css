@@ -90,3 +90,8 @@ body{
 .bg-color{
     background-color: #743FCB;
   }
+
+  .index{
+    position:fixed;
+    z-index: 1;
+  }

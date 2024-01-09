@@ -4,7 +4,6 @@ from django.db import models
 from enum import Enum
 
 
-
 class OTPtypes(Enum):
     CREATE_USER = 'create'
     FORGOT_PASSWORD = 'forgot'
@@ -24,12 +23,15 @@ class OTPtypes(Enum):
         return [(cls.UPDATE_PHONE.value, cls.UPDATE_PHONE.value), (cls.UPDATE_EMAIL.value, cls.UPDATE_EMAIL.value)]
             # print(datetime.datetime.now().time() , stored_timeout.time())
             # print(datetime.datetime.now().time() < stored_timeout.time())
+
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
     class Meta:
         abstract = True
+
 
 class OTP(BaseModel):
     code = models.CharField(max_length=CharFieldSizes.SMALL)
@@ -67,6 +69,7 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(email, password, **extra_fields)
+
 
 class User(AbstractUser, BaseModel):
     username = None

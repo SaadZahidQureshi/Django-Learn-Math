@@ -57,6 +57,11 @@
                 <small class="text-danger ">{{ err }}</small>
             {% endfor %}
           </div>
+
+          {% if error %}
+            <small class="text-danger ">{{ error }}</small>
+          {% endif %}
+
           <div class="mt-5 w-100 h-100">
             <!-- <a href="" id="email-varification-btn" class="submit-input-control w-100 text-decoration-none h-100">Verify</a> -->
             <input
