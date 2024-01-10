@@ -189,6 +189,7 @@ def resetPassword(request):
         'form': resetPasswordForm(),
         'email' : request.GET.get('email', None)
     }
+    
     if key:
         if(request.method == 'POST'):
             form = resetPasswordForm(request.POST)

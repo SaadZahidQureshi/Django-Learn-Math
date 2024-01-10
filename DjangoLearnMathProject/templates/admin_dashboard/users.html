@@ -36,7 +36,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/dashboard.html?id=0"
+                    href="{% url 'dashboard'%}?id=0"
                     onclick="toggleActive(this)"
                   >
                     <svg
@@ -214,7 +214,10 @@
             </div>
           </div>
 
-          <!-- search bar  -->
+
+          <form id="searchForm" action="{% url 'users'%}">
+          
+            <!-- search bar  -->
           <div class="row justify-content-center margintop gap-2">
             <div class="col-3">
               <div class="">
@@ -229,41 +232,54 @@
               </div>
             </div>
 
+            
             <div class="col-5 d-flex justify-content-center align-items-center">
               <div
                 class="h-75 w-100 position-relative d-flex align-items-center"
               >
-                <div class="w-100 searchbar-height d-flex align-items-center">
-                  <input
-                    class="search-border search-border-search-btns w-100 h-100 ps-5 pe-3"
-                    type="search"
-                    name="search-bar"
-                    id="searchbar"
-                    placeholder="Search user.."
-                  />
-                </div>
-
-                <div class="position-absolute svg-position">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="svg-size"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                  >
-                    <path
-                      d="M12.4813 12.5054C12.7551 12.2335 13.194 12.2335 13.4678 12.5054L15.2773 13.9661H15.3087C15.6748 14.3362 15.6748 14.9361 15.3087 15.3061C14.9426 15.6762 14.3491 15.6762 13.983 15.3061L12.4813 13.5851L12.4243 13.5208C12.3182 13.3864 12.2595 13.2189 12.2595 13.0453C12.2595 12.8427 12.3393 12.6484 12.4813 12.5054ZM7.49245 1.41699C9.10386 1.41699 10.6493 2.06401 11.7887 3.21571C12.9282 4.36741 13.5683 5.92944 13.5683 7.55819C13.5683 10.9499 10.848 13.6994 7.49245 13.6994C4.13687 13.6994 1.41663 10.9499 1.41663 7.55819C1.41663 4.1665 4.13687 1.41699 7.49245 1.41699Z"
-                      fill="#C4C4C4"
+                  <div class="w-100 searchbar-height d-flex align-items-center">
+                    <input
+                      class="search-border search-border-search-btns w-100 h-100 ps-5 pe-3"
+                      type="search"
+                      name="search-bar"
+                      id="searchInput"
+                      {% if seachbar %}
+                      value='{{seachbar}}'
+                      {% else %}
+                      value=''
+                      {% endif %}
+                      
+                      placeholder="Search user.."
                     />
-                  </svg>
-                </div>
+                  </div>
+                  
+
+                  <div class="position-absolute svg-position">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="svg-size"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                    >
+                      <path
+                        d="M12.4813 12.5054C12.7551 12.2335 13.194 12.2335 13.4678 12.5054L15.2773 13.9661H15.3087C15.6748 14.3362 15.6748 14.9361 15.3087 15.3061C14.9426 15.6762 14.3491 15.6762 13.983 15.3061L12.4813 13.5851L12.4243 13.5208C12.3182 13.3864 12.2595 13.2189 12.2595 13.0453C12.2595 12.8427 12.3393 12.6484 12.4813 12.5054ZM7.49245 1.41699C9.10386 1.41699 10.6493 2.06401 11.7887 3.21571C12.9282 4.36741 13.5683 5.92944 13.5683 7.55819C13.5683 10.9499 10.848 13.6994 7.49245 13.6994C4.13687 13.6994 1.41663 10.9499 1.41663 7.55819C1.41663 4.1665 4.13687 1.41699 7.49245 1.41699Z"
+                        fill="#C4C4C4"
+                      />
+                    </svg>
+                  </div>
               </div>
+
             </div>
+            
 
             <div
               class="col-3 d-flex justify-content-start align-items-center gap-2"
             >
               <div class="w-100">
                 <button
+                type='button'
+                id='startDateBtn'
+                value='{{startdate}}'
                 data-target="datePickerButton1"
                   class="date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2"
                 >
@@ -281,7 +297,12 @@
                       />
                     </svg>
                   </div>
-                    Starting Date 
+                  {% if startdate %}
+                  {{startdate}}
+                  {% else %}
+                  Starting Date 
+                  {% endif %}
+                    
                     <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
 
                 </button>
@@ -290,7 +311,8 @@
 
               <div class="w-100">
                 <button
-                
+                type='button'
+                id='endDateBtn'
                 data-target="datePickerButton2"
                   class=" date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2"
                 >
@@ -308,7 +330,12 @@
                       />
                     </svg>
                   </div>
-                    Ending Date
+                  {% if enddate %}
+                  {{enddate}}
+                  {% else %}
+                  Ending Date
+                  {% endif %}
+                    
                     <!-- <p class="m-0 p-0 " id="date" >Ending Date</p> -->
 
                 </button>
@@ -369,6 +396,7 @@
             </div>
           </div>
 
+          </form>
           <!-- table container -->
           <div class="row justify-content-center mt-3">
             <div class="col p-0">
@@ -396,7 +424,7 @@
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
 
-                        <td>{{user.updated_at}}</td>
+                        <td>{{user.date_joined}}</td>
                         <td>
                           <div
                             class="d-flex justify-content-center align-items-center gap-1"
@@ -454,45 +482,45 @@
                       </tr>
 
                          <!-- Modal user successfully delete-->
-   <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered" style="width: 80%;">
-      <div class="modal-content ps-4 pe-4">
-        <div class="modal-body">
+                        <div class="modal-dialog modal-dialog-centered" style="width: 80%;">
+                          <div class="modal-content ps-4 pe-4">
+                            <div class="modal-body">
 
-            <div class="row p-0">
-                <div class="col d-flex justify-content-end p-0">
-                    <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
-                </div>
-            </div>
-          <div class=" d-flex flex-column align-items-center justify-content-center">
-            <div class="">
-                <img src="../assets/svgs/delete svg.svg" alt="">
-            </div>
-            <!-- <div class=""><h1 class="modal-marks">Want to Delete?</h1></div> -->
-            
-            <div class="d-flex justify-content-center align-items-center">
-                
-                <div class="mt-2">
-                    <h1 class="modal-head m-0 p-0">Want to Delete?</h1>
-                </div>
-            
-              </div>
+                                <div class="row p-0">
+                                    <div class="col d-flex justify-content-end p-0">
+                                        <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
+                                    </div>
+                                </div>
+                              <div class=" d-flex flex-column align-items-center justify-content-center">
+                                <div class="">
+                                    <img src="../assets/svgs/delete svg.svg" alt="">
+                                </div>
+                                <!-- <div class=""><h1 class="modal-marks">Want to Delete?</h1></div> -->
+                                
+                                <div class="d-flex justify-content-center align-items-center">
+                                    
+                                    <div class="mt-2">
+                                        <h1 class="modal-head m-0 p-0">Want to Delete?</h1>
+                                    </div>
+                                
+                                  </div>
 
-            <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this user? You will not able to recover this user again.</p></div>
+                                <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this user? You will not able to recover this user again.</p></div>
 
-            <div class="mt-3 pt-1">
-              {% comment %} {{user.id}} {% endcomment %}
-                  {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
-                  <a href="{% url 'user-delete' pk=user.id%}"  class="text-decoration-none modal-button border-0 text-light" >Delete</a>
-                  {% comment %} <button  >Delete</button> {% endcomment %}
-            </div>
-        </div>
-        </div>
-      </div>
-    </div>
-  
-  </div>
+                                <div class="mt-3 pt-1">
+                                  {% comment %} {{user.id}} {% endcomment %}
+                                      {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
+                                      <a href="{% url 'user-delete' pk=user.id%}"  class="text-decoration-none modal-button border-0 text-light" >Delete</a>
+                                      {% comment %} <button  >Delete</button> {% endcomment %}
+                                </div>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+                      </div>
                       {% endfor %}
                       {% endif %}
                      
@@ -508,63 +536,32 @@
             <div class="col-11 d-flex justify-content-end p-0">
               <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
+                  
+                  {% if users.has_previous %}
                   <li class="page-item">
                     <a
                       class="page-link text-dark border-0 prev"
-                      href="#"
+                      href="?page={{ users.previous_page_number }}"
                       tabindex="-1"
                       aria-disabled="true"
                       >Prev</a
                     >
                   </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">1</a>
+                  {% endif %}
+
+                  {% for page_num in users.paginator.page_range %}
+                  <li class="page-item  d-flex justify-content-center align-items-center">
+                    <a class="page-link border-0 {% if users.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
                   </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">4</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">5</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">6</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">7</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">8</a>
-                  </li>
-                  <li
-                    class="page-item d-flex justify-content-center align-items-center"
-                  >
-                    <a class="page-link" href="#">9</a>
-                  </li>
+                  {% endfor %}
+
+                  {% if users.has_next %}
                   <li class="page-item">
-                    <a class="page-link next border-0" href="#">Next</a>
+                    <a class="page-link next border-0" href="?page={{ users.next_page_number }}">Next</a>
                   </li>
+                  {% endif %}
+
+
                 </ul>
               </nav>
             </div>
