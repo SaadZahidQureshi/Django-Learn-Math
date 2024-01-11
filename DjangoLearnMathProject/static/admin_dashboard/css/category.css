@@ -25,3 +25,19 @@
 .category-img{
     
 }
+
+.drop-arrow{
+    position: absolute;
+    right: 8px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.dropdown-options{
+    height: 150px !important;
+}
+._position{
+    right: 222px;
+    top: 63px;
+}

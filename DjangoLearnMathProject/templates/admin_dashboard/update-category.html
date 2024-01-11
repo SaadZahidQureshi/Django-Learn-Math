@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +10,12 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/common.css">
-  <!-- <link rel="stylesheet" href="../css/category.css"> -->
-  <link rel="stylesheet" href="../css/users.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <!-- <link rel="stylesheet" href="../css/profile.css"> -->
-  <link rel="stylesheet" href="../css/user-details.css">
-  <link rel="stylesheet" href="../css/update-category.css">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/common.css'%}">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/users.css'%}">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/login.css'%}">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/user-details.css'%}">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/update-category.css'%}">
+  <link rel="stylesheet" href="{%static 'admin_dashboard/css/category.css'%}">
   <title>Update Category</title>
 
 
@@ -228,24 +228,32 @@
                             
                         <div class="row w-90 ">
 
-
+                          <form action="{% url 'update-category' pk=category.id%}" method="POST">
+                            {% csrf_token %}
                             <div class="row align-items-center justify-content-between  p-0">
-
+                              
                                 <div class="col-4 w-50 ">   
                                     <div class="d-flex flex-column  gap-4 ">
 
-                                        <div class="">
-                                            <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Centered dropdown
-                                            </button>
-                                            <ul class="dropdown-menu ">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                <li><a class="dropdown-item" href="#">Action three</a></li>
-                                            </ul>
-                                        </div>
+                                      <div class="">
+                                        <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" name='category_title' type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            
+                                          {% if category %}
+                                          {{category}}
+                                          {% else %}
+                                          Select Category
+                                          {% endif %}
+                                        </button>
+                                        
+                                        <ul class="dropdown-menu">
+                                          {% comment %} {% for category in categories %} {% endcomment %}
+                                            <li><a class="dropdown-item" href="#" data-value = '{{category}}'>{{category}}</a></li>
+                                            {% comment %} {% endfor %} {% endcomment %}
+                                        </ul>
+                                    </div>
+                                    <input class='d-none' name='category_title' value='{{category}}' type="text" name="" id="">
     
-                                        <div class="">
+                                        <div class="d-none">
                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Centered dropdown
                                             </button>
@@ -259,8 +267,7 @@
 
                                         <div class="">
                                             <div class="mb-3">
-                                                <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
-                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="10"></textarea>
+                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" name='category_description' rows="14">{{category.category_description}}</textarea>
                                               </div>
                                         </div>
                                     </div>
@@ -279,9 +286,25 @@
                                        
 
 
-                                        <div class=" h-50 ">
-                                            <div class="height-90 border-user-defind border-radius">
-                                                <!-- <div class="h-100 border-user-defind  "></div> -->
+                                        <div class=" h-50 position-relative ">
+                                            <div class="height-90 border-user-defind border-radius " id="selected_background_img">
+                                              <img src="{{category.category_image.url}}" style="width:100%;height:100%;" alt="" id='img_category'>
+                                            </div>
+
+                                            <div class="position-absolute _position">
+                                              <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">
+                                                <input class='d-none' type="file" accept='image/x' name="category_image" id='fileInput' onchange="displayImage(this)">                                                      
+                                                  <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                      <g clip-path="url(#clip0_1_11314)">
+                                                      <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
+                                                      </g>
+                                                      <defs>
+                                                      <clipPath id="clip0_1_11314">
+                                                          <rect width="32" height="32" />
+                                                      </clipPath>
+                                                      </defs>
+                                                  </svg>
+                                              </a>
                                             </div>
                                         </div>
                                     </div>
@@ -297,13 +320,16 @@
                             <div class="row w-100">
                                 <div class="col d-flex justify-content-center">
                                     <div class="mt-4 w-50">
-                                        <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none update-category-btn" href="../html/category.html?showAlert=true" type="submit" name="" id="update-category-btn">Update</a>
+                                      {% comment %} ../html/category.html?showAlert=true {% endcomment %}
+                                      <button type='submit' class="submit-input-control d-flex justify-content-center align-items-center border-0 update-category-btn">Update</button>
+                                        {% comment %} <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none update-category-btn" href="#" type="submit" name="" id="update-category-btn">Update</a> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
-                           
+                          </form>
                   
                         </div>
+                        
                 </div>
 
 
@@ -353,7 +379,8 @@
   
   </div>
 
-<script src="../js/common.js"></script>
+<script src="{% static 'admin_dashboard/js/common.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/importData.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

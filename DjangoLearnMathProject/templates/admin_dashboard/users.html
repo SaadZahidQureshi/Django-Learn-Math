@@ -33,6 +33,7 @@
               class="w-100 d-flex justify-content-center "
             >
               <div class="d-flex flex-column gap-4 nav-height margintop-nav">
+                
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
@@ -54,7 +55,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/users.html?id=1"
+                    href="{% url 'users'%}?id=1"
                     onclick="toggleActive(this)"
                   >
                     <svg
@@ -74,7 +75,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/category.html?id=2"
+                    href="{% url 'categories'%}?id=2"
                     onclick="toggleActive(this)"
                   >
                     <svg
@@ -175,7 +176,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/login.html?id=6"
+                    href="{% url 'logout'%}"
                     onclick="toggleActive(this)"
                   >
                     <svg

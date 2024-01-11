@@ -9,10 +9,14 @@ urlpatterns = [
     path('users/', views.users, name='users'),
     path('users/<pk>/', views.usersDetails, name='user-details'),
     path('user-delete/<pk>', views.usersDelete, name='user-delete'),
-    path('users/', views.usersFilter, name='user-filter'),
+
     
     
     path('categories/', views.categories, name='categories'),
+    path('add-category/', views.addCategory, name='add-category'),
+    path('view-category/<pk>/', views.viewCategory, name='view-category'),
+    path('update-category/<pk>/', views.updateCategory, name='update-category'),
+    path('delete-category/<pk>/', views.deleteCategory, name='delete-category'),
 
 
 
