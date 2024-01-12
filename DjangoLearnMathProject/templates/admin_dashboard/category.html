@@ -41,7 +41,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'dashboard'%}?id=0"
+                        href="{% url 'dashboard'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -59,7 +59,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'users'%}?id=1"
+                        href="{% url 'users'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -79,7 +79,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'categories'%}?id=2"
+                        href="{% url 'categories'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -108,7 +108,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/level.html?id=3"
+                        href="{%url 'levels'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -245,7 +245,7 @@
                           <h5 class="alert-heading">Success!</h5>
                         </div>
                         <div class="">
-                          <p class="alert-body mb-0">Trignometry is updated successfully. Move ahead to next categories.</p>
+                          <p class="alert-body mb-0">{{category}} is updated successfully. Move ahead to next categories.</p>
                         </div>
                       </div>
                     </div>
@@ -491,7 +491,7 @@
                                             <div class="d-flex justify-content-center align-items-center gap-1">
                                                 <!--view button  -->
                                               <div class="">
-                                                    <a class="action-btns action-btns-view" href="{%url 'view-category' pk=category.id%}?id=2">
+                                                    <a class="action-btns action-btns-view"  href="{%url 'view-category' pk=category.id%}?id=2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                                             <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
                                                             <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
@@ -515,7 +515,7 @@
                                                 </div>
                                                 <!-- delete button -->
                                                 <div class="">
-                                                    <a class="action-btns action-btns-remove" href="#"   data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" >
+                                                    <a class="action-btns action-btns-remove" href="#" onclick=deleterecord({{category.id}})   data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                             <g clip-path="url(#clip0_1_7717)">
                                                               <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
@@ -532,56 +532,16 @@
                                           </td>
                                         </tr>
 
-                                         <!-- Modal user successfully delete-->
-                                        <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-dialog-centered" >
-                                            <div class="modal-content ps-4 pe-4">
-                                              <div class="modal-body">
 
-                                                  <div class="row p-0">
-                                                      <div class="col d-flex justify-content-end p-0">
-                                                          <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
-                                                      </div>
-                                                  </div>
-                                                <div class=" d-flex flex-column align-items-center justify-content-center">
-                                                  <div class="">
-                                                      <img src="../assets/svgs/delete svg.svg" alt="">
-                                                  </div>
-                                                  <!-- <div class=""><h1 class="modal-marks">Want to Delete?</h1></div> -->
-                                                  
-                                                  <div class="d-flex justify-content-center align-items-center">
-                                                      
-                                                      <div class="mt-2">
-                                                          <h1 class="modal-head m-0 p-0">Want to Delete?</h1>
-                                                      </div>
-                                                  
-                                                    </div>
-
-                                                  <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this category? In case of deletion you will loss all the questions in that category.</p></div>
-
-                                                  <div class="mt-3 pt-1">
-                                                    <a href="{% url 'delete-category' pk=category.id%}" class="modal-button border-0 text-light text-decoration-none">Delete</a>
-                                                        {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
-                                                  </div>
-                                              </div>
-                                              </div>
-                                            </div>
-                                          </div>
-
-                                        </div>
                                         {% endfor %}
 
-                                        
-
-                                        
                                       </tbody>
                                   </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                          <!-- pagination container -->
+                <!-- pagination container -->
             <div class="row justify-content-center">
               <div class="col-11 d-flex justify-content-end p-0">
                 <nav aria-label="Page navigation example">
@@ -616,10 +576,6 @@
                 </nav>
               </div>
             </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -627,8 +583,52 @@
 
 
 <!--  data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" -->
+<!-- Modal user successfully delete-->
+<div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" >
+  <div class="modal-content ps-4 pe-4">
+    <div class="modal-body">
 
+        <div class="row p-0">
+            <div class="col d-flex justify-content-end p-0">
+                <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
+            </div>
+        </div>
+      <div class=" d-flex flex-column align-items-center justify-content-center">
+        <div class="">
+            <img src="../assets/svgs/delete svg.svg" alt="">
+        </div>
+        <!-- <div class=""><h1 class="modal-marks">Want to Delete?</h1></div> -->
+        
+        <div class="d-flex justify-content-center align-items-center">
+            
+            <div class="mt-2">
+                <h1 class="modal-head m-0 p-0">Want to Delete?</h1>
+            </div>
+        
+          </div>
 
+        <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this category? In case of deletion you will loss all the questions in that category.</p></div>
+
+        <div class="mt-3 pt-1">
+          <a href="{% url 'delete-category' pk=0%}" class="modal-button border-0 text-light text-decoration-none">Delete</a>
+              {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function deleterecord(pk){
+  modal_button = document.querySelector('.modal-button')
+  link = "{% url 'delete-category' pk=0 %}".replace('0', pk)
+  modal_button.href = link
+  console.log(modal_button)
+}
+</script>
 <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/datePicker.js'%}"></script>
 <script

@@ -1,11 +1,15 @@
 from django.shortcuts import render
+from adminDashboard.models import Category
 
 
 # Create your views here.
 
 
-def index(request):
-    return render (request, 'user/home.html')
+def user_dashboard(request):
+    context={
+    'categories': Category.objects.all()
+    }
+    return render (request, 'user/home.html',context)
 
 def popupQuiz(request):
     return render(request, 'user/Popup-Quiz.html')
@@ -19,6 +23,3 @@ def question_with_image(request):
 def question_wrong_answer(request):
     return render (request, 'user/Question-wrong-ans.html')
 
-# admin pages below here
-def admin_login(request):
-    return render(request, 'admin/login.html')

@@ -146,18 +146,22 @@ document.addEventListener("DOMContentLoaded", function() {
   // ---------------------------------------------------------
 
   function filter(start=null, end=null){
-    console.log('start date',start,'end date',end)
+    // console.log('start date',start,'end date',end)
 
     const startDateBtn = document.getElementById('startDateBtn');
     const endDateBtn = document.getElementById('endDateBtn');
+    const searchInput = document.getElementById('searchInput');
+
 
     const submitForm = () =>{
-       const startDate = start
+      const startDate = start
       const endDate = end
+      const searchQuery = searchInput.value.trim();
       
       const queryParams = new URLSearchParams();
       if (startDate) queryParams.set('start_date', startDate);
       if (endDate) queryParams.set('end_date', endDate);
+      if (searchQuery) queryParams.set('search', searchQuery);
 
       const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
       window.location.href = newUrl;
@@ -172,69 +176,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   document.addEventListener('DOMContentLoaded',function(){
-
     const searchInput = document.getElementById('searchInput');
     const searchForm = document.getElementById('searchForm');
     
     const submitForm = () => {
+      
       const searchQuery = searchInput.value.trim();
-      // const startDate = start
-      // const endDate = end 
-
       const queryParams = new URLSearchParams();
       if (searchQuery) queryParams.set('search', searchQuery);
-      // if (startDate) queryParams.set('start_date', startDate);
-      // if (endDate) queryParams.set('end_date', endDate);
-
       const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
       window.location.href = newUrl;
+
     };
 
-    // searchInput.textContent = searchQuery
     searchInput.addEventListener('keyup', function(event) {
       if (event.key === 'Enter') {
         submitForm();
       }
     });
-
-    // startDateBtn.addEventListener('click', submitForm);
-    // endDateBtn.addEventListener('click', submitForm);
-
   })
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   const searchInput = document.getElementById('searchInput');
-  //   const startDateBtn = document.getElementById('startDateBtn');
-  //   const endDateBtn = document.getElementById('endDateBtn');
-  //   const searchForm = document.getElementById('searchForm');
-
-  //   // Function to submit the form with query parameters
-  //   const submitForm = () => {
-  //     const searchQuery = searchInput.value.trim();
-  //     const startDate = startDateBtn.textContent // assuming you store the selected date in a data attribute
-  //     const endDate = endDateBtn.textContent // assuming you store the selected date in a data attribute
-
-  //     console.log(startDate, endDate)
-
-  //     const queryParams = new URLSearchParams();
-  //     if (searchQuery) queryParams.set('search', searchQuery);
-  //     if (startDate) queryParams.set('start_date', startDate);
-  //     if (endDate) queryParams.set('end_date', endDate);
-
-  //     const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-  //     window.location.href = newUrl;
-  //   };
-
-  //   // Event listener for key events on the search input
-  //   searchInput.addEventListener('keyup', function(event) {
-  //     if (event.key === 'Enter') {
-  //       submitForm();
-  //     }
-  //   });
-
-
-  //   // Event listener for focusout event on date selection buttons
-  //   // startDateBtn.addEventListener('focusout', submitForm);
-  //   // endDateBtn.addEventListener('focusout', submitForm);
-  // });
-
- 

@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Check if the showAlert parameter is present in the URL for update category
-  const showAlertUpdateParam = getQueryParam("showAlert");
+  const showAlertUpdateParam = getQueryParam("updateAlert");
 
   if (showAlertUpdateParam === "true") {
     // The showAlert parameter is present for update category, display the update alert
@@ -151,7 +151,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const id = window.location.href.split('?')[1].split('=')[1];
   const testid = getQueryParam('current')
-  console.log(testid)
 
   const items = document.querySelectorAll('.nav-link');
 
@@ -177,3 +176,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   })
 })
+

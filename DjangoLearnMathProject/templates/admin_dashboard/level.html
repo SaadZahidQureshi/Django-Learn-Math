@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +10,9 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/category.css">
-  <link rel="stylesheet" href="../css/users.css">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
   <title>Levels</title>
 
 
@@ -416,7 +417,7 @@
                                           <td>
                                             <div class="d-flex justify-content-center align-items-center gap-1">
                                                 <div class="">
-                                                    <a class="action-btns action-btns-view" href="../html/level-details.html?id=3">
+                                                    <a class="action-btns action-btns-view" href="{% url 'level-details'%}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                                             <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
                                                             <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
@@ -1063,8 +1064,8 @@
 
 </div>
 
-<script src="../js/common.js"></script>
-<script src="../js/datePicker.js"></script>
+<script src="{% static 'admin_dashboard/js/common.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/datePicker.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

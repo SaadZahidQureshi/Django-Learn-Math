@@ -48,7 +48,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'dashboard'%}?id=0"
+                        href="{% url 'dashboard'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -66,7 +66,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'users'%}?id=1"
+                        href="{% url 'users'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -86,7 +86,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="{% url 'categories'%}?id=2"
+                        href="{% url 'categories'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -115,7 +115,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/level.html?id=3"
+                        href="{%url 'levels'%}"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -264,7 +264,7 @@
                                                         {% endif %}
                                                     </div>
                                                   </div>
-                                                  <input class="d-none" id='selectedcategory' type="text" name='category_title'>
+                                                  <input class="d-none" id='selectedcategory' type="text" name='category_title' >
                                                   
                                                   {% comment %} {{form.as_p}} {% endcomment %}
                                                   
@@ -305,7 +305,7 @@
                                                     <div class="col">
                                                         <div class="">
                                                             <div class="">
-                                                                <textarea class="w-100 p-3 border-user-defind border-radius" name='category_description' id="exampleFormControlTextarea1" rows="15" placeholder="Add description here"></textarea>
+                                                                <textarea class="w-100 p-3 border-user-defind border-radius" name='category_description' id="exampleFormControlTextarea1" rows="5" placeholder="Add description here"></textarea>
                                                             </div>
                                                             {% if form.errors %}
                                                             {% for error in  form.category_description.errors %}
@@ -321,7 +321,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col d-flex flex-column gap-4">
+                                        <div class="col d-flex flex-column gap-4 position-relative">
 
                                             <div class="row w-100 d-none">
                                                 <div class="col">
@@ -380,17 +380,19 @@
                                                         </div>
                                                         
                                                     </div>
-                                                    {% if form.errors %}
-                                                    {% for error in  form.category_image.errors %}
-                                                    <small class="text-danger">{{error}}</small>
-                                                    {% endfor %}
-                                                    {% endif %}
+                                                  
                                                 </div>
                                             </div>
-                                            
+                                    {% if form.errors %}
+                                    {% for error in  form.category_image.errors %}
+                                    <small class="text-danger position-absolute error_possition">{{error}}</small>
+                                    {% endfor %}
+                                    {% endif %}
                                         </div>
+                                       
 
                                     </div>
+                                    
 
                                     <div class="row w-100">
                                         <div class="col d-flex justify-content-center">
@@ -401,6 +403,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                   
                                 </form>
                             </div>
                         </div>  

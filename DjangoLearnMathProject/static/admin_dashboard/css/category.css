@@ -38,6 +38,21 @@
     height: 150px !important;
 }
 ._position{
-    right: 222px;
-    top: 63px;
+    /* right: 222px;
+    top: 63px; */
+    right: 50%;
+    top: 50%;
+    transform: translate(40%, -50%);
+}
+#selected_background_img{
+    background-repeat : no-repeat !important;
+    background-size : cover !important;
+    background-position: center !important;
+    height: 230%;
+}
+.error_possition{
+    bottom: -5px;
+}
+.height-95{
+    height: 95%;
 }
