@@ -43,7 +43,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/dashboard.html?id=0"
+                        href="{% url 'dashboard'%}?id=0"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -61,7 +61,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/users.html?id=1"
+                        href="{% url 'users'%}?id=1"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -81,7 +81,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/category.html?id=2"
+                        href="{% url 'categories'%}?id=2"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -110,7 +110,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/level.html?id=3"
+                        href="{% url 'levels'%}?id=3"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -268,7 +268,7 @@
                       <div class="row w-100 justify-content-center gap-4 mt-4 mb-4">
                         <div class="col-4 d-flex justify-content-end">
                           <div class=" mt-4 w-75">
-                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="../html/update-level.html?id=3" type="submit" name="" id="submit-btn" >Update</a>
+                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="{% url 'level-update'%}?id=3" type="submit" name="" id="submit-btn" >Update</a>
                           </div>
                         </div>
 

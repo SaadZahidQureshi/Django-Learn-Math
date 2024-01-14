@@ -25,6 +25,7 @@ urlpatterns = [
     path('levels/', views.levels, name='levels'),
     path('level-details/', views.levelDetails, name='level-details'),
     path('level-update/', views.levelUpdate, name='level-update'),
+    path('add-update/', views.addLevel, name='add-update'),
 
 
 

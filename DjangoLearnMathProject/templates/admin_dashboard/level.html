@@ -40,7 +40,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/dashboard.html?id=0"
+                        href="{% url 'dashboard'%}?id=0"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -58,7 +58,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/users.html?id=1"
+                        href="{% url 'users'%}?id=1"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -78,7 +78,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/category.html?id=2"
+                        href="{% url 'categories'%}?id=2"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -107,7 +107,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/level.html?id=3"
+                        href="{% url 'levels'%}?id=3"
                         onclick="toggleActive(this)"
                       >
                         <svg
@@ -219,7 +219,7 @@
                     <div class="col d-flex justify-content-center ">
                         <div class="w-75 d-flex justify-content-end align-items-center">
                             <div class="">
-                                <a class="new-category text-decoration-none text-light " href="../html/add-level.html?id=3" ><p class="m-0 p-0">Add New Level</p></a>
+                                <a class="new-category text-decoration-none text-light " href="{% url 'add-update'%}?id=3" ><p class="m-0 p-0">Add New Level</p></a>
                             </div>
                         </div>
                     </div>

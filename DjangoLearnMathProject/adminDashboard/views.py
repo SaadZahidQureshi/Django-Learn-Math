@@ -55,7 +55,6 @@ def dashboard(request):
 
 
 # users views here 
-
 @login_required(login_url='login')
 def users(request):
 
@@ -114,7 +113,6 @@ def usersDelete(request,pk):
 
 
 # category views here
-
 @login_required(login_url='login')
 def categories(request):
     search = request.GET.get('search', None)
