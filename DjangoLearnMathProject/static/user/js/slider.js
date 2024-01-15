@@ -1,43 +1,43 @@
 const sliderList = document.getElementById('slider-list');
 // console.log('test1')
 // Sample data for slider items
-const sliderData = [
-  { text: 'Level 1', name: 'level-1', href: '../question'+'?id=level-1' },
-  { text: 'Level 2', name: 'level-2', href: '../question_with_image'+'?id=level-2' },
-  { text: 'Level 3', name: 'level-3', href: '../question_wrong_answer'+'?id=level-3' },
-  { text: 'Level 4', name: 'level-4', href: '../question'+'?id=level-4' },
-  { text: 'Level 5', name: 'level-5', href: '../question_with_image'+'?id=level-5' },
-  { text: 'Level 6', name: 'level-6', href: '../question_wrong_answer'+'?id=level-6' },
-  { text: 'Level 7', name: 'level-7', href: '../question'+'?id=level-7' },
-  { text: 'Level 8', name: 'level-8', href: '../question_with_image'+'?id=level-8' },
-  { text: 'Level 9', name: 'level-9', href: '../question_wrong_answer'+'?id=level-9' },
-  { text: 'Level 10', name: 'level-10', href: '../question'+'?id=level-10' },
-  { text: 'Level 11', name: 'level-11', href: '../question_with_image'+'?id=level-11' },
-  { text: 'Level 12', name: 'level-12', href: '../question_wrong_answer'+'?id=level-12' },
-  { text: 'Level 13', name: 'level-13', href: '../question'+'?id=level-13' },
-  { text: 'Level 14', name: 'level-14', href: '../question_with_image'+'?id=level-14' },
-  { text: 'Level 15', name: 'level-15', href: '../question_wrong_answer'+'?id=level-15' },
-  { text: 'Level 16', name: 'level-16', href: '../question'+'?id=level-16' },
-  // Add more data as needed
-];
+// const sliderData = [
+//   { text: 'Level 1', name: 'level-1', href: '../question'+'?id=level-1' },
+//   { text: 'Level 2', name: 'level-2', href: '../question_with_image'+'?id=level-2' },
+//   { text: 'Level 3', name: 'level-3', href: '../question_wrong_answer'+'?id=level-3' },
+//   { text: 'Level 4', name: 'level-4', href: '../question'+'?id=level-4' },
+//   { text: 'Level 5', name: 'level-5', href: '../question_with_image'+'?id=level-5' },
+//   { text: 'Level 6', name: 'level-6', href: '../question_wrong_answer'+'?id=level-6' },
+//   { text: 'Level 7', name: 'level-7', href: '../question'+'?id=level-7' },
+//   { text: 'Level 8', name: 'level-8', href: '../question_with_image'+'?id=level-8' },
+//   { text: 'Level 9', name: 'level-9', href: '../question_wrong_answer'+'?id=level-9' },
+//   { text: 'Level 10', name: 'level-10', href: '../question'+'?id=level-10' },
+//   { text: 'Level 11', name: 'level-11', href: '../question_with_image'+'?id=level-11' },
+//   { text: 'Level 12', name: 'level-12', href: '../question_wrong_answer'+'?id=level-12' },
+//   { text: 'Level 13', name: 'level-13', href: '../question'+'?id=level-13' },
+//   { text: 'Level 14', name: 'level-14', href: '../question_with_image'+'?id=level-14' },
+//   { text: 'Level 15', name: 'level-15', href: '../question_wrong_answer'+'?id=level-15' },
+//   { text: 'Level 16', name: 'level-16', href: '../question'+'?id=level-16' },
+//   // Add more data as needed
+// ];
 
 
 // Dynamically generate slider items
-function generateSliderItems() {
-  sliderList.innerHTML = ''; // Clear existing items
+// function generateSliderItems() {
+//   sliderList.innerHTML = ''; // Clear existing items
 
-  sliderData.forEach((item, index) => {
-      const listItem = document.createElement('a');
-      listItem.className = 'slider-items text-center text-decoration-none';
-      listItem.innerText = item.text;
-      listItem.href = item.href;
-      listItem.dataset.name = item.name;
-      sliderList.appendChild(listItem);
-  });
+//   sliderData.forEach((item, index) => {
+//       const listItem = document.createElement('a');
+//       listItem.className = 'slider-items text-center text-decoration-none';
+//       listItem.innerText = item.text;
+//       listItem.href = item.href;
+//       listItem.dataset.name = item.name;
+//       sliderList.appendChild(listItem);
+//   });
 
-}
+// }
 
-generateSliderItems();
+// generateSliderItems();
 
 const sliderItems = document.querySelectorAll('.slider-items');
 const totalItems = sliderItems.length;

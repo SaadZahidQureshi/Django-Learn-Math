@@ -43,8 +43,8 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/dashboard.html?id=0"
-                          onclick="toggleActive(this)"
+                          href="{%url 'dashboard'%}"
+                          
                         >
                           <svg
                             class="sidebar__link-icon def-color"
@@ -60,12 +60,12 @@
       
                       <div class="d-flex">
                         <a
-                          class="nav-link rounded-border bg-color"
-                          href="{% url 'users' %}?id=1"
-                          onclick="toggleActive(this)"
+                          class="nav-link rounded-border bg-color active-side-bar-menu active-svg-color "
+                          href="{% url 'users' %}"
+                          
                         >
                           <svg
-                            class="sidebar__link-icon def-color"
+                            class="sidebar__link-icon "
                             viewBox="0 0 40 53"
                             xmlns="http://www.w3.org/2000/svg"
                           >
@@ -81,8 +81,8 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="{% url 'categories'%}?id=2"
-                          onclick="toggleActive(this)"
+                          href="{% url 'categories'%}"
+                       
                         >
                           <svg
                             class="sidebar__link-icon def-color"
@@ -110,8 +110,8 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/level.html?id=3"
-                          onclick="toggleActive(this)"
+                          href="{% url 'levels'%}"
+                          
                         >
                           <svg
                             class="sidebar__link-icon def-color"
@@ -129,8 +129,8 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/question.html?id=4"
-                          onclick="toggleActive(this)"
+                          href="../html/question.html"
+                        
                         >
                           <svg
                             class="sidebar__link-icon def-color"
@@ -154,8 +154,8 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/profile.html?id=5"
-                          onclick="toggleActive(this)"
+                          href="../html/profile.html"
+                          
                         >
                           <svg
                             class="sidebar__link-icon def-color"
@@ -183,7 +183,7 @@
                         <a
                           class="nav-link rounded-border bg-color"
                           href="{% url 'logout'%}"
-                          onclick="toggleActive(this)"
+                          
                         >
                           <svg
                             class="sidebar__link-icon def-color"

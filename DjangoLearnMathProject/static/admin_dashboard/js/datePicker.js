@@ -84,16 +84,21 @@ document.addEventListener("DOMContentLoaded", function() {
           const endDate = endDateBtn.textContent.trim()
 
           if(startDate === 'Starting Date' && endDate != null )
-          {filter(start=null,end=endDate)
-          // console.log('cont-1')
+          {
+
+          valuessend(start='', end=endDate)
+
+
           }
           else if (endDate === 'Ending Date' && startDate != null )
-          {filter(start=startDate, end=null) 
-            // console.log('cont-2')
+          {
+            valuessend(start=startDate, end=null)
+
+
           }
-          else if(endDate != null && startDate != null){
-            // console.log('cont-3')
-            filter(start=startDate, end=endDate) 
+          else if(endDate != null && startDate != null){ 
+          valuessend(start=startDate, end=endDate)
+            
           }
       }
       });
@@ -141,57 +146,16 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-
-
   // ---------------------------------------------------------
 
-  function filter(start=null, end=null){
-    // console.log('start date',start,'end date',end)
 
-    const startDateBtn = document.getElementById('startDateBtn');
-    const endDateBtn = document.getElementById('endDateBtn');
-    const searchInput = document.getElementById('searchInput');
+  function valuessend(start, end){
 
+    startdateinput = document.getElementById('startdateinput')
+    startdateinput.value = start
 
-    const submitForm = () =>{
-      const startDate = start
-      const endDate = end
-      const searchQuery = searchInput.value.trim();
-      
-      const queryParams = new URLSearchParams();
-      if (startDate) queryParams.set('start_date', startDate);
-      if (endDate) queryParams.set('end_date', endDate);
-      if (searchQuery) queryParams.set('search', searchQuery);
+    enddateinput = document.getElementById('enddateinput')
+    enddateinput.value = end
 
-      const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-      window.location.href = newUrl;
-    }
-    
-    submitForm();
-    
-    startDateBtn.textContent = start
-    endDateBtn.textContent = end
-
+    document.getElementById('searchForm').submit()
   }
-
-
-  document.addEventListener('DOMContentLoaded',function(){
-    const searchInput = document.getElementById('searchInput');
-    const searchForm = document.getElementById('searchForm');
-    
-    const submitForm = () => {
-      
-      const searchQuery = searchInput.value.trim();
-      const queryParams = new URLSearchParams();
-      if (searchQuery) queryParams.set('search', searchQuery);
-      const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
-      window.location.href = newUrl;
-
-    };
-
-    searchInput.addEventListener('keyup', function(event) {
-      if (event.key === 'Enter') {
-        submitForm();
-      }
-    });
-  })

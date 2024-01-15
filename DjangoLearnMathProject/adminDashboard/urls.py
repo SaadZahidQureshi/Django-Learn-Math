@@ -11,6 +11,7 @@ urlpatterns = [
     path('users/', views.users, name='users'),
     path('users/<pk>/', views.usersDetails, name='user-details'),
     path('user-delete/<pk>', views.usersDelete, name='user-delete'),
+    path('profile/', views.profile, name='profile'),
 
     
     # category urls here
@@ -23,8 +24,20 @@ urlpatterns = [
 
     # level urls here
     path('levels/', views.levels, name='levels'),
-    path('level-details/', views.levelDetails, name='level-details'),
-    path('level-update/', views.levelUpdate, name='level-update'),
+    path('level-details/<pk>', views.levelDetails, name='level-details'),
+    path('level-update/<pk>', views.levelUpdate, name='level-update'),
+    path('level-add/', views.addLevel, name='level-add'),
+    path('level-delete/<pk>', views.deleteLevel, name='level-delete'),
+
+
+
+    # question urls here
+    path('questions/', views.Questions, name='questions'),
+    path('add-question/', views.addQuestion, name='add-question'),
+    path('view-question/<pk>/', views.viewQuestion, name='view-question'),
+    path('update-question/<pk>/', views.updateQuestion, name='update-question'),
+    path('delete-question/<pk>/', views.deleteQuestion, name='delete-question'),
+
 
 
 

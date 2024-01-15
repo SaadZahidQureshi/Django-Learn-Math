@@ -42,7 +42,7 @@
                       <a
                         class="nav-link rounded-border bg-color"
                         href="{% url 'dashboard'%}"
-                        onclick="toggleActive(this)"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -60,7 +60,7 @@
                       <a
                         class="nav-link rounded-border bg-color"
                         href="{% url 'users'%}"
-                        onclick="toggleActive(this)"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -78,12 +78,12 @@
     
                     <div class="d-flex">
                       <a
-                        class="nav-link rounded-border bg-color"
+                        class="nav-link rounded-border bg-color active-side-bar-menu active-svg-color"
                         href="{% url 'categories'%}"
-                        onclick="toggleActive(this)"
+                        
                       >
                         <svg
-                          class="sidebar__link-icon def-color"
+                          class="sidebar__link-icon "
                           viewBox="0 0 40 40"
                           xmlns="http://www.w3.org/2000/svg"
                         >
@@ -109,7 +109,7 @@
                       <a
                         class="nav-link rounded-border bg-color"
                         href="{%url 'levels'%}"
-                        onclick="toggleActive(this)"
+                       
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -127,8 +127,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/question.html?id=4"
-                        onclick="toggleActive(this)"
+                        href="../html/question.html"
+                     
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -152,8 +152,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/profile.html?id=5"
-                        onclick="toggleActive(this)"
+                        href="../html/profile.html"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -181,7 +181,7 @@
                       <a
                         class="nav-link rounded-border bg-color"
                         href="{% url 'logout'%}"
-                        onclick="toggleActive(this)"
+                      
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -281,6 +281,8 @@
                  
                 </div>
 
+            <form id="searchForm" action="{% url 'categories'%}" method='GET'>
+
                 <!-- search bar  -->
                 <div class="row justify-content-center margintop gap-2">
                   <div class="col-3">
@@ -313,7 +315,7 @@
                             value=''
                             {% endif %}
                             
-                            placeholder="Search user.."
+                            placeholder="Search category.."
                           />
                         </div>
                         
@@ -404,6 +406,11 @@
       
                       </button>
                     </div>
+
+                    <input class='d-none' type="text" name="startdate"  id='startdateinput' value='{% if startdate %}{{startdate}}{% endif %}'>
+                    <input class='d-none' type="text" name="enddate" id='enddateinput' value='{% if enddate %}{{enddate}}{% endif %}'>
+                    <input class='d-none' type="submit" name="" id="">
+      
       
                     <!-- Date picker container -->
                     <div class="date-picker-container">
@@ -459,7 +466,7 @@
       
                   </div>
                 </div>
-
+            </form>
                 <!-- table container -->
                 <div class="row justify-content-center mt-3">
                     <div class="col p-0">
@@ -491,7 +498,7 @@
                                             <div class="d-flex justify-content-center align-items-center gap-1">
                                                 <!--view button  -->
                                               <div class="">
-                                                    <a class="action-btns action-btns-view"  href="{%url 'view-category' pk=category.id%}?id=2">
+                                                    <a class="action-btns action-btns-view"  href="{%url 'view-category' pk=category.id%}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                                             <path d="M12.5 19.8984C6.61719 19.8984 2.02344 13.2266 1.82812 12.9375L1.5625 12.5L1.85938 12.0625C2.02344 11.7734 6.61719 5.10156 12.5 5.10156C18.3828 5.10156 22.9766 11.7734 23.1719 12.0625L23.4375 12.5L23.1406 12.9375C22.9766 13.2266 18.3828 19.8984 12.5 19.8984ZM3.44531 12.5C4.53125 13.9219 8.24219 18.3359 12.5 18.3359C16.7578 18.3359 20.4688 13.9297 21.5547 12.5C20.4688 11.0781 16.7578 6.66406 12.5 6.66406C8.24219 6.66406 4.53125 11.0703 3.44531 12.5Z" fill="#565656"/>
                                                             <path d="M12.5 8.59333C12.3751 8.58608 12.2499 8.58608 12.125 8.59333C12.06 8.59906 11.9994 8.62851 11.9548 8.67606C11.9101 8.72361 11.8845 8.78593 11.8828 8.85114C11.883 8.92152 11.9111 8.98896 11.9609 9.03864C12.3291 9.41441 12.5365 9.91881 12.5391 10.4449C12.5391 10.9898 12.3226 11.5124 11.9373 11.8978C11.5519 12.2831 11.0293 12.4996 10.4844 12.4996C9.96573 12.498 9.46766 12.2965 9.09375 11.9371C9.05895 11.9 9.01452 11.8734 8.96543 11.8602C8.91635 11.847 8.86455 11.8478 8.81587 11.8624C8.76719 11.877 8.72354 11.9049 8.68982 11.9429C8.6561 11.9809 8.63366 12.0276 8.625 12.0777C8.60537 12.2175 8.59493 12.3584 8.59375 12.4996C8.59375 13.2722 8.82285 14.0274 9.25207 14.6698C9.6813 15.3122 10.2914 15.8128 11.0051 16.1085C11.7189 16.4041 12.5043 16.4815 13.2621 16.3308C14.0198 16.1801 14.7158 15.808 15.2621 15.2617C15.8084 14.7154 16.1805 14.0194 16.3312 13.2617C16.4819 12.5039 16.4046 11.7185 16.1089 11.0047C15.8133 10.2909 15.3126 9.68088 14.6702 9.25165C14.0278 8.82243 13.2726 8.59333 12.5 8.59333Z" fill="#565656"/>
@@ -500,7 +507,7 @@
                                                 </div>
                                                 <!-- edit button -->
                                                 <div class="">
-                                                    <a class="action-btns action-btns-view" href="{%url 'update-category' pk=category.id %}?id=2">
+                                                    <a class="action-btns action-btns-view" href="{%url 'update-category' pk=category.id %}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                                             <g clip-path="url(#clip0_1_8245)">
                                                               <path d="M5 16.6662V20H8.12543L17.3475 10.1631L14.2221 6.82928L5 16.6662ZM19.7562 7.59383C20.0813 7.24712 20.0813 6.6826 19.7562 6.33588L17.8101 4.26004C17.4851 3.91332 16.9558 3.91332 16.6308 4.26004L15.1056 5.88693L18.231 9.22073L19.7562 7.59383Z" fill="#565656"/>
@@ -576,6 +583,7 @@
                 </nav>
               </div>
             </div>
+            
             </div>
         </div>
     </div>

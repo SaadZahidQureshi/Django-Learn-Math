@@ -20,10 +20,8 @@ class CATEGORY_LIST(Enum):
         return [(item.value, item.value) for item in CATEGORY_LIST]
 
 
-# CATEGORY_LIST = [('Calculus','Calculus'),('Geometery','Geometery'),('Trigonometery','Trigonometery'),('Algebra','Algebra')]
-    
 class Category(BaseModel):
-    category_title = models.CharField(max_length=CharFieldSizes.XXX_LARGE, choices = CATEGORY_LIST.choices())
+    category_title = models.CharField(max_length=CharFieldSizes.XXX_LARGE)
     category_description = models.TextField()
     category_image = models.ImageField(upload_to='category_images')
 
@@ -42,9 +40,12 @@ def resize_image(sender,instance, **kwargs):
 
 
 class Level(BaseModel):
-    level_no = models.IntegerField(unique=True)
+    level_no = models.IntegerField()
     number_of_questions = models.IntegerField()
-    level_category = models.ForeignKey(Category,on_delete=models.DO_NOTHING)
+    level_category = models.ForeignKey(Category,on_delete=models.CASCADE)
     
+    class Meta:
+        unique_together = ('level_no', 'level_category')
+
     def __str__(self):
         return f"Level {self.level_no}"

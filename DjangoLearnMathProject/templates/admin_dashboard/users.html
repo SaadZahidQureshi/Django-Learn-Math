@@ -19,8 +19,8 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <!-- sidebar -->
-        <div class="col-1 p-0 m-0 bg-sidebar border  ">
+          <!-- sidebar -->
+          <div class="col-1 p-0 m-0 bg-sidebar border  ">
           <div class="d-flex flex-column align-items-center ">
             <!-- wanna show these two column vertically  -->
             <div
@@ -33,12 +33,11 @@
               class="w-100 d-flex justify-content-center "
             >
               <div class="d-flex flex-column gap-4 nav-height margintop-nav">
-                
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="{% url 'dashboard'%}?id=0"
-                    onclick="toggleActive(this)"
+                    href="{%url 'dashboard'%}"
+                    
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -54,12 +53,12 @@
 
                 <div class="d-flex">
                   <a
-                    class="nav-link rounded-border bg-color"
-                    href="{% url 'users'%}?id=1"
-                    onclick="toggleActive(this)"
+                    class="nav-link rounded-border bg-color active-side-bar-menu active-svg-color "
+                    href="{% url 'users' %}"
+                    
                   >
                     <svg
-                      class="sidebar__link-icon def-color"
+                      class="sidebar__link-icon "
                       viewBox="0 0 40 53"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -75,8 +74,8 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="{% url 'categories'%}?id=2"
-                    onclick="toggleActive(this)"
+                    href="{% url 'categories'%}"
+                  
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -104,8 +103,8 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/level.html?id=3"
-                    onclick="toggleActive(this)"
+                    href="{% url 'levels'%}"
+                    
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -123,8 +122,8 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/question.html?id=4"
-                    onclick="toggleActive(this)"
+                    href="../html/question.html"
+                  
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -148,8 +147,8 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/profile.html?id=5"
-                    onclick="toggleActive(this)"
+                    href="../html/profile.html"
+                    
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -177,7 +176,7 @@
                   <a
                     class="nav-link rounded-border bg-color"
                     href="{% url 'logout'%}"
-                    onclick="toggleActive(this)"
+                    
                   >
                     <svg
                       class="sidebar__link-icon def-color"
@@ -216,7 +215,7 @@
           </div>
 
 
-          <form id="searchForm" action="{% url 'users'%}">
+          <form id="searchForm" action="{% url 'users'%}" method='GET'>
           
             <!-- search bar  -->
           <div class="row justify-content-center margintop gap-2">
@@ -341,6 +340,12 @@
 
                 </button>
               </div>
+
+              
+              <input class='d-none' type="text" name="startdate"  id='startdateinput' value='{% if startdate %}{{startdate}}{% endif %}'>
+              <input class='d-none' type="text" name="enddate" id='enddateinput' value='{% if enddate %}{{enddate}}{% endif %}'>
+              <input class='d-none' type="submit" name="" id="">
+
 
               <!-- Date picker container -->
               <div class="date-picker-container">

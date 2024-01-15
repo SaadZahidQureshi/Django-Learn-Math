@@ -26,8 +26,8 @@
 
         <div class="row ">
 
-            <!-- sidebar -->
-            <div class="col-1 p-0 m-0 bg-sidebar border  ">
+             <!-- sidebar -->
+             <div class="col-1 p-0 m-0 bg-sidebar border  ">
               <div class="d-flex flex-column align-items-center ">
                 <!-- wanna show these two column vertically  -->
                 <div
@@ -42,9 +42,9 @@
                   <div class="d-flex flex-column gap-4 nav-height margintop-nav">
                     <div class="d-flex">
                       <a
-                        class="nav-link rounded-border bg-color"
-                        href="../html/dashboard.html?id=0"
-                        onclick="toggleActive(this)"
+                        class="nav-link rounded-border bg-color "
+                        href="{% url 'dashboard'%}"
+                       
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -61,8 +61,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/users.html?id=1"
-                        onclick="toggleActive(this)"
+                        href="{% url 'users'%}"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -81,8 +81,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/category.html?id=2"
-                        onclick="toggleActive(this)"
+                        href="{% url 'categories'%}"
+                       
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -109,12 +109,12 @@
     
                     <div class="d-flex">
                       <a
-                        class="nav-link rounded-border bg-color"
-                        href="../html/level.html?id=3"
-                        onclick="toggleActive(this)"
+                        class="nav-link rounded-border bg-color active-side-bar-menu active-svg-color "
+                        href="{% url 'levels'%}"
+                   
                       >
                         <svg
-                          class="sidebar__link-icon def-color"
+                          class="sidebar__link-icon "
                           viewBox="0 0 40 40"
                           xmlns="http://www.w3.org/2000/svg"
                         >
@@ -129,8 +129,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/question.html?id=4"
-                        onclick="toggleActive(this)"
+                        href="{% url 'questions'%}"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -154,8 +154,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/profile.html?id=5"
-                        onclick="toggleActive(this)"
+                        href="{% url 'profile' %}"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -182,8 +182,8 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/login.html?id=6"
-                        onclick="toggleActive(this)"
+                        href="{%url 'logout'%}"
+                        
                       >
                         <svg
                           class="sidebar__link-icon def-color"
@@ -230,14 +230,14 @@
                       <div class="row w-100 justify-content-between">
                         <div class="col-5">
                           <div class="position-relative mt-3 pb-0">
-                            <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="ID">
+                            <input class="input-control p-3" type="text" name="current-password" value='{{record.id}}' id="input-password" placeholder="ID" readonly>
                             <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                           </div>
                         </div>
 
                         <div class="col-5">
                             <div class="position-relative mt-3 pb-0">
-                              <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Level no">
+                              <input class="input-control p-3" type="text" name="current-password" value='{{record.level_no}}' id="input-password" placeholder="Level no" readonly>
                               <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                             </div>
                           </div>
@@ -246,14 +246,14 @@
                       <div class="row w-100 justify-content-between">
                         <div class="col-5">
                           <div class="position-relative mt-3 pb-0">
-                            <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="No. fo Questions">
+                            <input class="input-control p-3" type="text" name="current-password" value='{{record.number_of_questions}}' id="input-password" placeholder="No. fo Questions" readonly>
                             <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                           </div>
                         </div>
 
                         <div class="col-5">
                             <div class="position-relative mt-3 pb-0">
-                              <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Date & Time">
+                              <input class="input-control p-3" type="text" name="current-password" value='{{record.level_category}}' id="input-password" placeholder="Category" readonly>
                               <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                             </div>
                           </div>
@@ -268,13 +268,13 @@
                       <div class="row w-100 justify-content-center gap-4 mt-4 mb-4">
                         <div class="col-4 d-flex justify-content-end">
                           <div class=" mt-4 w-75">
-                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="../html/update-level.html?id=3" type="submit" name="" id="submit-btn" >Update</a>
+                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="{% url 'level-update' pk=record.id%}" type="submit" name="" id="submit-btn" >Update</a>
                           </div>
                         </div>
 
                         <div class="col-4 ">
                             <div class=" mt-4 w-75">
-                              <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none delete-category-btn" href="#"  type="submit" name="" id="submit-btn"  data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Delete</a>
+                              <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none delete-category-btn" href="#"  type="submit" onclick=deleterecord({{record.id}}) name="" id="submit-btn"  data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Delete</a>
                             </div>
                           </div>
                       </div>
@@ -322,17 +322,25 @@
             <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete a level? In case of deletion you will loss all the information in that level.</p></div>
   
             <div class="mt-3 pt-1">
-                  <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button>
+          <a href="{% url 'level-delete' pk=0%}" class="modal-button border-0 text-light text-decoration-none">Delete</a>
+
+                  {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
             </div>
         </div>
         </div>
       </div>
     </div>
   
-  </div>
+</div>
 
-  
-
+  <script>
+    function deleterecord(pk){
+      modal_button = document.querySelector('.modal-button')
+      link = "{% url 'level-delete' pk=0 %}".replace('0', pk)
+      modal_button.href = link
+      console.log(modal_button)
+    }
+  </script>
 <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

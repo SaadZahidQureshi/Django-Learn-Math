@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.db.models import Q
 from django.urls import reverse
-from adminDashboard.models import CATEGORY_LIST, Category
-from adminDashboard.forms import CategoryForm
+from adminDashboard.models import CATEGORY_LIST, Category, Level
+from adminDashboard.forms import CategoryForm, LevelForm
 from customAuth.forms import CustomAuthenticationForm
 from customAuth.models import User
 
@@ -53,15 +53,18 @@ def dashboard(request):
     return render (request, 'admin_dashboard/dashboard.html',context)
 
 
+def profile(request):
+    return render( request, 'admin_dashboard/profile.html')
+
+
 
 # users views here 
-
 @login_required(login_url='login')
 def users(request):
 
     search = request.GET.get('search-bar', None)
-    start_date = request.GET.get('start_date', None)
-    end_date = request.GET.get('end_date', None)
+    start_date = request.GET.get('startdate', None)
+    end_date = request.GET.get('enddate', None)
     context={
         'seachbar': search,
         'startdate': start_date,
@@ -114,12 +117,11 @@ def usersDelete(request,pk):
 
 
 # category views here
-
 @login_required(login_url='login')
 def categories(request):
-    search = request.GET.get('search', None)
-    start_date = request.GET.get('start_date', None)
-    end_date = request.GET.get('end_date', None)
+    search = request.GET.get('search-bar', '')
+    start_date = request.GET.get('startdate', '')
+    end_date = request.GET.get('enddate', '')
     context={
         'seachbar': search,
         'startdate': start_date,
@@ -205,13 +207,101 @@ def deleteCategory(request,pk):
 
 # level view here 
 def levels(request):
-    return render(request,'admin_dashboard/level.html')
+    context={
+        'startdate': request.GET.get('startdate',None),
+        'enddate': request.GET.get('enddate',None),
+        'seachbar': request.GET.get('search-bar',None),
+        'records' : Level.objects.all(),
+        'records_count' : Level.objects.all().count,
+    }
+
+    if context['startdate'] and context['enddate']:
+        context['records'] = context['records'].filter(created_at__range=(context['startdate'], context['enddate']))
+    elif context['startdate']:
+        context['records'] = context['records'].filter(created_at__gte=context['startdate'])
+    elif context['enddate']:
+        context['records'] = context['records'].filter(created_at__lte=context['enddate'])
+
+    # Filter based on name
+    if context['seachbar']:
+        context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']))
+
+    paginator = Paginator(context['records'],2)
+    page = request.GET.get('page')
+
+    try:
+        records_within_range = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        records_within_range = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, show the last page
+        records_within_range = paginator.page(paginator.num_pages)
+
+    level_count = context['records'].count()
+    context['records']= records_within_range
+    context['level_count'] = level_count
+
+    
+    return render(request,'admin_dashboard/level.html' ,context)
 
 def addLevel(request):
-    return render(request, 'admin_dashboard/add-level.html')
+    context={
+        'categories': Category.objects.all(),
+        'form': LevelForm()
+    }
+    if request.method =='POST':
+        form = LevelForm(request.POST)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            messages.success = (request, True)
+            return redirect(reverse('levels')+f'?addlevelAlert=true')
+        print(form.errors)
+    return render(request, 'admin_dashboard/add-level.html',context)
 
-def levelDetails(request):
-    return render (request, 'admin_dashboard/level-details.html')
+def levelDetails(request,pk):
+    context= {
+        'record': Level.objects.get(id=pk)
+    }
+    return render (request, 'admin_dashboard/level-details.html',context)
 
-def levelUpdate(request):
-    return render(request, 'admin_dashboard/update-level.html')
+def levelUpdate(request,pk):
+    context= {
+        'record': Level.objects.get(id=pk),
+        'categories': Category.objects.all(),
+        'form' : LevelForm(instance=Level.objects.get(id=pk) )
+    }
+    if request.method == 'POST':
+        form = LevelForm(request.POST,context['record'])
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect('levels')
+    return render(request, 'admin_dashboard/update-level.html',context)
+
+def deleteLevel(request,pk):
+    record = Level.objects.get(id=pk)
+    record.delete()
+    return redirect('levels')
+
+
+# question views here
+def Questions(request):
+    return render(request, 'admin_dashboard/question.html')
+
+def addQuestion(request):
+    return render(request, 'admin_dashboard/add-question.html')
+
+
+def viewQuestion(request):
+    return render(request, 'admin_dashboard/question-details.html')
+
+
+def updateQuestion(request):
+    return render(request, 'admin_dashboard/update-question.html')
+
+
+def deleteQuestion(request):
+    pass
+

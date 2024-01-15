@@ -1,16 +1,3 @@
-// Your JavaScript
-function toggleActive(element) {
-    // Remove 'active' class from all nav links
-    var navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(function(link) {
-        link.classList.remove('active');
-    });
-
-    // Add 'active' class to the clicked nav link
-    element.classList.add('active');
-}
-
-
 
 document.addEventListener("DOMContentLoaded", function() {
   // Function to get query parameters from the URL
@@ -140,40 +127,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// active-side-bar-menu 
-// active-svg-color
-document.addEventListener("DOMContentLoaded", function() {
-
-  function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-  }
-
-  const id = window.location.href.split('?')[1].split('=')[1];
-  const testid = getQueryParam('current')
-
-  const items = document.querySelectorAll('.nav-link');
-
-  items.forEach((item,index) =>{
-    // console.log(item)
-
-    // if(testid == item.getAttribute('data-name')){
-    //   item.classList.add('active-side-bar-menu')
-    //   item.firstElementChild.classList.remove('def-color')
-    //   item.firstElementChild.classList.add('active-svg-color')
-    // }
-
-    if(index == id){
-      items.forEach(item =>{
-        item.classList.remove('active-side-bar-menu')
-        // console.log(navlinks[id].firstElementChild.classList.remove('def-color'))
-      })
-      // console.log(item.getAttribute('data-name'))
-      item.classList.add('active-side-bar-menu')
-      item.firstElementChild.classList.remove('def-color')
-      item.firstElementChild.classList.add('active-svg-color')
-
-    }
-  })
-})
 

@@ -91,7 +91,7 @@
        <div class="m-0 p-0 d-flex justify-content-center">
         <div class="question-container__width ">
           <div class="mt-4">
-            <h2 class="question-category">Trignometory</h2>
+            <h2 class="question-category">{{category}}</h2>
           </div>
         </div>
        </div>
@@ -113,23 +113,12 @@
             <div class="row justify-content-center align-items-center">
                 <div class="m-0 p-0 w-100 overflow-hidden" id="slider-container">
                     <ul class="d-flex list-unstyled slider-list m-0 p-2" id="slider-list" >
-                      <!-- <a href="" data-name=""></a> -->
-                        <!-- <a class="slider-items text-center text-decoration-none" href="../html/Question.html">Level 1</a>
-                        <a class="slider-items text-center text-decoration-none" href="../html/Question-with-image.html">Level 2</a>
-                        <a class="slider-items text-center text-decoration-none" href="../html/Question-wrong-ans.html">Level 3</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 4</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 5</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 6</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 7</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 8</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 9</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 10</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 11</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 12</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 13</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 14</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 15</a>
-                        <a class="slider-items text-center text-decoration-none" href="#">Level 16</a> -->
+                      {% if levels %}
+                      {% for level in levels %}
+                         <a class="slider-items text-center text-decoration-none" href="{% url 'question_with_image'%}">{{level}}</a>
+                      {% endfor %}
+                      {% endif %}
+                        
                     </ul>
                 </div>
             </div>
