@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.db.models import Q
+from django.db.models import Sum
 from django.urls import reverse
-from adminDashboard.models import CATEGORY_LIST, Category, Level
+from adminDashboard.models import CATEGORY_LIST, Category, Level, Question
 from adminDashboard.forms import CategoryForm, LevelForm
 from customAuth.forms import CustomAuthenticationForm
 from customAuth.models import User
@@ -20,19 +21,15 @@ def admin_login(request):
         if form.is_valid():
             email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            print(email,password)
             user = authenticate(request, email=email, password=password)
-            print(user.is_staff)
-            
+
             if user is not None and user.is_staff:
                 login(request, user)
-                # messages.success(request, f'Welcome, {email}!')
                 return redirect('dashboard')  # Redirect to your desired URL after successful login
             else:
                 messages.error(request, 'You not authorised.')
         print(form.errors)
         return render(request, 'admin_dashboard/login.html', {'form': form})
-
 
     else:
         form = AuthenticationForm()
@@ -42,13 +39,14 @@ def admin_login(request):
 @login_required(login_url='login')
 def admin_logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('admin-login')
 
 @login_required(login_url='login')
 def dashboard(request):
     context={
         'categories' : Category.objects.all().count(),
-        'users' : User.objects.all().count()
+        'users' : User.objects.all().count(),
+        'questions': Level.objects.aggregate(total_questions=Sum('number_of_questions'))
     }
     return render (request, 'admin_dashboard/dashboard.html',context)
 
@@ -286,20 +284,43 @@ def deleteLevel(request,pk):
     return redirect('levels')
 
 
+
+
+
+
+
 # question views here
 def Questions(request):
-    return render(request, 'admin_dashboard/question.html')
+    context={
+        'records': Question.objects.all(),
+        'record_count': Question.objects.all().count()
+    }
+    return render(request, 'admin_dashboard/question.html',context)
 
 def addQuestion(request):
-    return render(request, 'admin_dashboard/add-question.html')
+    context={
+        'levels':Level.objects.all()
+    }
+    return render(request, 'admin_dashboard/add-question.html',context)
 
 
-def viewQuestion(request):
-    return render(request, 'admin_dashboard/question-details.html')
+def viewQuestion(request,pk):
+    context={
+        'record': Question.objects.get(id=pk),
+        
+    }
+
+    return render(request, 'admin_dashboard/question-details.html',context)
 
 
-def updateQuestion(request):
-    return render(request, 'admin_dashboard/update-question.html')
+def updateQuestion(request, pk):
+    context={
+        'record': Question.objects.get(id=pk),
+        'levels': Level.objects.all()
+    }
+    if request.method == 'POST':
+        print('--------',request.POST)
+    return render(request, 'admin_dashboard/update-question.html', context)
 
 
 def deleteQuestion(request):

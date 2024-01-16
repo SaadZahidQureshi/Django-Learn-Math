@@ -119,7 +119,7 @@
                             </div>
     
                             <div class="d-flex">
-                                <a class="nav-link rounded-border bg-color" href="{% url 'logout'%}" >
+                                <a class="nav-link rounded-border bg-color" href="{% url 'admin-logout'%}" >
                                     <svg class="sidebar__link-icon def-color" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_1_8179)">
                                         <path d="M35.0001 0H16.6667C15.3419 0.00395682 14.0724 0.532012 13.1356 1.46884C12.1988 2.40566 11.6707 3.67513 11.6667 5V15H26.6667C27.9928 15 29.2646 15.5268 30.2023 16.4645C31.14 17.4021 31.6667 18.6739 31.6667 20C31.6667 21.3261 31.14 22.5979 30.2023 23.5355C29.2646 24.4732 27.9928 25 26.6667 25H11.6667V35C11.6707 36.3249 12.1988 37.5943 13.1356 38.5312C14.0724 39.468 15.3419 39.996 16.6667 40H35.0001C36.3249 39.996 37.5944 39.468 38.5312 38.5312C39.4681 37.5943 39.9961 36.3249 40.0001 35V5C39.9961 3.67513 39.4681 2.40566 38.5312 1.46884C37.5944 0.532012 36.3249 0.00395682 35.0001 0V0Z"/>
@@ -220,7 +220,7 @@
                                     </div>
 
                                     <div class="">
-                                        <p class="dashboar-head-container__desc">56</p>
+                                        <p class="dashboar-head-container__desc">{{questions.total_questions}}</p>
                                     </div>
                                 </div>
                             </div>

@@ -14,7 +14,7 @@ from customAuth import helpers
 # Create your views here.
 def emailVerify(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user-dashboard')
     acc_type = request.GET.get('type', None)
     if (request.method == 'POST'):
         form = OTPForm(request.POST)
@@ -67,7 +67,7 @@ def codeVerify(request):
 
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user-dashboard')
 
     key =request.session.get('veri2', None)
     if key:
@@ -96,7 +96,7 @@ def signup(request):
 
 def user_login(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user-dashboard')
     if request.method == 'POST':
         form = CustomAuthenticationForm(request.POST)
         if form.is_valid():
@@ -105,7 +105,7 @@ def user_login(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')  # Redirect to your home page or any other desired page
+                return redirect('user-dashboard')  # Redirect to your home page or any other desired page
             else:
                 message = 'User does not exist!'
                 return render(request, 'user/Login.html', {'form': form, 'message': message})

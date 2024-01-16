@@ -10,6 +10,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
@@ -167,13 +168,14 @@
                                                 <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative mt-3 pb-0">
+                                                        {% comment %} <textarea class="input-control p-3" name="inputquestion" id="inputquestion"  rows="10"></textarea> {% endcomment %}
                                                         <input class="input-control p-3" type="text" name="current-password" id="inputquestion" placeholder="Type question here...">
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
                                                   </div>
                                             
-                                                  <div class="row w-100">
+                                                  <div class="row w-100 d-none">
                                                     <div class="col">
                                                         <div class="">
                                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -195,13 +197,19 @@
                                                                 Select Level
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                                {% if levels %}
+                                                                {% for level in levels %}
+                                                                <li><a class="dropdown-item" href="#">Level {{level.level_no}}, {{level.level_category.category_title}}</a></li>
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                                {% comment %} <li><a class="dropdown-item" href="#">Action</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action three</a></li>
+                                                                <li><a class="dropdown-item" href="#">Action three</a></li> {% endcomment %}
                                                             </ul>
                                                         </div>
                                                     </div>
                                                   </div>
+                                                  <input type="text" name="selectedcategory" id="" value=''>
 
                                                   <div class="row w-100 ">
                                                     <div class="col">
@@ -293,7 +301,6 @@
                                                                 Select right answer
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action two</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action three</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action four</a></li>
@@ -305,8 +312,8 @@
                                                 <div class="row w-100">
                                                     <div class="col">
                                                         <div class="">
-                                                            <div class="" id="inputquestiontextarea">
-                                                                <!-- <textarea class="form-control  border-user-defind border-radius"  rows="15" placeholder="Add description here"></textarea> -->
+                                                            <div class="" >
+                                                                <textarea id="inputquestiontextarea" class="form-control  border-user-defind border-radius"  rows="11" placeholder="Add description here"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -412,11 +419,12 @@
       </div>
     </div>
   
-  </div>
+</div>
+
 
 <script src="{% static 'admin_dashboard/js/common.js' %}"></script>
 <script src="{% static 'admin_dashboard/js/importData.js'%}"></script>
-<script src="{% static 'admin_dashboard/js/mathJax.js'%}"></script>
+<script type='text/javascript' src="{% static 'admin_dashboard/js/mathJax.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

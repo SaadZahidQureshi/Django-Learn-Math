@@ -49,3 +49,21 @@ class Level(BaseModel):
 
     def __str__(self):
         return f"Level {self.level_no}"
+    
+
+
+class Question(BaseModel):
+    question_title = models.CharField(max_length=255)
+    question_description = models.TextField()
+    option_a = models.CharField(max_length=255)
+    option_b = models.CharField(max_length=255)
+    option_c = models.CharField(max_length=255)
+    option_d = models.CharField(max_length=255)
+    correct_answer = models.CharField(max_length=1, choices=[('A', 'Option A'), ('B', 'Option B'), ('C', 'Option C'), ('D', 'Option D')])
+    question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    question_helping_video = models.CharField(max_length=100)
+    question_image = models.ImageField(upload_to='questions_images')
+    question_countdown_time = models.IntegerField()
+
+    def __str__(self):
+        return self.question_title

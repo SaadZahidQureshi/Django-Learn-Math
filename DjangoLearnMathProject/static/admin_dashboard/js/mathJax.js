@@ -21,17 +21,19 @@ MathJax.Hub.Config({
 
   document.getElementById('inputquestion').addEventListener('input', function() {
     var mathInputValue = this.value;
+    console.log(mathInputValue)
     var outputElement = document.getElementById('inputquestiontextarea');
-    
+    console.log(outputElement)
     // Clear previous output
     outputElement.innerHTML = '';
 
     // Create a new span element for rendering
     var newSpan = document.createElement('span');
-    newSpan.textContent = mathInputValue;
+    newSpan.innerHTML = mathInputValue.replace(/\n/g, '<br/>').replace(/\s/g, '&nbsp;');
+    outputElement.textContent = mathInputValue;
 
     // Append the new span to the output element
-    outputElement.appendChild(newSpan);
+    // outputElement.appendChild(newSpan);
 
     // Use MathJax to typeset the math content
     MathJax.Hub.Typeset(outputElement);

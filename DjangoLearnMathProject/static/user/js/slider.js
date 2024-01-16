@@ -77,7 +77,14 @@ function updateSlider() {
 
 window.addEventListener('load', function() {
 
-  const url = window.location.href.split('?');
+  const url = window.location.href;
+  var urlParams = new URLSearchParams(url);
+
+  console.log(urlParams)
+
+  var param1 = urlParams.get('level', null);
+  console.log(param1) // value1
+
   const id = url[url.length-1].split('=')
   let uni_id =id[id.length-1]
 

@@ -165,13 +165,13 @@
                                                 <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative mt-3 pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Type question here...">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
                                                   </div>
                                             
-                                                  <div class="row w-100">
+                                                  <div class="row w-100 d-none">
                                                     <div class="col">
                                                         <div class="">
                                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -190,13 +190,18 @@
                                                     <div class="col">
                                                         <div class="">
                                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                {% if record %}
+                                                                {{record.question_level}}
+                                                                {% else %}
                                                                 Select Level
+                                                                {% endif %}
+
                                                             </button>
-                                                            <ul class="dropdown-menu">
+                                                            {% comment %} <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action two</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action three</a></li>
-                                                            </ul>
+                                                            </ul> {% endcomment %}
                                                         </div>
                                                     </div>
                                                   </div>
@@ -209,7 +214,7 @@
                                                                 <path d="M12 4C8.13403 4 5 7.13407 5 11C5 14.866 8.13403 18 12 18C15.8659 18 19 14.866 19 11C19 7.13407 15.8659 4 12 4ZM12 5.74999V11H6.75C6.75 8.10051 9.10052 5.74999 12 5.74999Z" fill="#743FCB"/>
                                                               </svg>
                                                         </div>
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Allocate minutes to solve">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.question_countdown_time}}' placeholder="Allocate minutes to solve" readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                         
                                                       </div>
@@ -220,27 +225,8 @@
                                                 <div class="col">
                                                     
                                                 <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                                    <img class="category-img d-none rounded-1 w-100 h-100" src="" alt="cateogry-img">
-                                                    <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
-                                                        <div class="">
-                                                            <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">                                                       
-                                                                <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                                    <g clip-path="url(#clip0_1_11314)">
-                                                                    <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                                    </g>
-                                                                    <defs>
-                                                                    <clipPath id="clip0_1_11314">
-                                                                        <rect width="32" height="32" />
-                                                                    </clipPath>
-                                                                    </defs>
-                                                                </svg>
-                                                            </a> 
-                                                        </div>  
-                                                                                                        
-                                                    </div>
-                                                    <div class="">
-                                                        <p class="m-0 p-0 upload-text upload-img-text">Upload an image</p> 
-                                                    </div>
+                                                    <img class="category-img rounded-1 w-100 h-100" src="{{record.question_image.url}}" alt="cateogry-img">
+                                                    
                                                     
                                                 </div>
                                                     
@@ -250,7 +236,7 @@
                                                 <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Option a">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.option_a}}' placeholder="Option a" readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
@@ -258,7 +244,7 @@
                                                   <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Option b">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.option_b}}' placeholder="Option b" readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
@@ -266,7 +252,7 @@
                                                   <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Option c">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.option_c}}' placeholder="Option c" readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
@@ -274,7 +260,7 @@
                                                   <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" placeholder="Option d">
+                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.option_d}}' placeholder="Option d" readonly>
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
@@ -290,14 +276,18 @@
                                                     <div class="col">
                                                         <div class="mt-3">
                                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                {% if record %}
+                                                                {{record.correct_answer}}
+                                                                {% else %}
                                                                 Select right answer
+                                                                {% endif %}
                                                             </button>
-                                                            <ul class="dropdown-menu">
+                                                            {% comment %} <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action two</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action three</a></li>
                                                                 <li><a class="dropdown-item" href="#">Action four</a></li>
-                                                            </ul>
+                                                            </ul> {% endcomment %}
                                                         </div>
                                                     </div>
                                                   </div>
@@ -306,7 +296,7 @@
                                                     <div class="col">
                                                         <div class="">
                                                             <div class="">
-                                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="15" placeholder="Add description here"></textarea>
+                                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="11" placeholder="Add description here" readonly >{{record.question_description}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -353,7 +343,7 @@
                                     <div class="row w-100">
                                         <div class="col d-flex justify-content-end">
                                             <div class="mt-4 w-50">
-                                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="../html/update-question.html?id=4" type="submit" name="" id="add-category-btn">Update</a>
+                                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none view-category-btn text-dark" href="{% url 'update-question' pk=record.id%}" type="submit" name="" id="add-category-btn">Update</a>
                                             </div>
                                         </div>
                                         <div class="col d-flex justify-content-start">
