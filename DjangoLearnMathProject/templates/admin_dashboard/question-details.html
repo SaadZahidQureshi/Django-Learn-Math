@@ -165,7 +165,8 @@
                                                 <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative mt-3 pb-0">
-                                                        <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." readonly>
+                                                        <textarea class="input-control-text-area p-3"  rows="3" readonly>{{record.question_title}}</textarea>
+                                                        {% comment %} <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." readonly> {% endcomment %}
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
@@ -296,7 +297,7 @@
                                                     <div class="col">
                                                         <div class="">
                                                             <div class="">
-                                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="11" placeholder="Add description here" readonly >{{record.question_description}}</textarea>
+                                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="15" placeholder="Add description here" readonly >{{record.question_description}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -305,7 +306,12 @@
                                                 <div class="row w-100 ">
                                                     <div class="col h-100">
                                                         
-                                                    <div class="video-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
+                                                        
+                                                    <div class=" video-container video-file-container-height d-flex flex-column justify-content-center align-items-center   border-user-defind border-radius">
+                                                         
+                                                        {% if record %}
+                                                        {{record.question_helping_video|safe}}
+                                                        {% else %}
                                                         <img class="category-img d-none rounded-1" src="" alt="cateogry-img">
                                                         <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
                                                             <div class="">
@@ -326,8 +332,8 @@
                                                         </div>
                                                         <div class="">
                                                             <p class="m-0 p-0 upload-text upload-img-text">Upload an video</p> 
-                                                        </div>
-                                                        
+                                                        </div> 
+                                                        {% endif %}
                                                     </div>
                                                         
                                                     </div>
@@ -348,7 +354,7 @@
                                         </div>
                                         <div class="col d-flex justify-content-start">
                                             <div class="mt-4 w-50">
-                                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none delete-category-btn" href="#" type="submit" name="" id="" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" >Delete</a>
+                                                <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none delete-category-btn" href="#" type="submit" onclick=deleterecord({{record.id}}) name="" id="" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" >Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -377,7 +383,7 @@
     <div class="modal-dialog modal-dialog-centered" >
       <div class="modal-content ps-4 pe-4">
         <div class="modal-body">
-
+  
             <div class="row p-0">
                 <div class="col d-flex justify-content-end p-0">
                     <a data-bs-dismiss="modal" href=""><img src="../assets/svgs/cancel.svg" alt=""></a>
@@ -396,18 +402,29 @@
                 </div>
             
               </div>
-
-            <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete this category? In case of deletion you will loss all the questions in that category.</p></div>
-
+  
+            <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete a level? In case of deletion you will loss all the information in that level.</p></div>
+  
             <div class="mt-3 pt-1">
-                  <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button>
+            <a href="{% url 'level-delete' pk=0%}" class="modal-button border-0 text-light text-decoration-none">Delete</a>
+  
+                  {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
             </div>
         </div>
         </div>
       </div>
     </div>
   
-  </div>
+</div>
+  
+  <script>
+    function deleterecord(pk){
+      modal_button = document.querySelector('.modal-button')
+      link = "{% url 'delete-question' pk=0 %}".replace('0', pk)
+      modal_button.href = link
+      console.log(modal_button)
+    }
+  </script>
 
   <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
   <script src="{% static 'admin_dashboard/js/importData.js'%}"></script>

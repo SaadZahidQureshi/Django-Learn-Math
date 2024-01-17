@@ -10,7 +10,12 @@
 .img-file-container-height{
     height: 30vh;
 }
-
+#question_image_background
+{
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
 .dropdown-menu-question{
     width: 35% ;
 }
@@ -29,4 +34,29 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     position: absolute;
     z-index: 1;
+}
+
+.video-container {
+    position: relative;
+    width: 100%; /* Set the width of the container */
+    padding-bottom: 56.25%; /* Assuming 16:9 aspect ratio, adjust as needed */
+    height: 0;
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .input-control-text-area{
+    width: 100%;
+    /* height: 50px; */
+    flex-shrink: 0;
+    border-radius: 5px;
+    border: 1px solid #743FCB;
+    background: #FFF;
+    padding-left: 40px;
 }

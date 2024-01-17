@@ -132,7 +132,7 @@
                   <div class="d-flex">
                     <a
                       class="nav-link rounded-border bg-color"
-                      href="../html/question.html"
+                      href="{% url 'questions'%}"
                    
                     >
                       <svg
@@ -157,7 +157,7 @@
                   <div class="d-flex">
                     <a
                       class="nav-link rounded-border bg-color"
-                      href="../html/profile.html"
+                      href="{% url 'profile'%}"
                       
                     >
                       <svg
@@ -358,7 +358,7 @@
                                           
                                           <div class="row w-100 ">
                                               <div class="col ">
-                                                  <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='selected_background_img' style='background:url("{{category.category_image.url}}");'>
+                                                  <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='selected_background_img_question' style='background:url("{{category.category_image.url}}");'>
                                                       <img class="category-img d-none rounded-1 w-100 h-100" name='category_image' src="" alt="cateogry-img">
                                                       <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
                                                           <div class="">

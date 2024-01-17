@@ -32,17 +32,3 @@ $(document).ready(function () {
     });
   });
 
-
-
-document.getElementById('options_btn').addEventListener('click', function(){
-    a = document.getElementById('option_a').value
-    b = document.getElementById('option_b').value
-    c = document.getElementById('option_c').value
-    d = document.getElementById('option_d').value
-console.log(a,b,c,d)
-    document.getElementById('options_a').textContent = a
-    document.getElementById('options_b').textContent = b
-    document.getElementById('options_c').textContent = c
-    document.getElementById('options_d').textContent = d
-
-})

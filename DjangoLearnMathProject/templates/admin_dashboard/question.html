@@ -221,9 +221,18 @@
                         </div>
                     </div>
                 </div>
+
+
+
+                <form id='searchForm' action="" method='GET'>
                 <!-- search bar  -->
                 <div class="row justify-content-center mt-3 gap-2">
-                    
+                  <input class='d-none' type="text" name="startdate"  id='startdateinput' value='{% if startdate %}{{startdate}}{% endif %}'>
+                  <input class='d-none' type="text" name="enddate" id='enddateinput' value='{% if enddate %}{{enddate}}{% endif %}'>
+                  <input class='d-none' type="text" name="category" id='categoryinput' value='{% if category %}{{category}}{% endif %}'>
+                  <input class='d-none' type="text" name="level" id='levelinput' value='{% if level %}{{level}}{% endif %}'>
+                  <input class='d-none' type="submit" name="" id="">
+
                     <div class="col-3 d-none">
                         <div class="">
                             <div class="d-flex flex-column">
@@ -241,7 +250,7 @@
 
                         <div class=" h-75 w-100 position-relative d-flex align-items-center">
                             <div class="w-100 searchbar-height d-flex align-items-center">
-                                <input class="search-border search-border-search-btns w-100 h-100 ps-5 pe-3" type="search" name="search-bar" id="searchbar" placeholder="Search question..">
+                                <input class="search-border search-border-search-btns w-100 h-100 ps-5 pe-3" type="search" name="search-bar" id="searchbar" value='{% if search %}{{search}}{% endif %}' placeholder="Search question..">
                             </div>
 
                             <div class="position-absolute svg-position">
@@ -274,32 +283,19 @@
                             </div>
                             <div class="w-100">
                                 <!-- here in this element i want to show selected value -->
-                                <p class="m-0 p-0 text-dark" id="category">Select Category</p>
+                                <p class="m-0 p-0 text-dark" id="categoryselected" >{% if category %}{{category}}{% else %}Select Category{% endif %}</p>
                             </div>
-                        </button>
+                          </button>
                             <div class="dropdown-content year-list" >
                                 <!-- list items here -->
+                                {% if categories %}
+                                {% for category in categories %}
+                                <li class='list-items' data-value='{{category}}'>{{category}}</li>
+                                {% endfor %}
+                                {% endif %}
                             </div>
                         </div>
-                            <!-- <button class="searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                                        <g clip-path="url(#clip0_1_8791)">
-                                          <path d="M14.0625 3.75L7.5 0L0.9375 3.75L7.5 7.50003L14.0625 3.75Z" fill="#565656"/>
-                                          <path d="M7.5 13.1249L2.57812 10.3125L0.9375 11.25L7.5 15L14.0625 11.25L12.4219 10.3125L7.5 13.1249Z" fill="#565656"/>
-                                          <path d="M7.5 9.37494L2.57812 6.5625L0.9375 7.5L7.5 11.25L14.0625 7.5L12.4219 6.5625L7.5 9.37494Z" fill="#565656"/>
-                                        </g>
-                                        <defs>
-                                          <clipPath id="clip0_1_8791">
-                                            <rect width="15" height="15" fill="white"/>
-                                          </clipPath>
-                                        </defs>
-                                      </svg>
-                                </div>
-                                <div class="">
-                                    <p class="m-0 p-0 text-dark">Select Category</p>
-                                </div>
-                            </button> -->
+                           
                         </div>
 
                         <div class=" w-100 ">
@@ -315,52 +311,87 @@
                             </div>
                             <div class="w-75">
                                 <!-- here in this element i want to show selected value -->
-                                <p class="m-0 p-0 text-dark" id="level">Select level</p>
+                                <p class="m-0 p-0 text-dark" id="levelselected">{% if level %}{{level}}{% else %}Select level{% endif %}</p>
                             </div>
-                        </button>
+                            </button>
                             <div class="dropdown-content dropdown-content-level year-list" >
                                 <!-- list items here -->
+                                {% if levels %}
+                                {% for level in levels %}                                
+                                <li class='list-items levels' data-value='{{level}}'>{{level}}</li>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                        </div>
-                            <!-- <button class="searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M11.5 6.25L8.5 7.75V12H11.5V6.25Z" fill="#565656"/>
-                                        <path d="M4.5 12H7.5V8.25L4.5 9.75V12Z" fill="#565656"/>
-                                        <path d="M12.5 5.75V12H16V4L12.5 5.75Z" fill="#565656"/>
-                                        <path d="M3.5 10.25L0 12H3.5V10.25Z" fill="#565656"/>
-                                      </svg>
-                                </div>
-                                <div class="">
-                                    <p class="m-0 p-0 text-dark">Select level</p>
-                                </div>
-                            </button> -->
+                          </div>
+                            
                         </div>
                         
                         
-                        <div class=" w-100 ">
-                            <button data-target="datePickerButton1" class=" date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z" fill="#565656"/>
-                                      </svg>
-                                </div>
-                                Starting Date
-                                <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
-                            </button>
+                        <div class="w-100">
+                          <button
+                          type='button'
+                          id='startDateBtn'
+                          value='{{startdate}}'
+                          data-target="datePickerButton1"
+                            class="date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2"
+                          >
+                            <div class="">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                              >
+                                <path
+                                  d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z"
+                                  fill="#565656"
+                                />
+                              </svg>
+                            </div>
+                            {% if startdate %}
+                            {{startdate}}
+                            {% else %}
+                            Starting Date 
+                            {% endif %}
+                              
+                              <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
+                              {% comment %} <input class="d-none" type="text" name="startdate" id="" value=''> {% endcomment %}
+          
+                          </button>
                         </div>
-
-                        <div class="w-100 ">
-                            <button data-target="datePickerButton2" class="date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2" >
-                                <div class="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z" fill="#565656"/>
-                                      </svg>
-                                </div>
-                                Ending Date
-                                <!-- <p class="m-0 p-0 " id="date" >Starting Date</p> -->
-
-                            </button>
+        
+        
+                        <div class="w-100">
+                          <button
+                          type='button'
+                          id='endDateBtn'
+                          data-target="datePickerButton2"
+                            class=" date-picker-button searchbar-height w-100 border-0 search-border-search-btns bg-sidebar d-flex justify-content-center align-items-center gap-2"
+                          >
+                            <div class="">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                              >
+                                <path
+                                  d="M12.6666 2.66634H11.9999V1.99967C11.9999 1.59967 11.7333 1.33301 11.3333 1.33301C10.9333 1.33301 10.6666 1.59967 10.6666 1.99967V2.66634H5.33325V1.99967C5.33325 1.59967 5.06659 1.33301 4.66659 1.33301C4.26659 1.33301 3.99992 1.59967 3.99992 1.99967V2.66634H3.33325C2.19992 2.66634 1.33325 3.53301 1.33325 4.66634V5.33301H14.6666V4.66634C14.6666 3.53301 13.7999 2.66634 12.6666 2.66634ZM1.33325 12.6663C1.33325 13.7997 2.19992 14.6663 3.33325 14.6663H12.6666C13.7999 14.6663 14.6666 13.7997 14.6666 12.6663V6.66634H1.33325V12.6663ZM11.3333 7.99967C11.7333 7.99967 11.9999 8.26634 11.9999 8.66634C11.9999 9.06634 11.7333 9.33301 11.3333 9.33301C10.9333 9.33301 10.6666 9.06634 10.6666 8.66634C10.6666 8.26634 10.9333 7.99967 11.3333 7.99967ZM11.3333 10.6663C11.7333 10.6663 11.9999 10.933 11.9999 11.333C11.9999 11.733 11.7333 11.9997 11.3333 11.9997C10.9333 11.9997 10.6666 11.733 10.6666 11.333C10.6666 10.933 10.9333 10.6663 11.3333 10.6663ZM7.99992 7.99967C8.39992 7.99967 8.66659 8.26634 8.66659 8.66634C8.66659 9.06634 8.39992 9.33301 7.99992 9.33301C7.59992 9.33301 7.33325 9.06634 7.33325 8.66634C7.33325 8.26634 7.59992 7.99967 7.99992 7.99967ZM7.99992 10.6663C8.39992 10.6663 8.66659 10.933 8.66659 11.333C8.66659 11.733 8.39992 11.9997 7.99992 11.9997C7.59992 11.9997 7.33325 11.733 7.33325 11.333C7.33325 10.933 7.59992 10.6663 7.99992 10.6663ZM4.66659 7.99967C5.06659 7.99967 5.33325 8.26634 5.33325 8.66634C5.33325 9.06634 5.06659 9.33301 4.66659 9.33301C4.26659 9.33301 3.99992 9.06634 3.99992 8.66634C3.99992 8.26634 4.26659 7.99967 4.66659 7.99967ZM4.66659 10.6663C5.06659 10.6663 5.33325 10.933 5.33325 11.333C5.33325 11.733 5.06659 11.9997 4.66659 11.9997C4.26659 11.9997 3.99992 11.733 3.99992 11.333C3.99992 10.933 4.26659 10.6663 4.66659 10.6663Z"
+                                  fill="#565656"
+                                />
+                              </svg>
+                            </div>
+                            {% if enddate %}
+                            {{enddate}}
+                            {% else %}
+                            Ending Date
+                            {% endif %}
+                              
+                              <!-- <p class="m-0 p-0 " id="date" >Ending Date</p> -->
+          
+                          </button>
                         </div>
 
                          <!-- Date picker container -->
@@ -415,7 +446,7 @@
                           </div>
                     </div>
                 </div>
-
+              </form>
                 <!-- table container -->
                 <div class="row justify-content-center mt-3">
                     <div class="col p-0">
@@ -467,7 +498,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="">
-                                                    <a class="action-btns action-btns-remove" href="#" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">
+                                                    <a class="action-btns action-btns-remove" href="#" onclick=deleterecord({{record.id}}) data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                             <g clip-path="url(#clip0_1_7717)">
                                                               <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM9.17 11.17C9.56 10.78 10.19 10.78 10.58 11.17L12 12.59L13.42 11.17C13.81 10.78 14.44 10.78 14.83 11.17C15.22 11.56 15.22 12.19 14.83 12.58L13.41 14L14.83 15.42C15.22 15.81 15.22 16.44 14.83 16.83C14.44 17.22 13.81 17.22 13.42 16.83L12 15.41L10.58 16.83C10.19 17.22 9.56 17.22 9.17 16.83C8.78 16.44 8.78 15.81 9.17 15.42L10.59 14L9.17 12.58C8.78 12.2 8.78 11.56 9.17 11.17ZM15.5 4L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4H15.5Z" fill="white"/>
@@ -552,10 +583,12 @@
           
             </div>
 
-          <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure you want to delete a question? In case of deletion you will loss all the information in that question.</p></div>
+          <div class="text-center mt-3 pt-2"><p class="modal-message m-0 p-0">Are you sure want to delete a level? In case of deletion you will loss all the information in that level.</p></div>
 
           <div class="mt-3 pt-1">
-                <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button>
+          <a href="{% url 'level-delete' pk=0%}" class="modal-button border-0 text-light text-decoration-none">Delete</a>
+
+                {% comment %} <button type="button" class="modal-button border-0 text-light" data-bs-dismiss="modal">Delete</button> {% endcomment %}
           </div>
       </div>
       </div>
@@ -563,6 +596,14 @@
   </div>
 
 </div>
+
+<script>
+  function deleterecord(pk){
+    modal_button = document.querySelector('.modal-button')
+    link = "{% url 'delete-question' pk=0 %}".replace('0', pk)
+    modal_button.href = link
+  }
+</script>
 <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/datePicker.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/categorySelector.js'%}"></script>

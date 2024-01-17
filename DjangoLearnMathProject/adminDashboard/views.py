@@ -7,8 +7,9 @@ from django.shortcuts import render,redirect
 from django.db.models import Q
 from django.db.models import Sum
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from adminDashboard.models import CATEGORY_LIST, Category, Level, Question
-from adminDashboard.forms import CategoryForm, LevelForm
+from adminDashboard.forms import CategoryForm, LevelForm, QuestionForm
 from customAuth.forms import CustomAuthenticationForm
 from customAuth.models import User
 
@@ -289,40 +290,90 @@ def deleteLevel(request,pk):
 
 
 
-# question views here
+
 def Questions(request):
-    context={
-        'records': Question.objects.all(),
-        'record_count': Question.objects.all().count()
+    context = {
+        'records': None,
+        'record_count': 0,
+        'categories': Category.objects.all(),
+        'category': request.GET.get('category', None),
+        'level': request.GET.get('level', None),
+        'startdate': request.GET.get('startdate', None),
+        'enddate': request.GET.get('enddate', None),
+        'search': request.GET.get('search-bar', None)
     }
-    return render(request, 'admin_dashboard/question.html',context)
+
+    selected_category_title = request.GET.get('category', None)
+
+    if selected_category_title:
+        try:
+            selected_category = Category.objects.get(category_title=selected_category_title)
+            levels = Level.objects.filter(level_category=selected_category)
+            context['levels']= levels
+            context['records'] = Question.objects.filter(question_level__in=levels)
+        except Category.DoesNotExist:
+            context['records'] = Question.objects.none()
+    else:
+        context['records'] = Question.objects.all()
+
+    if context['startdate'] and context['enddate']:
+        context['records'] = context['records'].filter(created_at__range=(context['startdate'], context['enddate']))
+    elif context['startdate']:
+        context['records'] = context['records'].filter(created_at__gte=context['startdate'])
+    elif context['enddate']:
+        context['records'] = context['records'].filter(created_at__lte=context['enddate'])
+
+    # Filter based on name
+    if context['search']:
+        context['records'] = context['records'].filter(
+            Q(question_title__icontains=context['search']) | Q(question_description__icontains=context['search'])
+        )
+
+    context['record_count'] = context['records'].count()
+
+    return render(request, 'admin_dashboard/question.html', context)
+
+
 
 def addQuestion(request):
+    
     context={
-        'levels':Level.objects.all()
+        'levels':Level.objects.all(),
+        'form': QuestionForm()
     }
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, request.FILES)
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect('questions')
+        print(form.errors)
     return render(request, 'admin_dashboard/add-question.html',context)
-
 
 def viewQuestion(request,pk):
     context={
         'record': Question.objects.get(id=pk),
-        
     }
-
     return render(request, 'admin_dashboard/question-details.html',context)
-
 
 def updateQuestion(request, pk):
     context={
         'record': Question.objects.get(id=pk),
-        'levels': Level.objects.all()
+        'levels': Level.objects.all(),
+        'form': QuestionForm(instance=Question.objects.get(id=pk))
     }
     if request.method == 'POST':
-        print('--------',request.POST)
+        form = QuestionForm(request.POST, request.FILES, instance=Question.objects.get(id=pk))
+        context['form'] = form
+        if form.is_valid():
+            form.save()
+            return redirect('questions')
+        print(form.errors)
     return render(request, 'admin_dashboard/update-question.html', context)
 
+def deleteQuestion(request,pk):
+    record = Question.objects.get(id=pk)
+    record.delete()
+    return redirect('questions')
 
-def deleteQuestion(request):
-    pass
 

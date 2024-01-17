@@ -157,7 +157,7 @@
                     <div class="row w-100 ">
 
                         <div class="col">
-                            <form action="{% url 'update-question' pk=record.id%}" method='POST'>
+                            <form action="{% url 'update-question' pk=record.id%}" method='POST' enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="row h-100 w-100">
 
@@ -167,10 +167,16 @@
                                             <div class="row w-100 ">
                                                 <div class="col">
                                                   <div class="position-relative mt-3 pb-0">
-                                                    <input class="input-control p-3" type="text" name="question_title" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." >
+                                                    <textarea class="input-control-text-area p-3" name="question_title"  rows="3" placeholder="Type question here...">{{record.question_title}}</textarea>
+                                                    {% comment %} <input class="input-control p-3" type="text" name="question_title" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." > {% endcomment %}
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.question_title.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
                                         
                                               <div class="row w-100 d-none">
@@ -191,7 +197,7 @@
                                               <div class="row w-100">
                                                 <div class="col">
                                                     <div class="">
-                                                        <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" id='level_btn' type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                             {% if record %}
                                                             {{record.question_level}}
                                                             {% else %}
@@ -207,6 +213,11 @@
                                                             {% endif %}
                                                         </ul> 
                                                     </div>
+                                                    {% if form.errors %}
+                                                    {% for error in form.question_level.errors %}
+                                                    <small class='text-danger'>{{error}}</small>
+                                                    {% endfor %}
+                                                    {% endif %}
                                                 </div>
                                               </div>
                                                 <input class='d-none'  id='selectedcategory' type="text" value='{{record.question_level.id}}'  name='question_level'>
@@ -225,18 +236,49 @@
                                                     
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.question_countdown_time.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
 
                                             <div class="row w-100 ">
-                                            <div class="col">
+                                                <div class="col">
                                                 
-                                            <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                                <img class="category-img rounded-1 w-100 h-100" src="{{record.question_image.url}}" alt="cateogry-img">
-                                                <input type="file" name='question_image' class='d-none'>
-                                                
-                                            </div>
-                                                
-                                            </div>
+                                                    <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='question_image_background'  style='background:url("{{record.question_image.url}}");' >
+                                                        {% comment %} <img class="category-img rounded-1 w-100 h-100" src="" alt="question-img"> {% endcomment %}
+                                                        <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
+                                                                <div class="">
+                                                                
+                                                                        <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">
+                                                                        <input class='d-none' type="file" accept='image/x' name="question_image" id='question_image' onchange="displayImage(this)">                                                      
+                                                                            <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                                                <g clip-path="url(#clip0_1_11314)">
+                                                                                <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
+                                                                                </g>
+                                                                                <defs>
+                                                                                <clipPath id="clip0_1_11314">
+                                                                                    <rect width="32" height="32" />
+                                                                                </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                        </a> 
+                                                                </div>  
+                                                                                                            
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="m-0 p-0 upload-text upload-img-text">Upload an image</p> 
+                                                        </div>
+                                                        
+                                                    </div>
+                                                        
+                                                </div>
+                                                {% if form.errors %}
+                                                {% for error in form.question_image.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                             </div>
 
                                             <div class="row w-100 ">
@@ -246,6 +288,11 @@
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.option_a.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
                                               <div class="row w-100 ">
                                                 <div class="col">
@@ -254,6 +301,11 @@
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.option_b.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
                                               <div class="row w-100 ">
                                                 <div class="col">
@@ -262,6 +314,11 @@
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.option_c.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
                                               <div class="row w-100 ">
                                                 <div class="col">
@@ -270,6 +327,11 @@
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.option_d.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
                                         </div>
                                     </div>
@@ -289,15 +351,20 @@
                                                             {% endif %}
                                                         </button>
                                                          <ul class="dropdown-menu ">
-                                                            <li><a class="dropdown-item options" id='options_a' ></a></li>
-                                                            <li><a class="dropdown-item options" id='options_b' ></a></li>
-                                                            <li><a class="dropdown-item options" id='options_c' ></a></li>
-                                                            <li><a class="dropdown-item options" id='options_d' ></a></li>
+                                                            <li><a class="dropdown-item options" id='options_a' data-value='A'></a></li>
+                                                            <li><a class="dropdown-item options" id='options_b' data-value='B' ></a></li>
+                                                            <li><a class="dropdown-item options" id='options_c' data-value='C' ></a></li>
+                                                            <li><a class="dropdown-item options" id='options_d' data-value='D' ></a></li>
                                                         </ul> 
                                                     </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.correct_answer.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                               </div>
-                                              <input name='correct_answer' class='d-none' type="text" name="" id="correct_answer">
+                                              <input name='correct_answer' class='d-none' type="text" value='{% if record %}{{record.correct_answer}}{% endif %}' id="correct_answer">
                                               
                                             <div class="row w-100">
                                                 <div class="col">
@@ -307,9 +374,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% if form.errors %}
+                                                {% for error in form.question_description.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
                                             </div>
 
-                                            <div class="row w-100 ">
+                                            <div class="row w-100 d-none">
                                                 <div class="col h-100">
                                                     
                                                 <div class="video-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
@@ -339,8 +411,23 @@
                                                     
                                                 </div>
                                             </div>
+
+                                            <div class="row w-100">
+                                                <div class="col">
+                                                    <div class="">
+                                                        <div class="">
+                                                            <textarea class="form-control  border-user-defind border-radius" name='question_helping_video' id="exampleFormControlTextarea1" rows="17" placeholder="Add description here"  >{{record.question_helping_video}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% if form.errors %}
+                                                {% for error in form.question_helping_video.errors %}
+                                                <small class='text-danger'>{{error}}</small>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </div>
                                             
-                                            
+                                            {% comment %} {{form.as_p}} {% endcomment %}
                                         </div>
                                         
                                     </div>
@@ -624,7 +711,7 @@
   </div>
 
 <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
-<script src="{% static 'admin_dashboard/js/importData.js'%}"></script>
+<script src="{% static 'admin_dashboard/js/LevelOptionSelector.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

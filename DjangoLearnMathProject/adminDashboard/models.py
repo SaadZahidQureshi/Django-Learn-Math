@@ -61,7 +61,7 @@ class Question(BaseModel):
     option_d = models.CharField(max_length=255)
     correct_answer = models.CharField(max_length=1, choices=[('A', 'Option A'), ('B', 'Option B'), ('C', 'Option C'), ('D', 'Option D')])
     question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
-    question_helping_video = models.CharField(max_length=100)
+    question_helping_video = models.TextField()
     question_image = models.ImageField(upload_to='questions_images')
     question_countdown_time = models.IntegerField()
 

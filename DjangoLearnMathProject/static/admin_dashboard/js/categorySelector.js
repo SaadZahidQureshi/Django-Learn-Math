@@ -1,24 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-        
-    var items = document.getElementsByClassName('list-items');
-    var selectedYear = document.getElementById('category');
-    var dropdownContent = document.querySelector('.dropdown-content');
+    var items = document.querySelectorAll('.list-items');
+    showcategory = document.getElementById('categoryselected')
+    categoryinput = document.getElementById('categoryinput')
+    searchForm = document.getElementById('searchForm')
 
-    var years = ['Calculus1', 'Calculus2', 'Trignometery', 'Algebra', 'Geometery','Calculus1', 'Calculus2', 'Trignometery', 'Algebra', 'Geometery'];
+    items.forEach((item)=>{
 
-    years.forEach((year)=>{
-        var listitems= document.createElement('li');
-        listitems.setAttribute('value', year);
-        listitems.classList.add('list-items');
-        listitems.textContent = year
-
-
-        listitems.addEventListener('click', function(){
-            var selectedValue = this.getAttribute('value');
+        item.addEventListener('click', function(){
+            var selectedValue = this.getAttribute('data-value');
             console.log(selectedValue);
-            selectedYear.textContent = selectedValue
+            showcategory.textContent = selectedValue
+            categoryinput.value = selectedValue
+            searchForm.submit()
         })
-        dropdownContent.appendChild(listitems);
     })
 
 });
