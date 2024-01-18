@@ -11,6 +11,8 @@
     crossorigin="anonymous"
   />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>tinymce.init({ selector:'.richtextfields' });</script>
 
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
@@ -168,7 +170,7 @@
                                             <div class="row w-100 ">
                                                 <div class="col">
                                                   <div class="position-relative mt-3 pb-0">
-                                                    <textarea class="input-control-text-area p-3" name="question_title" id='inputquestion'  rows="3" placeholder="Type question here..."></textarea>
+                                                    <textarea class="input-control-text-area p-3 richtextfields" name="question_title" id='inputquestion'  rows="3" placeholder="Type question here..."></textarea>
                                                     {% comment %} <input class="input-control p-3" type="text" name="question_title" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." > {% endcomment %}
                                                     <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                   </div>
@@ -180,20 +182,6 @@
                                                 {% endif %}
                                               </div>
                                         
-                                              <div class="row w-100 d-none">
-                                                <div class="col">
-                                                    <div class="">
-                                                        <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Category
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                                            <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                            <li><a class="dropdown-item" href="#">Action three</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                              </div>
 
                                               <div class="row w-100">
                                                 <div class="col">
@@ -364,14 +352,14 @@
                                                 <small class='text-danger'>{{error}}</small>
                                                 {% endfor %}
                                                 {% endif %}
-                                              </div>
+                                            </div>
                                               <input name='correct_answer' class='d-none' type="text"  id="correct_answer">
                                               
                                             <div class="row w-100">
                                                 <div class="col">
                                                     <div class="">
                                                         <div class="" >
-                                                            <textarea class="form-control  border-user-defind border-radius" name='question_description'   rows="11" placeholder="Add description here"  ></textarea>
+                                                            <textarea class="form-control  border-user-defind border-radius richtextfields" name='question_description'   rows="11" placeholder="Add description here"  ></textarea>
                                                         </div>
                                                     </div>
                                                 </div>

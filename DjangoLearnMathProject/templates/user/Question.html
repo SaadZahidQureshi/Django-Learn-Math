@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{% static 'user/css/hamburger-menu.css' %}">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
-    <script  type="text/x-mathjax-config" src="{% static 'admin_dashboard/js/mathJax.js'%}"></script>
     <title>Question</title>
   </head>
   <body>
@@ -194,14 +193,8 @@
                     <!-- Actual question body -->
                     <div class="mt-3">
                         <p class="question__body mathDiv" >
-{{question.question_description}}
-{% comment %} A particle is moving along a line. Its displacement (in meters) after thours is:
-s(t)=
-–
-6t+7
-Find the average velocity over the interval [7,16].
-Write your answer as an integer, fraction, or decimal rounded to the nearest tenth. Simplify any fractions.
-metersperhour {% endcomment %}
+                          {{question.question_description}}
+
                           </p>
                     </div>
                     <!-- Question image  -->
@@ -402,32 +395,17 @@ metersperhour {% endcomment %}
       item.addEventListener('input', function () {
         var mathInputValue = this.textContent;
   
-        // Clear previous output by removing all child nodes
-        while (item.firstChild) {
-          item.removeChild(item.firstChild);
-        }
-  
-        // Create a new span element for rendering
         var newSpan = document.createElement('span');
         newSpan.textContent = mathInputValue.replace(/\n/g, '\n').replace(/\s/g, ' ');
   
-        // Append the new span to the div
         item.appendChild(newSpan);
-  
-        // Use MathJax to typeset the math content
         MathJax.Hub.Typeset(item);
       });
     });
   });
   
-
-
-// Event listener for input changes
-
-
-
-
 </script>
+
 
   <script src="{% static 'user/js/ham-burger-menu.js'%}"></script>
   <script src="{% static 'user/js/slider.js'%}"></script>

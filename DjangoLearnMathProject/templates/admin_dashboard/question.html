@@ -10,6 +10,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
+
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
@@ -286,7 +287,7 @@
                                 <p class="m-0 p-0 text-dark" id="categoryselected" >{% if category %}{{category}}{% else %}Select Category{% endif %}</p>
                             </div>
                           </button>
-                            <div class="dropdown-content year-list" >
+                            <div class="dropdown-content " >
                                 <!-- list items here -->
                                 {% if categories %}
                                 {% for category in categories %}
@@ -314,7 +315,7 @@
                                 <p class="m-0 p-0 text-dark" id="levelselected">{% if level %}{{level}}{% else %}Select level{% endif %}</p>
                             </div>
                             </button>
-                            <div class="dropdown-content dropdown-content-level year-list" >
+                            <div class="dropdown-content dropdown-content-level" >
                                 <!-- list items here -->
                                 {% if levels %}
                                 {% for level in levels %}                                
@@ -526,31 +527,41 @@
                     </div>
                 </div>
 
-                <!-- pagination -->
-                <div class="row justify-content-center">
-                    <div class="col-11 d-flex justify-content-end p-0">
-              
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                              <li class="page-item">
-                                <a class="page-link text-dark border-0 prev" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-                              </li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">4</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">5</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">6</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">7</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">8</a></li>
-                              <li class="page-item d-flex justify-content-center align-items-center"><a class="page-link" href="#">9</a></li>
-                              <li class="page-item">
-                                <a class="page-link next border-0" href="#">Next</a>
-                              </li>
-                            </ul>
-                          </nav>
-                    </div>
-                </div>
+               <!-- pagination container -->
+            <div class="row justify-content-center">
+              <div class="col-11 d-flex justify-content-end p-0">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end">
+                    
+                    {% if records.has_previous %}
+                    <li class="page-item">
+                      <a
+                        class="page-link text-dark border-0 prev"
+                        href="?page={{ records.previous_page_number }}"
+                        tabindex="-1"
+                        aria-disabled="true"
+                        >Prev</a
+                      >
+                    </li>
+                    {% endif %}
+
+                    {% for page_num in records.paginator.page_range %}
+                    <li class="page-item  d-flex justify-content-center align-items-center">
+                      <a class="page-link border-0 {% if records.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if records.has_next %}
+                    <li class="page-item">
+                      <a class="page-link next border-0" href="?page={{ records.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+
+
+                  </ul>
+                </nav>
+              </div>
+            </div>
 
             </div>
         </div>
@@ -606,8 +617,8 @@
 </script>
 <script src="{% static 'admin_dashboard/js/common.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/datePicker.js'%}"></script>
-<script src="{% static 'admin_dashboard/js/categorySelector.js'%}"></script>
-<script src="{% static 'admin_dashboard/js/selectLevel.js'%}"></script>
+{% comment %} <script src="{% static 'admin_dashboard/js/selectLevel.js'%}"></script> {% endcomment %}
+<script src="{% static 'admin_dashboard/js/categoryLevelSelector.js'%}"></script>
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

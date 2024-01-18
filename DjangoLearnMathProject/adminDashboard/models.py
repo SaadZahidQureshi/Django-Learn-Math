@@ -28,8 +28,6 @@ class Category(BaseModel):
     def __str__(self):
         return self.category_title
 
-
-
 @receiver(post_save, sender=Category)
 def resize_image(sender,instance, **kwargs):
 
@@ -49,6 +47,7 @@ class Level(BaseModel):
 
     def __str__(self):
         return f"Level {self.level_no}"
+        # return f"Level {self.level_no}"
     
 
 
@@ -63,7 +62,7 @@ class Question(BaseModel):
     question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     question_helping_video = models.TextField()
     question_image = models.ImageField(upload_to='questions_images')
-    question_countdown_time = models.IntegerField()
+    question_countdown_time = models.PositiveIntegerField()
 
     def __str__(self):
         return self.question_title

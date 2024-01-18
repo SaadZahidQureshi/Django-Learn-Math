@@ -230,189 +230,123 @@
                 <div class="col-11 shadow-sm rounded-3 d-flex flex-column align-items-center  p-5 ">
                   
                           
-                      <div class="row w-100">
+                  <div class="row w-100 ">
 
-                          <div class="col ">
-                              <form action="{% url 'update-category' pk=category.id %}" method='POST' enctype="multipart/form-data">
-                                {% csrf_token %}
-                                  <div class="row h-100 w-100">
+                    <div class="col">
+                        <form action="{% url 'update-category' pk=category.id%}" method='POST' enctype="multipart/form-data">
+                          {% csrf_token %}
+                            <div class="row h-100 w-100">
 
-                                      <div class="col  ">
-                                          <div class="d-flex flex-column h-100 w-100 gap-4 ">
-                                          
-                                                <div class="row w-100  ">
-                                                  <div class="col">
-                                                      <div class="">
-                                                          <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" name='category_title' type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                             {% if category %}
-                                                              {{category}}
-                                                              {% else %}
-                                                              Select Category
-                                                              {% endif %}                                                              
-
-                                                          </button>
-                                                          
-                                                          <ul class="dropdown-menu">
-                                                            {% for category in categories %}
-                                                              <li><a class="dropdown-item" href="#" data-value = '{{category.1}}'>{{category.1}}</a></li>
-                                                              {% endfor %}
-                                                          </ul>
-                                                      </div>
-                                                      {% if form.errors %}
-                                               
-                                                      {% for error in  form.category_title.errors %}
-                                                      <small class="text-danger">{{error}}</small>
-
-                                                      {% endfor %}
-                                                      {% endif %}
-                                                  </div>
+                                <div class="col  ">
+                                    <div class="d-flex flex-column h-100 w-100 gap-4 ">
+                                    
+                                          <div class="row w-100  ">
+                                            <div class="col">
+                                                <div class="">
+                                                    {% comment %} <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" name='category_title' type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Select Category
+                                                    </button>
+                                                    
+                                                    <ul class="dropdown-menu">
+                                                      {% for category in categories %}
+                                                        <li><a class="dropdown-item" href="#" data-value = '{{category.1}}'>{{category.1}}</a></li>
+                                                        {% endfor %}
+                                                    </ul> {% endcomment %}
+                                                    <input class='input-control ps-3' type="text" name="category_title" id="" value='{{category.category_title}}'>
                                                 </div>
-                                                <input class="d-none" id='selectedcategory' type="text" value='{{category}}' name='category_title'>
-                                                
-                                                {% comment %} {{form.as_p}} {% endcomment %}
-                                                
-                                                {% comment %} {{form.as_p}} {% endcomment %}
-                                                
+                                                {% if form.errors %}
+                                         
+                                                {% for error in  form.category_title.errors %}
+                                                <small class="text-danger">{{error}}</small>
 
-                                                <div class="row w-100 d-none">
-                                                  <div class="col">
-                                                      <div class="">
-                                                          <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                              Select Level
-                                                          </button>
-                                                          <ul class="dropdown-menu">
-                                                              <li><a class="dropdown-item" href="#">Action</a></li>
-                                                              <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                              <li><a class="dropdown-item" href="#">Action three</a></li>
-                                                          </ul>
-                                                      </div>
-                                                  </div>
-                                                </div>
-
-                                                <div class="row w-100 d-none">
-                                                  <div class="col">
-                                                      <div class="position-relative ">
-                                                          <select class=" form-control border-user-defind height border-radius border-radius-hover"  name="category_title" >
-                                                             <option class = 'dropdown-options' value="" selected disabled>Select Category</option>
-                                                              <option class = 'dropdown-options' value="Action">Action</option>
-                                                              <option class = 'dropdown-options' value="Action two">Action two</option>
-                                                              <option class = 'dropdown-options' value="Action three">Action three</option>
-                                                          </select>
-                                                        
-                                                          <img class='drop-arrow' src="{% static 'admin_dashboard/assets/svgs/dropdown_svg.svg'%}" alt="">
-                                                      </div>
-                                                  </div>
-                                              </div>
-
-                                                <div class="row w-100">
-                                                  <div class="col">
-                                                      <div class="">
-                                                          <div class="">
-                                                              <textarea class="w-100 p-3 border-user-defind border-radius" name='category_description' id="exampleFormControlTextarea1" rows="5" placeholder="Add description here">{% if category %}{{category.category_description}}{% endif %}</textarea>
-                                                          </div>
-                                                          {% if form.errors %}
-                                                          {% for error in  form.category_description.errors %}
-                                                          <small class="text-danger">{{error}}</small>
-
-                                                          {% endfor %}
-                                                          {% endif %}
-                                                      </div>
-                                                  </div>
-                                                </div>
-                                              
-                                                                                    
+                                                {% endfor %}
+                                                {% endif %}
+                                            </div>
                                           </div>
-                                      </div>
-
-                                      <div class="col d-flex flex-column gap-4 position-relative">
-
-                                          <div class="row w-100 d-none">
-                                              <div class="col">
-                                                  <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                                      <!-- <img class="category-img d-none rounded-1 w-100 h-100" src="" alt="cateogry-img"> -->
-                                                      <div class=" d-flex flex-column  justify-content-center ">
-                                                          <div class="">
-                                                              <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" >                                                       
-                                                                  <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                                      <g clip-path="url(#clip0_1_11314)">
-                                                                      <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                                      </g>
-                                                                      <defs>
-                                                                      <clipPath id="clip0_1_11314">
-                                                                          <rect width="32" height="32" />
-                                                                      </clipPath>
-                                                                      </defs>
-                                                                  </svg>
-                                                              </a> 
-                                                          </div>  
-                                                                                                          
-                                                      </div>
-                                                      <div class="">
-                                                          <p class="m-0 p-0 upload-text ">Upload a video</p> 
-                                                      </div>
-                                                      
-                                                  </div>
-                                              </div>
-                                          </div>
-
+                                          {% comment %} <input class="d-none" id='selectedcategory' type="text" name='category_title' > {% endcomment %}
                                           
-                                          <div class="row w-100 ">
-                                              <div class="col ">
-                                                  <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='selected_background_img_question' style='background:url("{{category.category_image.url}}");'>
-                                                      <img class="category-img d-none rounded-1 w-100 h-100" name='category_image' src="" alt="cateogry-img">
-                                                      <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
-                                                          <div class="">
-                                                            
-                                                              <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">
-                                                                <input class='d-none' type="file" accept='image/x' name="category_image" id='fileInput' onchange="displayImage(this)">                                                      
-                                                                  <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                                      <g clip-path="url(#clip0_1_11314)">
-                                                                      <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                                      </g>
-                                                                      <defs>
-                                                                      <clipPath id="clip0_1_11314">
-                                                                          <rect width="32" height="32" />
-                                                                      </clipPath>
-                                                                      </defs>
-                                                                  </svg>
-                                                              </a> 
-                                                          </div>  
-                                                                                                          
-                                                      </div>
-                                                      <div class="">
-                                                          <p class="m-0 p-0 upload-text upload-img-text">Upload an image</p> 
-                                                      </div>
-                                                      
-                                                      
-                                                  </div>
-                                                  
-                                                  
-                                              </div>
-                                          </div>
-                                          {% if form.errors %}
-                                          {% for error in  form.category_image.errors %}
-                                          <small class="text-danger position-absolute error_possition">{{error}}</small>
-                                          {% endfor %}
-                                          {% endif %}
+                                          {% comment %} {{form.as_p}} {% endcomment %}
                                           
-                                      </div>
-                                     
-                                      
+                                          
+                                  
 
-                                  </div>
+                                          <div class="row w-100">
+                                            <div class="col">
+                                                <div class="">
+                                                    <div class="">
+                                                        <textarea class="w-100 p-3 border-user-defind border-radius" name='category_description' id="exampleFormControlTextarea1" rows="6" placeholder="Add description here">{{category.category_description}}</textarea>
+                                                    </div>
+                                                    {% if form.errors %}
+                                                    {% for error in  form.category_description.errors %}
+                                                    <small class="text-danger">{{error}}</small>
 
-                                  <div class="row w-100">
-                                      <div class="col d-flex justify-content-center">
-                                          <div class="mt-4 w-50">
-                                            {% comment %} ../html/category.html?addAlert=true {% endcomment %}
-                                            <input type="submit" class="submit-input-control d-flex justify-content-center align-items-center border-0 update-category-btn" name="submit" id="add-category-btn" value='Update'>
-                                              {% comment %} <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none update-category-btn" href="#" type="submit" name="submit" id="add-category-btn">Save</a> {% endcomment %}
-                                          </div>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
-                      </div>  
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                                                              
+                                    </div>
+                                </div>
+
+                                <div class="col d-flex flex-column gap-4 position-relative">
+
+                                    <div class="row w-100 ">
+                                        <div class="col ">
+                                            <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='selected_background_img' style='background:url("{% if category %}{{category.category_image.url}}{% endif %}")'>
+                                                <img class="category-img d-none rounded-1 w-100 h-100" name='category_image' src="" alt="cateogry-img">
+                                                <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
+                                                    <div class="">
+                                                      
+                                                        <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">
+                                                          <input class='d-none' type="file" accept='image/x' name="category_image" id='fileInput' onchange="displayImage(this)">                                                      
+                                                            <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                                <g clip-path="url(#clip0_1_11314)">
+                                                                <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
+                                                                </g>
+                                                                <defs>
+                                                                <clipPath id="clip0_1_11314">
+                                                                    <rect width="32" height="32" />
+                                                                </clipPath>
+                                                                </defs>
+                                                            </svg>
+                                                        </a> 
+                                                    </div>  
+                                                                                                    
+                                                </div>
+                                                <div class="">
+                                                    <p class="m-0 p-0 upload-text upload-img-text">Upload an image</p> 
+                                                </div>
+                                                
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                            {% if form.errors %}
+                            {% for error in  form.category_image.errors %}
+                            <small class="text-danger position-absolute error_possition">{{error}}</small>
+                            {% endfor %}
+                            {% endif %}
+                                </div>
+                               
+
+                            </div>
+                            
+
+                            <div class="row w-100">
+                                <div class="col d-flex justify-content-center">
+                                    <div class="mt-4 w-50">
+                                      {% comment %} ../html/category.html?addAlert=true {% endcomment %}
+                                      <input type="submit" class="submit-input-control d-flex justify-content-center align-items-center border-0 update-category-btn" name="submit" id="add-category-btn" value='Save'>
+                                        {% comment %} <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none update-category-btn" href="#" type="submit" name="submit" id="add-category-btn">Save</a> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>  
               </div>
           </div>
 

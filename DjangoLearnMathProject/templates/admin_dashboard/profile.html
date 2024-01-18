@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +10,11 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/category.css">
-  <link rel="stylesheet" href="../css/users.css">
-  <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="../css/profile.css">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/login.css'%}">
+  <link rel="stylesheet" href="{% static 'admin_dashboard/css/profile.css'%}">
   <title>Questions</title>
 
 
@@ -151,6 +152,8 @@
                     </div>
                 </div>
 
+                <form action="" method='POST'>
+                  {% csrf_token %}
                 <div class="row justify-content-center mt-5 h-50 ">
                   <div class="col-11 shadow-sm rounded-2 d-flex justify-content-center align-items-center p-0 ">
 
@@ -162,45 +165,62 @@
                         <div class="d-flex justify-content-start "><p class="ms-3 mb-0 p-0">You must remember your current password to change password.</p></div>
                       </div>
 
+                      
                       <div class="row w-100 ">
                         <div class="col">
                           <div class="position-relative mt-3 pb-0">
-                            <input class="input-control" type="password" name="current-password" id="input-password" placeholder="Current Password">
-                            <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="password-icon">
+                            <input class="input-control" type="password" name="old_password" id="input-password" placeholder="Current Password">
+                            <img class="input-svg bit-wide position-absolute" src="{% static 'admin_dashboard/assets/svgs/password-svg.svg'%}" alt="password-icon">
                           </div>
                         </div>
+                        {% if form.errors %}
+                        {% for error in form.old_password.errors %}
+                        <small class='text-danger'>{{error}}</small>
+                        {% endfor %}
+                        {% endif %}
                       </div>
 
                       <div class="row w-100">
                         <div class="col">
                           <div class="position-relative mt-3 pb-0">
-                            <input class="input-control" type="password" name="new-password" id="new-password" placeholder="New Password">
-                            <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="password-icon">
+                            <input class="input-control" type="password" name="new_password1" id="new-password" placeholder="New Password">
+                            <img class="input-svg bit-wide position-absolute" src="{% static 'admin_dashboard/assets/svgs/password-svg.svg'%}" alt="password-icon">
                           </div>
                         </div>
+                        {% if form.errors %}
+                        {% for error in form.new_password1.errors %}
+                        <small class='text-danger'>{{error}}</small>
+                        {% endfor %}
+                        {% endif %}
                       </div>
 
                       <div class="row w-100">
                         <div class="col">
                           <div class="position-relative mt-3 pb-0">
-                            <input class="input-control" type="password" name="confirm-new-password" id="confirm-new-password" placeholder="Confirm New Password">
-                            <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="password-icon">
+                            <input class="input-control" type="password" name="new_password2" id="confirm-new-password" placeholder="Confirm New Password">
+                            <img class="input-svg bit-wide position-absolute" src="{% static 'admin_dashboard/assets/svgs/password-svg.svg'%}" alt="password-icon">
                           </div>
                         </div>
+                        {% if form.errors %}
+                        {% for error in form.new_password2.errors %}
+                        <small class='text-danger'>{{error}}</small>
+                        {% endfor %}
+                        {% endif %}
                       </div>
 
                       <div class="row w-100">
                         <div class="col">
                           <div class=" mt-4 mb-4">
-                            <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none" href="#" type="submit" name="login-btn" id="submit-btn" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Confirm</a>
+                            <button class="submit-input-control d-flex justify-content-center align-items-center border-0">Confirm</button>
+                            {% comment %} <a class="submit-input-control d-flex justify-content-center align-items-center text-decoration-none" href="#" type="submit" name="login-btn" id="submit-btn" data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal">Confirm</a> {% endcomment %}
                           </div>
                         </div>
                       </div>
-
+                    
                     </div>
                   </div>
                 </div>
-
+              </form>
 
 
 
