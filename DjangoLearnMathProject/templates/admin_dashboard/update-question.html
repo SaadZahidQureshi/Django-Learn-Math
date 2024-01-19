@@ -10,7 +10,6 @@
          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
          crossorigin="anonymous"
          />
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
@@ -18,6 +17,21 @@
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/question.css'%}">
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/user-details.css'%}">
       <link rel="stylesheet" href="{% static 'admin_dashboard/css/update-category.css' %}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://cdn.tiny.cloud/1/ebqaj6lq8ho7ktsjj7ajw220uu2ll5yktoudwlq6sn9l6tl2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+      <script>
+         tinymce.init({
+            selector: '.richtextfields',
+            external_plugins: {
+                  tiny_mce_wiris: 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js'
+            },
+            plugins: 'advlist autolink lists link image charmap print preview anchor', 
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                  alignleft aligncenter alignright alignjustify | \
+                  bullist numlist \
+                  tiny_mce_wiris_formulaEditor | tiny_mce_wiris_formulaEditorChemistry |' ,
+         });
+      </script>
       <title>Update Question</title>
    </head>
    <body>
@@ -140,7 +154,7 @@
                                     <div class="row w-100 ">
                                        <div class="col">
                                           <div class="position-relative mt-3 pb-0">
-                                             <textarea class="input-control-text-area p-3" name="question_title"  rows="3" placeholder="Type question here...">{{record.question_title}}</textarea>
+                                             <textarea class="input-control-text-area p-3 richtextfields" name="question_title"  rows="3" placeholder="Type question here...">{{record.question_title}}</textarea>
                                              {% comment %} <input class="input-control p-3" type="text" name="question_title" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." > {% endcomment %}
                                              <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                           </div>
@@ -151,20 +165,7 @@
                                        {% endfor %}
                                        {% endif %}
                                     </div>
-                                    <div class="row w-100 d-none">
-                                       <div class="col">
-                                          <div class="">
-                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                             Select Category
-                                             </button>
-                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                <li><a class="dropdown-item" href="#">Action three</a></li>
-                                             </ul>
-                                          </div>
-                                       </div>
-                                    </div>
+        
                                     <div class="row w-100">
                                        <div class="col">
                                           <div class="">
@@ -191,6 +192,7 @@
                                        </div>
                                     </div>
                                     <input class='d-none'  id='selectedcategory' type="text" value='{{record.question_level.id}}'  name='question_level'>
+
                                     <div class="row w-100 ">
                                        <div class="col">
                                           <div class="position-relative  pb-0">
@@ -326,7 +328,7 @@
                                        <div class="col">
                                           <div class="">
                                              <div class="">
-                                                <textarea class="form-control  border-user-defind border-radius" name='question_description' id="exampleFormControlTextarea1" rows="10" placeholder="Add description here"  >{{record.question_description}}</textarea>
+                                                <textarea class="form-control  border-user-defind border-radius richtextfields" name='question_description' id="exampleFormControlTextarea1" rows="14" placeholder="Add description here"  >{{record.question_description}}</textarea>
                                              </div>
                                           </div>
                                        </div>

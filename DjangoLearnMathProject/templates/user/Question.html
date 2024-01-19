@@ -11,14 +11,14 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.css'%}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{% static 'user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.js'%}"></script>
     <link rel="stylesheet" href="{% static 'user/css/style.css'%}" />
     <link rel="stylesheet" href="{% static 'user/css/question.css'%}">
-    <link rel="stylesheet" href="{%static 'user/css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'user/css/home.css'%}">
     <link rel="stylesheet" href="{% static 'user/css/hamburger-menu.css' %}">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
+    <script src="{% static 'user/assets/components/roundSlider-1.6.1/roundSlider-1.6.1/src/roundslider.js'%}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <title>Question</title>
   </head>
   <body>
@@ -188,12 +188,12 @@
                   <div class="m-0 p-0">
                     <!-- Question no 1. -->
                     <div class="mt-2">
-                        <p class="question__number m-0 mathDiv" >Question No.{{question.id}}:  {{question.question_title}}</p>
+                        <p class="question__number m-0 " >Question No.{{question.id}}:  {{question.question_title | safe}}</p>
                     </div>
                     <!-- Actual question body -->
                     <div class="mt-3">
-                        <p class="question__body mathDiv" >
-                          {{question.question_description}}
+                        <p class="question__body " >
+                          {{question.question_description | safe}}
 
                           </p>
                     </div>
@@ -376,35 +376,6 @@
       </div>
     </div>
   </div>
-<script>
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      processEscapes: true
-    },
-    CommonHTML: { linebreaks: { automatic: true } },
-    "HTML-CSS": { linebreaks: { automatic: true } },
-    SVG: { linebreaks: { automatic: true } }
-  });
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    var mathDivs = document.querySelectorAll('.mathDiv');
-  
-    mathDivs.forEach((item) => {
-      item.addEventListener('input', function () {
-        var mathInputValue = this.textContent;
-  
-        var newSpan = document.createElement('span');
-        newSpan.textContent = mathInputValue.replace(/\n/g, '\n').replace(/\s/g, ' ');
-  
-        item.appendChild(newSpan);
-        MathJax.Hub.Typeset(item);
-      });
-    });
-  });
-  
-</script>
 
 
   <script src="{% static 'user/js/ham-burger-menu.js'%}"></script>

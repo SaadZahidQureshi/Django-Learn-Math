@@ -311,10 +311,6 @@ def Questions(request):
 
     selected_category_title = context['category']
     selected_level = context['level']
-    if selected_level:
-        levels = Level.objects.get(id=selected_level)
-        print(levels)
-        context['records'] = Question.objects.filter(question_level = levels)
 
     if selected_category_title:
         try:
@@ -326,6 +322,11 @@ def Questions(request):
             context['records'] = Question.objects.none()
     else:
         context['records'] = Question.objects.all()
+    
+    if selected_level:
+        levels = Level.objects.get(id=selected_level)
+        context['level']= levels.level_no
+        context['records'] = Question.objects.filter(question_level = levels)
 
     if context['startdate'] and context['enddate']:
         context['records'] = context['records'].filter(created_at__range=(context['startdate'], context['enddate']))

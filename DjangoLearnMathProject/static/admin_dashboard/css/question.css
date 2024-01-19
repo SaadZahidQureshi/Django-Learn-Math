@@ -49,6 +49,7 @@
     height: 100%;
     top: 0;
     left: 0;
+    border-radius: 4px;
   }
 
   .input-control-text-area{
@@ -59,4 +60,7 @@
     border: 1px solid #743FCB;
     background: #FFF;
     padding-left: 40px;
+}
+.height-385px{
+    height: 385px;
 }

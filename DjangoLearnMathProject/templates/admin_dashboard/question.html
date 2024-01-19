@@ -312,14 +312,14 @@
                             </div>
                             <div class="w-75">
                                 <!-- here in this element i want to show selected value -->
-                                <p class="m-0 p-0 text-dark" id="levelselected">{% if level %}{{level}}{% else %}Select level{% endif %}</p>
+                                <p class="m-0 p-0 text-dark" id="levelselected">{% if level %}Level {{level}}{% else %}Select level{% endif %}</p>
                             </div>
                             </button>
                             <div class="dropdown-content dropdown-content-level" >
                                 <!-- list items here -->
                                 {% if levels %}
                                 {% for level in levels %}                                
-                                <li class='list-items levels' data-value='{{level}}'>{{level}}</li>
+                                <li class='list-items levels' data-value='{{level.id}}'>{{level}}</li>
                                 {% endfor %}
                                 {% endif %}
                             </div>

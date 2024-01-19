@@ -5,11 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
         items.forEach((item) => {
             item.addEventListener('click', function() {
                 var selectedValue = this.getAttribute('data-value');
-                
+                var selectedValueText = this.textContent
+                console.log(selectedValueText)
                 // Check if the clicked item belongs to the 'levels' class
                 if (this.classList.contains('levels')) {
-                    levelselected.textContent = selectedValue;
+                    levelselected.textContent = selectedValueText;
                     levelinput.value = selectedValue;
+                    
                 } else {
                     showElement.textContent = selectedValue;
                     inputElement.value = selectedValue;

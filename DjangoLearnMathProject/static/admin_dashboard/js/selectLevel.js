@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         item.addEventListener('click', function(){
             var selectedValue = this.getAttribute('data-value');
-            levelselected.textContent = selectedValue
+            console.log(selectedValue)
+            levelselected.textContent = 'Level '+selectedValue
             levelinput.value = selectedValue
             searchForm.submit()
         })

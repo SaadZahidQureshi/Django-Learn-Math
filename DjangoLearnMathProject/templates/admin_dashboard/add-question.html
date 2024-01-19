@@ -10,20 +10,29 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({ selector:'.richtextfields' });</script>
-
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/login.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/question.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/user-details.css'%}">
-  <link rel="stylesheet" href="{% static 'admin_dashboard/css/update-category.css' %}">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
-  <script  type="text/x-mathjax-config" src="{% static 'admin_dashboard/js/mathJax.js'%}"></script>
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/users.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/login.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/question.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/user-details.css'%}">
+<link rel="stylesheet" href="{% static 'admin_dashboard/css/update-category.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/ebqaj6lq8ho7ktsjj7ajw220uu2ll5yktoudwlq6sn9l6tl2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.richtextfields',
+        external_plugins: {
+            tiny_mce_wiris: 'https://www.wiris.net/demo/plugins/tiny_mce/plugin.js'
+        },
+        plugins: 'advlist autolink lists link image charmap print preview anchor', 
+        toolbar: 'undo redo | formatselect | bold italic backcolor | \
+            alignleft aligncenter alignright alignjustify | \
+            bullist numlist \
+            tiny_mce_wiris_formulaEditor | tiny_mce_wiris_formulaEditorChemistry |' ,
+    });
+</script>
+    
   <title>Add New Question</title>
 
 
@@ -170,9 +179,7 @@
                                             <div class="row w-100 ">
                                                 <div class="col">
                                                   <div class="position-relative mt-3 pb-0">
-                                                    <textarea class="input-control-text-area p-3 richtextfields" name="question_title" id='inputquestion'  rows="3" placeholder="Type question here..."></textarea>
-                                                    {% comment %} <input class="input-control p-3" type="text" name="question_title" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." > {% endcomment %}
-                                                    <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
+                                                    <textarea class="input-control-text-area p-3 richtextfields " name="question_title" id='inputquestion'  rows="3" placeholder="Type question here..."></textarea>
                                                   </div>
                                                 </div>
                                                 {% if form.errors %}
@@ -180,10 +187,10 @@
                                                 <small class='text-danger'>{{error}}</small>
                                                 {% endfor %}
                                                 {% endif %}
-                                              </div>
+                                            </div>
                                         
 
-                                              <div class="row w-100">
+                                            <div class="row w-100">
                                                 <div class="col">
                                                     <div class="">
                                                         <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" id='level_btn' type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -208,9 +215,8 @@
                                                     {% endfor %}
                                                     {% endif %}
                                                 </div>
-                                              </div>
-                                                <input class='d-none'  id='selectedcategory' type="text"   name='question_level'>
-
+                                            </div>
+                                            <input class='d-none'  id='selectedcategory' type="text"   name='question_level'>
 
                                               <div class="row w-100 ">
                                                 <div class="col">
@@ -359,7 +365,7 @@
                                                 <div class="col">
                                                     <div class="">
                                                         <div class="" >
-                                                            <textarea class="form-control  border-user-defind border-radius richtextfields" name='question_description'   rows="11" placeholder="Add description here"  ></textarea>
+                                                            <textarea class="form-control  border-user-defind border-radius richtextfields" name='question_description' id='question_description'  rows="14" placeholder="Type description here..."  ></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -370,36 +376,6 @@
                                                 {% endif %}
                                             </div>
 
-                                            <div class="row w-100 d-none">
-                                                <div class="col h-100">
-                                                    
-                                                <div class="video-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                                    <img class="category-img d-none rounded-1" src="" alt="cateogry-img">
-                                                    <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
-                                                        <div class="">
-                                                            <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">                                                       
-                                                                <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                                    <g clip-path="url(#clip0_1_11314)">
-                                                                    <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                                    </g>
-                                                                    <defs>
-                                                                    <clipPath id="clip0_1_11314">
-                                                                        <rect width="32" height="32" />
-                                                                    </clipPath>
-                                                                    </defs>
-                                                                </svg>
-                                                            </a> 
-                                                        </div>  
-                                                                                                        
-                                                    </div>
-                                                    <div class="">
-                                                        <p class="m-0 p-0 upload-text upload-img-text">Upload an video</p> 
-                                                    </div>
-                                                    
-                                                </div>
-                                                    
-                                                </div>
-                                            </div>
 
                                             <div class="row w-100">
                                                 <div class="col">
@@ -449,8 +425,6 @@
     </div>
 </body>
 
-<!--  data-bs-toggle="modal" data-bs-target="#user-successfully-delet-modal" -->
-
  <!-- Modal user successfully delete-->
  <div class="modal fade"  id="user-successfully-delet-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" >
@@ -487,6 +461,7 @@
     </div>
   
 </div>
+
 
 
 <script src="{% static 'admin_dashboard/js/common.js' %}"></script>

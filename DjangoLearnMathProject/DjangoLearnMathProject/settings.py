@@ -157,9 +157,6 @@ MESSAGE_TAGS = {
     cs.ERROR:'alert-danger'
 }
 
-# rich text editor
-TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js'
-TINYMCE_COMPRESSOR = False
 
 
 

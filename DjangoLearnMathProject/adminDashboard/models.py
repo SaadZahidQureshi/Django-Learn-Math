@@ -52,7 +52,7 @@ class Level(BaseModel):
 
 
 class Question(BaseModel):
-    question_title = models.CharField(max_length=255)
+    question_title = models.TextField()
     question_description = models.TextField()
     option_a = models.CharField(max_length=255)
     option_b = models.CharField(max_length=255)

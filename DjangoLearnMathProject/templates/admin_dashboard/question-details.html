@@ -10,6 +10,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/common.css'%}">
   <link rel="stylesheet" href="{% static 'admin_dashboard/css/category.css'%}">
@@ -165,27 +166,14 @@
                                                 <div class="row w-100 ">
                                                     <div class="col">
                                                       <div class="position-relative mt-3 pb-0">
-                                                        <textarea class="input-control-text-area p-3"  rows="3" readonly>{{record.question_title}}</textarea>
+                                                        <div class="input-control-text-area p-3"   readonly>{{record.question_title | safe}}</div>
                                                         {% comment %} <input class="input-control p-3" type="text" name="current-password" id="input-password" value='{{record.question_title}}' placeholder="Type question here..." readonly> {% endcomment %}
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
                                                   </div>
                                             
-                                                  <div class="row w-100 d-none">
-                                                    <div class="col">
-                                                        <div class="">
-                                                            <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Select Category
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action three</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                  </div>
+                                                 
 
                                                   <div class="row w-100">
                                                     <div class="col">
@@ -297,7 +285,8 @@
                                                     <div class="col">
                                                         <div class="">
                                                             <div class="">
-                                                                <textarea class="form-control  border-user-defind border-radius" id="exampleFormControlTextarea1" rows="16" placeholder="Add description here" readonly >{{record.question_description}}</textarea>
+                                                                
+                                                                <div class="form-control  border-user-defind border-radius height-385px" id="exampleFormControlTextarea1"  placeholder="Add description here" readonly >{{record.question_description | safe}}</div>
                                                             </div>
                                                         </div>
                                                     </div>
