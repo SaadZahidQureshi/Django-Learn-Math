@@ -103,7 +103,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/level.html?id=3"
+                    href="{%url 'levels'%}"
                     onclick="toggleActive(this)"
                   >
                     <svg
@@ -122,7 +122,7 @@
                 <div class="d-flex">
                   <a
                     class="nav-link rounded-border bg-color"
-                    href="../html/question.html"
+                    href="{%url 'questions'%}"
                   
                   >
                     <svg
@@ -430,7 +430,7 @@
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
 
-                        <td>{{user.date_joined}}</td>
+                        <td>{{user.date_joined|date:"d/m/y"}}</td>
                         <td>
                           <div
                             class="d-flex justify-content-center align-items-center gap-1"

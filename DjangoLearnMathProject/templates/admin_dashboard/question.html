@@ -172,7 +172,7 @@
                           <h5 class="alert-heading">Success!</h5>
                         </div>
                         <div class="">
-                          <p class="alert-body mb-0">1 Question is added successfully. Move ahead to next Questions.</p>
+                          <p class="alert-body mb-0"> Question is added successfully. Move ahead to next Questions.</p>
                         </div>
                       </div>
                     </div>
@@ -199,7 +199,7 @@
                           <h5 class="alert-heading">Success!</h5>
                         </div>
                         <div class="">
-                          <p class="alert-body mb-0">1 Question is Updated successfully. Move ahead to next Questions.</p>
+                          <p class="alert-body mb-0"> Question is Updated successfully. Move ahead to next Questions.</p>
                         </div>
                       </div>
                     </div>
@@ -470,10 +470,10 @@
                                         {% for record in records %}
                                         <tr class="tr shadow-sm ">
                                           <td >{{record.id}}</td>
-                                          <td>{{record.question_title}}</td>
+                                          <td>{{record.question_title | safe}}</td>
                                           <td>{{record.question_level}}</td>
                                           <td>{{record.question_level.level_category}}</td>
-                                          <td>{{record.created_at}}</td>
+                                          <td>{{record.created_at|date:"d/m/y"}}</td>
                                           <td>
                                             <div class="d-flex justify-content-center gap-1">
                                                 <div class="">

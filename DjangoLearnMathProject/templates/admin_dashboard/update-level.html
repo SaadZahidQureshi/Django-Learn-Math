@@ -261,20 +261,7 @@
 
 
 
-                        <div class="row w-100 d-none">
-                          <div class="col">
-                              <div class="">
-                                  <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Centered dropdown
-                                  </button>
-                                  <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Action</a></li>
-                                      <li><a class="dropdown-item" href="#">Action two</a></li>
-                                      <li><a class="dropdown-item" href="#">Action three</a></li>
-                                  </ul>
-                              </div>
-                          </div>
-                        </div>
+                      
 
                         <div class="row w-100  ">
                           <div class="col">
@@ -308,7 +295,7 @@
                               {% endif %}
                           </div>
                         </div>
-                        <input  id='selectedcategory' type="text" value='{{record.level_category}}'  name='level_category'>
+                        <input class='d-none'  id='selectedcategory' type="text" value='{{record.level_category.id}}'  name='level_category'>
 
 
                         <div class="row w-100">

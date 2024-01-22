@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
-from customAuth.models import BaseModel
+from customAuth.models import BaseModel,User
 from customAuth.CharFieldSizes import CharFieldSizes
 from enum import Enum
 from PIL import Image
@@ -27,6 +27,9 @@ class Category(BaseModel):
 
     def __str__(self):
         return self.category_title
+    
+    def total_questions(self):
+        return Question.objects.filter(question_level__level_category = self).count()
 
 @receiver(post_save, sender=Category)
 def resize_image(sender,instance, **kwargs):
@@ -50,7 +53,6 @@ class Level(BaseModel):
         # return f"Level {self.level_no}"
     
 
-
 class Question(BaseModel):
     question_title = models.TextField()
     question_description = models.TextField()
@@ -58,11 +60,19 @@ class Question(BaseModel):
     option_b = models.CharField(max_length=255)
     option_c = models.CharField(max_length=255)
     option_d = models.CharField(max_length=255)
-    correct_answer = models.CharField(max_length=1, choices=[('A', 'Option A'), ('B', 'Option B'), ('C', 'Option C'), ('D', 'Option D')])
+    correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')])
     question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     question_helping_video = models.TextField()
-    question_image = models.ImageField(upload_to='questions_images')
+    question_image = models.ImageField(upload_to='questions_images', blank=True, null=True)
     question_countdown_time = models.PositiveIntegerField()
 
     def __str__(self):
         return self.question_title
+    
+
+
+class Answer(BaseModel):
+    selected_option = models.CharField(max_length=255)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    number_of_attempts = models.PositiveIntegerField()

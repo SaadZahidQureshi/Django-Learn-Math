@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.shortcuts import render,redirect
-from django.db.models import Q
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.urls import reverse
 from customAuth.models import User
 from adminDashboard.models import CATEGORY_LIST, Category, Level, Question
@@ -92,7 +91,7 @@ def users(request):
         records = records.filter(Q(name__icontains=search) | Q(email__icontains=search))
 
     # Pagination
-    paginator = Paginator(records, 2)
+    paginator = Paginator(records, 4)
     page = request.GET.get('page')
 
     try:
@@ -138,6 +137,7 @@ def categories(request):
     }
 
     records = Category.objects.all()
+
     if start_date and end_date:
         records = records.filter(created_at__range=(start_date, end_date))
     elif start_date:
@@ -149,7 +149,7 @@ def categories(request):
     if search:
         records = records.filter(Q(category_title__icontains=search) | Q(category_description__icontains=search))
 
-    paginator = Paginator(records,2)
+    paginator = Paginator(records,4)
     page = request.GET.get('page')
 
     try:
@@ -194,7 +194,7 @@ def updateCategory(request,pk):
     context={
         'form': CategoryForm(instance=category),
         'category':Category.objects.get(id=pk),
-        'categories': CATEGORY_LIST.choices()
+        'categories': Category.objects.all()
     }
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES,instance=category)
@@ -220,6 +220,7 @@ def levels(request):
         'seachbar': request.GET.get('search-bar',None),
         'records' : Level.objects.all(),
         'records_count' : Level.objects.all().count,
+        'levelno': request.GET.get('levelno',None)
     }
 
     if context['startdate'] and context['enddate']:
@@ -233,7 +234,7 @@ def levels(request):
     if context['seachbar']:
         context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']))
 
-    paginator = Paginator(context['records'],2)
+    paginator = Paginator(context['records'],4)
     page = request.GET.get('page')
 
     try:
@@ -277,17 +278,20 @@ def levelDetails(request,pk):
 
 @login_required(login_url='admin-login')
 def levelUpdate(request,pk):
+    level = Level.objects.get(id=pk)
     context= {
-        'record': Level.objects.get(id=pk),
+        'record': level,
         'categories': Category.objects.all(),
-        'form' : LevelForm(instance=Level.objects.get(id=pk) )
+        'form' : LevelForm(instance=level),
+       
     }
     if request.method == 'POST':
-        form = LevelForm(request.POST,context['record'])
+        form = LevelForm(request.POST,instance=level)
         context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect('levels')
+            return redirect(reverse('levels')+f'?updatelevelAlert=true&levelno={level.level_no}')
+
     return render(request, 'admin_dashboard/update-level.html',context)
 
 @login_required(login_url='admin-login')
@@ -343,7 +347,7 @@ def Questions(request):
 
     context['record_count'] = context['records'].count()
 
-    paginator = Paginator(context['records'],2)
+    paginator = Paginator(context['records'],4)
     page = request.GET.get('page')
 
     try:
@@ -374,8 +378,7 @@ def addQuestion(request):
         context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect('questions')
-        print(form.errors)
+            return redirect(reverse('questions')+f'?questionAddedAlert=true')
     return render(request, 'admin_dashboard/add-question.html',context)
 
 @login_required(login_url='admin-login')
@@ -397,8 +400,7 @@ def updateQuestion(request, pk):
         context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect('questions')
-        print(form.errors)
+            return redirect(reverse('questions')+f'?questionUpdateAlert=true')
     return render(request, 'admin_dashboard/update-question.html', context)
 
 @login_required(login_url='admin-login')

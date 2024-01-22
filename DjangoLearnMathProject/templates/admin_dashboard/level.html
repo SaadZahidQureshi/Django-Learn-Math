@@ -244,7 +244,7 @@
                           <h5 class="alert-heading">Success!</h5>
                         </div>
                         <div class="">
-                          <p class="alert-body mb-0">Level 1 is added successfully. Move ahead to next levels.</p>
+                          <p class="alert-body mb-0">Level is added successfully. Move ahead to next levels.</p>
                         </div>
                       </div>
                     </div>
@@ -271,7 +271,7 @@
                           <h5 class="alert-heading">Success!</h5>
                         </div>
                         <div class="">
-                          <p class="alert-body mb-0">Level no. 20  is updated successfully. Move ahead to next categories.</p>
+                          <p class="alert-body mb-0">Level no. {{levelno}}  is updated successfully. Move ahead to next categories.</p>
                         </div>
                       </div>
                     </div>
@@ -494,7 +494,7 @@
                                           <td>{{record.level_no}}</td>
                                           <td>{{record.number_of_questions}}</td>
                                           <td>{{record.level_category}}</td>
-                                          <td>{{record.created_at}}</td>
+                                          <td>{{record.created_at|date:"d/m/y"}}</td>
                                           <td>
                                             <div class="d-flex justify-content-center align-items-center gap-1">
                                                 <div class="">

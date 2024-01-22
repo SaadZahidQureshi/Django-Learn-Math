@@ -127,7 +127,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/question.html"
+                        href="{%url 'questions'%}"
                      
                       >
                         <svg
@@ -152,7 +152,7 @@
                     <div class="d-flex">
                       <a
                         class="nav-link rounded-border bg-color"
-                        href="../html/profile.html"
+                        href="{%url 'profile'%}"
                         
                       >
                         <svg
@@ -492,8 +492,8 @@
                                           <td>{{category.id}}</td>
                                           <td>{{category.category_title}}</td>
                                           <td>{{category.category_description}}</td>
-                                          <td>22</td>
-                                          <td>{{category.created_at}}</td>
+                                          <td>{{category.total_questions}}</td>
+                                          <td>{{category.created_at|date:"d/m/y"}}</td>
                                           <td>
                                             <div class="d-flex justify-content-center align-items-center gap-1">
                                                 <!--view button  -->

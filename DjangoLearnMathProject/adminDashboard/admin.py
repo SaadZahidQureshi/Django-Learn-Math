@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category,Level,Question
+from .models import Category,Level,Question, Answer
 # Register your models here.
 
 # admin.site.register(Category)
@@ -18,4 +18,9 @@ class LevelAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('question_title', 'question_description', 'question_level', 'question_countdown_time')
+    readonly_fields = ('created_at', 'updated_at')
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ('question', 'user', 'selected_option','number_of_attempts')
     readonly_fields = ('created_at', 'updated_at')

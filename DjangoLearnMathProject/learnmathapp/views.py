@@ -1,6 +1,8 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from adminDashboard.models import Category,Level,Question
+from django.core.serializers import serialize
 
 
 # Create your views here.
@@ -25,7 +27,11 @@ def category(request,pk):
         try:
             level = Level.objects.get(id=level_id)
             questions = Question.objects.filter(question_level=level)
-            context['questions'] = questions
+            context['question'] = questions[0]
+            context['questionno'] = 1
+            context['total_questions'] = len(questions)
+            context['correct_option'] = questions[0].correct_answer
+            
         except Level.DoesNotExist:
             # Handle the case when the requested level does not exist
             pass
@@ -34,7 +40,6 @@ def category(request,pk):
     context['levels']=levels
     context['category']= category
     return render(request, 'user/Question.html', context)
-
 
 @login_required(login_url='login')
 def question_with_image(request):
