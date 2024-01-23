@@ -70,7 +70,6 @@ class Question(BaseModel):
         return self.question_title
     
 
-
 class Answer(BaseModel):
     selected_option = models.CharField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

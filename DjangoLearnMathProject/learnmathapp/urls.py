@@ -10,6 +10,7 @@ urlpatterns = [
     path('question_with_image/',views.question_with_image, name='question_with_image'), 
     path("question_wrong_answer/", views.question_wrong_answer, name="question_wrong_answer"),
     path ('profile-Setting/', profileSetting, name='profileSetting'),
+    path ('answer/', views.answer, name='answer'),
 
 
     # admin urls

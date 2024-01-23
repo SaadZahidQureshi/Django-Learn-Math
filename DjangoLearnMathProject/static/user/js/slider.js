@@ -77,25 +77,14 @@ function updateSlider() {
 
 window.addEventListener('load', function() {
 
-  const url = window.location.href;
-  var urlParams = new URLSearchParams(url);
+  const urlParams = new URLSearchParams(window.location.search);
+  level = urlParams.get('level')
 
-  console.log(urlParams)
-
-  var param1 = urlParams.get('level', null);
-  console.log(param1) // value1
-
-  const id = url[url.length-1].split('=')
-  let uni_id =id[id.length-1]
-
-  if(uni_id[uni_id.length-1] == '#'){
-    uni_id = uni_id.slice(0,-1)
-  }
   let selectedIndex = -1
   const items = document.querySelectorAll('.slider-items');
   // console.log(typeof(items))
   items.forEach((item,index) =>{
-    if(item.getAttribute('data-name') == uni_id){
+    if(item.getAttribute('data-name') == level){
       selectedIndex = index
       currentIndex = selectedIndex
       updateSlider()

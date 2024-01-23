@@ -18,88 +18,89 @@
     <link rel="stylesheet" href="{%static 'user/css/home.css'%}">
     <link rel="stylesheet" href="{% static 'user/css/hamburger-menu.css' %}">
 
-    <title>Question with wrong answer</title>
+    <title>Question </title>
   </head>
   <body>
 
 
 
     <div class="container-fluid m-0 p-0 main-container">
-      <!-- hamburger manu container -->
-      <div class="row m-0 p-0 ham-burger-menu shadow-sm"> 
-        <div class="d-flex justify-content-between align-items-center">
-          <div class=""><img class="m-0 p-0" src="{% static 'user/assets/svg/google.svg'%}" alt=""></div>
-          <div class=""><a onclick="return showMenu();" href=""><img class="m-0 p-0" src="{% static 'user/assets/svg/hamburger.svg'%}" alt=""></a></div>
-        </div>
-      </div>
-      
-      <!-- navbar container -->
-      <nav class="navbar shadow-sm d-flex justify-content-between nav-sm-d-none nav-slid-sm" >
-        <div
-          class="d-flex justify-content-start justify-content-sm-between  w-100 align-items-center p-0 m-0 pe-sm-5 ps-sm-5"
-        >
-          <div class="logo-container-sm-d-none">
-            <div class="container">
-              <img
-                class="logo-img"
-                src="{% static 'user/assets/svg/google.svg'%}"
-                alt="Logo"
-                style="width: 35px; height: 35px"
-              />
-            </div>
-          </div>
 
-          <div class="nav-container ">
-            <ul class="nav align-items-center justify-content-center justify-content-sm-center">
-              <li class="nav-link">
-                <a class="nav-items-fonts-props nav-item text-decoration-none text-dark" href="{%url 'index'%}">Home</a>
-              </li>
-              <li class="nav-link">
-                <div class="d-flex justify-content-between align-items-center">
-                  <a
-                    class="nav-items-fonts-props nav-item text-decoration-none text-dark"
-                    href=""
-                    >My Progress</a
-                  >
-                  <div class="round-slider ms-1" ></div>
-                </div>
-              </li>
-              <li class="nav-link">
+    <!-- hamburger manu container -->
+    <div class="row m-0 p-0 ham-burger-menu shadow-sm"> 
+      <div class="d-flex justify-content-between align-items-center">
+        <div class=""><img class="m-0 p-0" src="{%static 'user/assets/svg/google.svg'%}" alt=""></div>
+        <div class=""><a onclick="return showMenu();" href=""><img class="m-0 p-0" src="{% static 'user/assets/svg/hamburger.svg'%}" alt=""></a></div>
+      </div>
+    </div>
+
+    <!-- navbar container -->
+    <nav class="navbar shadow-sm d-flex justify-content-between nav-sm-d-none nav-slid-sm " >
+      <div
+        class="d-flex justify-content-start justify-content-sm-between  w-100 align-items-center p-0 m-0 pe-sm-5 ps-sm-5"
+      >
+        <div class="logo-container-sm-d-none">
+          <div class="container">
+            <a href="{% url 'index' %}"><img
+              class="logo-img"
+              src="{% static 'user/assets/svg/google.svg' %}"
+              alt="Logo"
+              style="width: 35px; height: 35px"
+            />
+          </div></a>
+        </div>
+
+        <div class="nav-container ">
+          <ul class="nav align-items-center justify-content-center justify-content-sm-center">
+            <li class="nav-link">
+              <a class="nav-items-fonts-props nav-item text-decoration-none text-dark " href="{% url 'user-dashboard' %}">Home</a>
+            </li>
+            <li class="nav-link">
+              <div class="d-flex justify-content-center align-items-center">
                 <a
                   class="nav-items-fonts-props nav-item text-decoration-none text-dark"
-                  href="{% url 'profileSetting'%}"
-                  >Settings</a
+                  href=""
+                  >My Progress</a
                 >
-              </li>
-              <li class="nav-link">
-                <a class="nav-item text-decoration-none popuz-quiz-btn" href="{% url 'popupQuiz'%}"
-                  >Popup Quiz</a
-                >
-              </li>
-              <li class="nav-link">
-                <a class="nav-item text-decoration-none popuz-quiz-btn text-light bg-color" href="{% url 'logout' %}"
-                  >Logout</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+                <div class="round-slider ms-1" ></div>
+              </div>
+            </li>
+            <li class="nav-link">
+              <a
+                class="nav-items-fonts-props nav-item text-decoration-none text-dark"
+                href="{% url 'profileSetting'%}"
+                >Settings</a
+              >
+            </li>
+            <li class="nav-link">
+              <a class="nav-item text-decoration-none popuz-quiz-btn" href="{% url 'popupQuiz' %}"
+                >Popup Quiz</a
+              >
+            </li>
 
-
-      <!-- top category container -->
-      <div class="row m-0 p-0">
-       <div class="m-0 p-0 d-flex justify-content-center">
-        <div class="question-container__width ">
-          <div class="mt-4">
-            <h2 class="question-category">Trignometory</h2>
-          </div>
+            <li class="nav-link">
+              <a class="nav-item text-decoration-none popuz-quiz-btn text-light bg-color" href="{% url 'logout' %}"
+                >Logout</a
+              >
+            </li>
+          </ul>
         </div>
-       </div>
       </div>
+    </nav>
 
-      <!-- slider container here  -->
-      <div class="row container-fluid justify-content-center align-items-center m-0 p-2 bg-light ">
+    <!-- top category container -->
+    <div class="row m-0 p-0">
+      <div class="m-0 p-0 d-flex justify-content-center">
+      <div class="question-container__width ">
+        <div class="mt-4">
+          <h2 class="question-category">{{category}}</h2>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- slider container here  -->
+    <div class="row container-fluid justify-content-center align-items-center m-0 p-2 bg-light ">
         <div class="col-1">
             <div class="">
                 <div class="d-flex justify-content-center align-items-center">
@@ -114,27 +115,17 @@
           <div class="row justify-content-center align-items-center">
               <div class="m-0 p-0 w-100 overflow-hidden" id="slider-container">
                   <ul class="d-flex list-unstyled slider-list m-0 p-2" id="slider-list" >
-                    <!-- <a href="" data-name=""></a> -->
-                      <!-- <a class="slider-items text-center text-decoration-none" href="../html/Question.html">Level 1</a>
-                      <a class="slider-items text-center text-decoration-none" href="../html/Question-with-image.html">Level 2</a>
-                      <a class="slider-items text-center text-decoration-none" href="../html/Question-wrong-ans.html">Level 3</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 4</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 5</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 6</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 7</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 8</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 9</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 10</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 11</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 12</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 13</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 14</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 15</a>
-                      <a class="slider-items text-center text-decoration-none" href="#">Level 16</a> -->
+                    {% if levels %}
+                    {% for level in levels %}
+                        <a class="slider-items text-center text-decoration-none" href="{% url 'category' pk=category.id%}?level={{level.level_no}}" data-name='{{level.level_no}}'>{{level}}</a>
+                    {% endfor %}
+                    {% endif %}
+                      
                   </ul>
               </div>
           </div>
         </div>
+
 
         <div class="col-1">
             <div class="">
@@ -145,271 +136,362 @@
                 </div>
             </div>
         </div>
-      </div> 
+    </div>  
+    <p class='d-none question-id'>{{question.id}}</p>
+    <p class='d-none category-id'>{{category.id}}</p>
+    <p class='d-none level_no'>{{current_level.level_no}}</p>
+    <!-- main-container -->
+    <div class="row m-0 p-0">
+      <div class="m-0 p-0 d-flex justify-content-center">
+        <div class="question-container__width p-0 m-0">
+          
+        <div class="row m-0 p-0 mt-3">
 
-      <!-- main-container -->
-      <div class="row m-0 p-0">
-        <div class="m-0 p-0 d-flex justify-content-center">
-         <div class="question-container__width p-0 m-0">
-           
-          <div class="row m-0 p-0 mt-3">
-
-            <div class="col-sm-9 col-order-sm-reverse-2">
-              
-              <!-- top message & time counter  container-->
-              <div class="row mt-3">
-                <div class="col-sm-9 col-order-sm-reverse-2 p-0 mt-sm ">
-                    <div class="">
-                        <p class="question-message m-0 p-0">
-                            Mark the one option which you think is the correct
-                            answer
-                          </p>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-order-sm-reverse-1 m-0 p-0 d-flex justify-content-center align-items-center">
-                    <div class="d-flex justify-content-end gap-1  ">
-                        <div class=" position-relative time-counter-container gap-sm">
-                            <img src="{% static 'user/assets/svg/Subtract.svg' %}" alt="">
-                            <p class="time-counter__text position-absolute" id="hour" >00</p>
-                        </div>
-                        <div class="position-relative time-counter-container gap-sm">
-                            <img src="{% static 'user/assets/svg/Subtract.svg' %}" alt="">
-                            <p class="time-counter__text position-absolute" id="minut" >00</p>
-                        </div>
-                        <div class="position-relative time-counter-container gap-sm">
-                            <img src="{% static 'user/assets/svg/Subtract.svg' %}" alt="">
-                            <p class="time-counter__text position-absolute" id="second">00</p>
-                        </div>
-                    </div>
-               </div>
-
+          <div class="col-sm-9 col-order-sm-reverse-2">
+            
+            <!-- top message & time counter  container-->
+            <div class="row mt-3">
+              <div class="col-sm-9 col-order-sm-reverse-2 p-0 mt-sm ">
+                  <div class="">
+                      <p class="question-message m-0 p-0">
+                          Mark the one option which you think is the correct
+                          answer
+                        </p>
+                  </div>
               </div>
 
-              <!-- Question container -->
-              <div class="row ">
-                <div class="p-0">
-                  <div class="m-0 p-0">
-                    <!-- Question no 1. -->
-                    <div class="mt-2">
-                        <p class="question__number m-0 ">Question no 1.</p>
-                    </div>
-                    <!-- Actual question body -->
-                    <div class="mt-3">
-                        <pre class="question__body">
-A particle is moving along a line. Its displacement (in meters) after thours is:
-s(t)=
-–
-6t+7
-Find the average velocity over the interval [7,16].
-Write your answer as an integer, fraction, or decimal rounded to the nearest tenth. Simplify any fractions.
-metersperhour
-                          </pre>
-                    </div>
-                    <!-- Question image  -->
-                    <div class="">
-                        <img class="question__img" src="{% static 'user/assets/svg/graph-qs.svg'%}" alt="">
-                    </div>
-                </div>
-                </div>
+              <div class="col-sm-3 col-order-sm-reverse-1 m-0 p-0 d-flex justify-content-center align-items-center">
+                  <div class="d-flex justify-content-end gap-1  ">
+                      <div class=" position-relative time-counter-container gap-sm">
+                          <img src="{% static 'user/assets/svg/Subtract.svg'%}" alt="">
+                          <p class="time-counter__text position-absolute" id="hour" >00</p>
+                      </div>
+                      <div class="position-relative time-counter-container gap-sm">
+                          <img src="{% static 'user/assets/svg/Subtract.svg'%}" alt="">
+                          <p class="time-counter__text position-absolute" id="minut" >00</p>
+                      </div>
+                      <div class="position-relative time-counter-container gap-sm">
+                          <img src="{% static 'user/assets/svg/Subtract.svg'%}"  alt="">
+                          <p class="time-counter__text position-absolute" id="second">00</p>
+                      </div>
+                  </div>
               </div>
 
             </div>
 
-            <!--Side-Result container -->
-            <div class="col-sm-3 col-order-sm-reverse-1 p-0 m-0">
-              <div class="d-flex flex-sm-column side-result-container justify-content-center gap-3">
-
-                  <div class="d-flex justify-content-end">
-
-                    <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-answered ">
-                      <div class="">
-                        <img
-                          class="side-result__image"
-                          src="{% static 'user/assets/svg/answered-qs.svg'%}"
-                          alt="answered-qs"
-                        />
-                      </div>
-                      <div class="">
-                        <div class="d-flex flex-column align-items-center justify-content-center  ">
-                          <div class="">
-                            <p class="side-result__text  p-0 m-0 text-center">Answered Questions</p>
-                          </div>
-                          <div>
-                            <p class="side-result__text-marks p-0 m-0 text-center">0/10</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
+            <!-- Question container -->
+            <div class="row ">
+              <div class="p-0">
+                <div class="m-0 p-0">
+                  <!-- Question no 1. -->
+                  <div class="mt-2">
+                    <p class="question__number m-0 " >Question No.{{questionno}}</p>
                   </div>
-
-                  <div class="d-flex justify-content-end">
-                    <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-correct">
-                          <div class="">
-                              <img
-                              class="side-result__image"
-                              src="{% static 'user/assets/svg/correct-ans.svg'%}"
-                              alt="answered-qs"
-                              />
-                          </div>
-                          <div class="">
-                              <div
-                              class="d-flex flex-column align-items-center justify-content-center"
-                              >
-                              <div>
-                                  <p class="side-result__text p-0 m-0 text-center">Correct Questions</p>
-                              </div>
-                              <div>
-                                  <p class="side-result__text-marks p-0 m-0 text-center">0/10</p>
-                              </div>
-                              </div>
-                          </div>
-                          </div>
+                  <!-- Actual question body -->
+                  <div class="mt-3">
+                    <p class="question__body " >{{question.question_description | safe}}</p>
                   </div>
-
-                  <div class="d-flex justify-content-end">
-                    <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-wrong">
-                          <div class="">
-                              <img class="side-result__image" src="{% static 'user/assets/svg/wrong-ans.svg'%}" alt="answered-qs" />
-                          </div>
-                          <div class="">
-                              <div
-                              class="d-flex flex-column align-items-center justify-content-center "
-                              >
-                              <div>
-                                  <p class="side-result__text p-0 m-0 text-center">Wrong Questions</p>
-                              </div>
-                              <div>
-                                  <p class="side-result__text-marks p-0 m-0 text-center">0/10</p>
-                              </div>
-                              </div>
-                          </div>
-                      </div>
+                  <!-- Question image  -->
+                  <div class="">
+                    <img class="question__img w-50" src="{% if question.question_image %}{{question.question_image.url}}{% endif %}" alt="">
                   </div>
-                  
+              </div>
               </div>
             </div>
 
           </div>
 
-          <!-- mcqs container -->
-          <div class="row p-0 mt-4">
-            <div class="col ">
-                <div class="row  w-75  ">
-                    <div class="col p-0 m-0">
-                      <div class="mt-2">
-                        <a
-                          class=" options d-flex justify-content-start align-items-center text-decoration-none"
-                            href="#"
-                          ><p class="first-p p-0 m-0">(A)</p>
-                          <p class="last-p m-0 ps-1">6.5 meters per hour</p></a
-                        >
+          <!--Side-Result container -->
+          <div class="col-sm-3 col-order-sm-reverse-1 p-0 m-0">
+            <div class="d-flex flex-sm-column side-result-container justify-content-center gap-3">
+
+                <div class="d-flex justify-content-end">
+
+                  <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-answered ">
+                    <div class="">
+                      <img
+                        class="side-result__image"
+                        src="{% static 'user/assets/svg/answered-qs.svg'%}"
+                        alt="answered-qs"
+                      />
+                    </div>
+                    <div class="">
+                      <div class="d-flex flex-column align-items-center justify-content-center  ">
+                        <div class="">
+                          <p class="side-result__text  p-0 m-0 text-center">Answered Questions</p>
+                        </div>
+                        <div>
+                          <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="col m-0 p-0">
-                      <div class="mt-2">
-                        <a
-                          class=" options d-flex justify-content-start align-items-center text-decoration-none"
-                            href="#"
-                          ><p class="first-p p-0 m-0">(B)</p>
-                          <p class="last-p m-0 ps-1">3 meters per hour</p></a
-                        >
-                      </div>
-                    </div>
+                  </div>
+
                 </div>
 
-                <div class="row  w-75">
-                    <div class="col p-0 m-0">
-                      <div class="mt-2">
-                        <a
-                          class=" options d-flex justify-content-start align-items-center text-decoration-none"
-                            href="#" 
-                          ><p class="first-p p-0 m-0">(C)</p>
-                          <p class="last-p m-0 ps-1">3.54 meters per hour</p></a>
-                      </div>
-                    </div>
-                    <div class="col m-0 p-0">
-                      <div class="mt-2">
-                        <a
-                          class="option-selected-wrong options d-flex justify-content-start align-items-center text-decoration-none"
-                            href="#" onclick="showError()" id="wrong-answer"
-                          ><p class="first-p p-0 m-0">(D)</p>
-                          <p class="last-p m-0 ps-1">None of these</p></a
-                        >
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- error meesage container -->
-            <div class=" col-4 ">
-              
-              <div class="row">
-                <div class="col p-0">
-                    <div class="d-flex flex-column justify-content-center align-items-center cotent-container-wrong-message d-none " id="wrong-message-box">
-                        <div class="text-center">
-                            <h1 class="cotent-container-wrong-message__heading p-0 m-0">Sorry ! your Answer is incorrect</h1>
+                <div class="d-flex justify-content-end">
+                  <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-correct">
+                        <div class="">
+                            <img
+                            class="side-result__image"
+                            src="{% static 'user/assets/svg/correct-ans.svg'%}"
+                            alt="answered-qs"
+                            />
                         </div>
                         <div class="">
-                            <h2 class="wcotent-container-wrong-message__desc p-0 m-0">Watch the video</h2>
+                            <div
+                            class="d-flex flex-column align-items-center justify-content-center"
+                            >
+                            <div>
+                                <p class="side-result__text p-0 m-0 text-center">Correct Questions</p>
+                            </div>
+                            <div>
+                                <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                            </div>
+                            </div>
                         </div>
-
-                    </div>
+                        </div>
                 </div>
+
+                <div class="d-flex justify-content-end">
+                  <div class="d-flex flex-column flex-sm-row justify-content-around align-items-center cotent-container-wrong">
+                        <div class="">
+                            <img class="side-result__image" src="{% static 'user/assets/svg/wrong-ans.svg'%}" alt="answered-qs" />
+                        </div>
+                        <div class="">
+                            <div
+                            class="d-flex flex-column align-items-center justify-content-center "
+                            >
+                            <div>
+                                <p class="side-result__text p-0 m-0 text-center">Wrong Questions</p>
+                            </div>
+                            <div>
+                                <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
             </div>
           </div>
 
-          <!-- Youtube video container -->
-          <div class="row m-0 p-0 d-none" id="video-container">
-                  
-            <div class="row m-0 p-0 " >
-                <div class="col p-0 shadow-sm mt-5">
-                    <div class=" ">
-                        <iframe class="embaded-video" src="https://www.youtube.com/embed/TMubSggUOVE?si=j27HGrhP73InpMU8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="p-3">
-                      <div class="">
-                        <h2 class="m-0 p-0 youtube__heading">Domain of this exponential function</h2>
-                    </div>
-                    <div class="">
-                        <h5 class="m-0 p-0 youtube__desc">Posted on 01 jan 2022</h5>
-                    </div>
-                    </div>
-                </div>
-            </div>
+        </div>
 
-            <div class="row mt-3 m-0">
-                <div class=" d-flex justify-content-end align-items-center gap-2 justify-center-sm">
-                    <div class="me-2">
-                        <a class="re-attempt-or-skip text-decoration-none text-light" href="">Re-attempt</a>
+        <!-- mcqs container -->
+        <div class="row p-0 mt-4">
+          <div class="col ">
+              <div class="row  w-75  ">
+                  <div class="col p-0 m-0">
+                    <div class="mt-2">
+                      <a
+                        class=" options d-flex justify-content-start align-items-center text-decoration-none"
+                        data-value='A'
+                        ><p class="first-p p-0 m-0">(A)</p>
+                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_a}}{% else %}6.5 meters per hour{% endif %}</p></a
+                      >
                     </div>
-                    <div class="me-2">
-                        <a class="re-attempt-or-skip bg-light text-decoration-none text-dark" href="">Skip and Continue</a>
+                  </div>
+                  <div class="col m-0 p-0">
+                    <div class="mt-2">
+                      <a
+                        class=" options d-flex justify-content-start align-items-center text-decoration-none"
+                        data-value='B'
+                        ><p class="first-p p-0 m-0">(B)</p>
+                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_b}}{% else %}3 meters per hour{% endif %}</p></a
+                        
+                        </a
+                      >
                     </div>
-                </div>
-            </div>
+                  </div>
+              </div>
 
-            <div class="row m-0 p-0">
-                <div class="message-end mt-3 mb-5">
-                    <div class="p-2">
-                        <p class="text-right">By watching the video you can conclude that which is correct answer. Although it is totally depends on you either you want to re_attempt the question or not. If your want to re_attepmt watch the video which would deifinitely help you in re-attempting the question. Click on the Re-attempt . But if you want to go for next question thenk click on skip and continue.
-                        </p>
+              <div class="row  w-75">
+                  <div class="col p-0 m-0">
+                    <div class="mt-2">
+                      <a
+                        class=" options d-flex justify-content-start align-items-center text-decoration-none"
+                        data-value='C'
+                        ><p class="first-p p-0 m-0">(C)</p>
+                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_c}}{% else %}3.54 meters per hour{% endif %}</p></a>
+                      </a>
                     </div>
-                </div>
-            </div>
-            
+                  </div>
+                  <div class="col m-0 p-0">
+                    <div class="mt-2">
+                      <a
+                        class=" options d-flex justify-content-start align-items-center text-decoration-none"
+                        data-value='D'  
+                        ><p class="first-p p-0 m-0">(D)</p>
+                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_d}}{% else %}None of these{% endif %}</p></a
+                        </a
+                      >
+                    </div>
+                  </div>
+              </div>
           </div>
 
-         </div>
+          <!-- error meesage container -->
+          <div class=" col-4 ">
+            
+            <div class="row">
+              <div class="col p-0">
+                  <div class="d-flex flex-column justify-content-center align-items-center cotent-container-wrong-message d-none " id="wrong-message-box">
+                      <div class="text-center">
+                          <h1 class="cotent-container-wrong-message__heading p-0 m-0">Sorry ! your Answer is incorrect</h1>
+                      </div>
+                      <div class="">
+                          <h2 class="wcotent-container-wrong-message__desc p-0 m-0">Watch the video</h2>
+                      </div>
+
+                  </div>
+              </div>
+              </div>
+              
+          </div>
         </div>
-       </div>
+
+        <!-- Youtube video container -->
+        <div class="row m-0 p-0 d-none" id="video-container">
+                
+          <div class="row m-0 p-0 " >
+              <div class="col p-0 shadow-sm mt-5">
+                  <div class=" ">
+                      <iframe class="embaded-video" src="https://www.youtube.com/embed/TMubSggUOVE?si=j27HGrhP73InpMU8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  </div>
+                  <div class="p-3">
+                    <div class="">
+                      {% comment %} <h2 class="m-0 p-0 youtube__heading">Domain of this exponential function</h2> {% endcomment %}
+                  </div>
+                  <div class="">
+                      {% comment %} <h5 class="m-0 p-0 youtube__desc">Posted on 01 jan 2022</h5> {% endcomment %}
+                  </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row mt-3 m-0">
+              <div class=" d-flex justify-content-end align-items-center gap-2 justify-center-sm">
+                  <div class="me-2">
+                      <a class="re-attempt-or-skip text-decoration-none text-light" href="">Re-attempt</a>
+                  </div>
+                  <div class="me-2">
+                      <a class="re-attempt-or-skip bg-light text-decoration-none text-dark" href="">Skip and Continue</a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row m-0 p-0">
+              <div class="message-end mt-3 mb-5">
+                  <div class="p-2">
+                      <p class="text-right">By watching the video you can conclude that which is correct answer. Although it is totally depends on you either you want to re_attempt the question or not. If your want to re_attepmt watch the video which would deifinitely help you in re-attempting the question. Click on the Re-attempt . But if you want to go for next question thenk click on skip and continue.
+                      </p>
+                  </div>
+              </div>
+          </div>
+          
+        </div>
+
+        </div>
+      </div>
+      </div>
     </div>
 
   </body>
+  <!-- Modal -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+        <div class="modal-body p-5">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <h2 class="modal-marks">1/{{total_questions}}</h2>
+            <div class="">
+              
+              <div class="d-flex justify-content-center align-items-center">
+                <img src="{% static 'user/assets/svg/good-female.svg'%}" alt="">
+                <h1 class="modal-head">Greate Job !</h1>
+              </div>
 
+            </div>
+            <p class="modal-message">Your answer is correct. Best of Luck for next answer</p>
+            {% comment %} <button type="button" class="modal-button" data-bs-dismiss="modal">Continue</button> {% endcomment %}
+            <a href=""   class="modal-button text-decoration-none" >Continue</a>
+        </div>
+        </div>
+        <!-- <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary modal-button" data-bs-dismiss="modal">Continue</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <script>
+    var options = document.querySelectorAll('.options');
+    selectedoption = false
+    question_id = document.querySelector('.question-id').textContent
+    category_id = document.querySelector('.category-id').textContent
+    level_no = document.querySelector('.level_no').textContent
+    baseurl = "{% url 'answer' %}"
+    {% comment %} baseurl = '{% url "answer" pk=0 %}'.replace('0', category_id) {% endcomment %}
+    var stored_option = '{{question.correct_answer}}';
+    console.log(stored_option)
+    modal_btn = document.querySelector('.modal-button')
+    options.forEach(function(option) {
+      option.addEventListener("click", function() {
+        if (!selectedoption){
+          selectedoption = true
+          var stored_option = '{{question.correct_answer}}';
+          var selected_option = this.getAttribute("data-value");
+          options.forEach(function(option) {
+            option.classList.remove('option-selected');
+            option.classList.remove('option-selected-wrong');
+          });
+          if (selected_option == stored_option) {
+            this.classList.add('option-selected');
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            myModal.show();
+            modal_btn.href = baseurl+'?level='+level_no+'&selected_option='+selected_option+'&qsid='+question_id+'&category_id='+category_id
+          } else {
+            this.classList.add('option-selected-wrong');
+            showError();
+            checkAnswer(category_id ,level_no, selected_option, question_id)
+          }
+        }
+      });
+    });
+
+    function checkAnswer(category_id ,level_no, selected_option, qsid) {
+      console.log('answer is being verifeid...')
+      $.ajax({
+        type: "GET",
+        url: baseurl+'?level='+level_no+'&selected_option='+selected_option+'&qsid='+question_id+'&category_id='+category_id,
+        data: {
+            "category_id": category_id,
+            "level_no": level_no,
+            "selected_option": selected_option,
+            "qsid": qsid,
+        },
+        dataType: "json",
+  
+        success: function (data) {
+  
+          if (data.error){
+              alert('Error')
+          }else{
+            console.log('response ', data)
+          }
+          
+        }
+        
+    });
+    }
+    
+ 
+  </script>
   <script src="{% static 'user/js/ham-burger-menu.js'%}"></script>
   <script src="{% static 'user/js/slider.js'%}"></script>
   <script src="{% static 'user/js/roundSlider.js'%}"></script>
