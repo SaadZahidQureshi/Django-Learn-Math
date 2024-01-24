@@ -17,10 +17,10 @@ class LevelAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('question_title', 'question_description', 'question_level', 'question_countdown_time')
+    list_display = ('id', 'question_description', 'question_level', 'question_countdown_time')
     readonly_fields = ('created_at', 'updated_at')
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('question', 'user', 'selected_option','number_of_attempts')
+    list_display = ('question_id', 'user', 'selected_option','number_of_attempts', 'time_taken')
     readonly_fields = ('created_at', 'updated_at')

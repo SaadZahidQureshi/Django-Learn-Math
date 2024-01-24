@@ -85,7 +85,7 @@
           <div class=" w-sm-80 ">
             {% if messages %}
               {% for message in messages  %}
-              <div class="d-flex justify-content-center "><p class= 'alert w-25 text-center index {{message.tags}}'>{{message}}</p></div>
+              <div class="d-flex justify-content-center "><p class= 'alert text-center index {{message.tags}}'>{{message}}</p></div>
               {% endfor %}
             {% endif %}
             <form action="{% url 'profileSetting' %}" method='POST' enctype="multipart/form-data">
@@ -287,6 +287,7 @@
 
     <script src="{% static 'user/js/roundSlider.js'%}"></script>
     <script src="{% static 'user/js/import-data.js' %}"></script>
+    <script src="{% static 'user/js/main.js' %}"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

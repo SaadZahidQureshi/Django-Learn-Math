@@ -8,7 +8,6 @@ from PIL import Image
 
 
 # Create your models here.
-
 class CATEGORY_LIST(Enum):
     CALCULUS = 'Calculus'
     GEOMETERY = 'Geometery'
@@ -68,10 +67,10 @@ class Question(BaseModel):
 
     def __str__(self):
         return self.question_title
-    
 
 class Answer(BaseModel):
     selected_option = models.CharField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     number_of_attempts = models.PositiveIntegerField()
+    time_taken = models.CharField(max_length = 255)

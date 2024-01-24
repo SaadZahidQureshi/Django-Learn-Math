@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{% static 'user/css/question.css'%}">
     <link rel="stylesheet" href="{%static 'user/css/home.css'%}">
     <link rel="stylesheet" href="{% static 'user/css/hamburger-menu.css' %}">
-
+    <link rel="icon" type="image/x" href="{% static 'user/assets/svg/google.svg' %}">
     <title>Question </title>
   </head>
   <body>
@@ -92,13 +92,21 @@
     <div class="row m-0 p-0">
       <div class="m-0 p-0 d-flex justify-content-center">
       <div class="question-container__width ">
-        <div class="mt-4">
+       
+        <div class="mt-4 ">
           <h2 class="question-category">{{category}}</h2>
+         
         </div>
       </div>
       </div>
     </div>
-
+    {% if messages %}
+    <div class=''>
+    {% for message in messages  %}
+    <div class="d-flex justify-content-center mt-1"><p class= 'alert  text-center index {{message.tags}}'>{{message}}</p></div>
+    {% endfor %}
+  </div>
+  {% endif %}
     <!-- slider container here  -->
     <div class="row container-fluid justify-content-center align-items-center m-0 p-2 bg-light ">
         <div class="col-1">
@@ -140,6 +148,9 @@
     <p class='d-none question-id'>{{question.id}}</p>
     <p class='d-none category-id'>{{category.id}}</p>
     <p class='d-none level_no'>{{current_level.level_no}}</p>
+    <p class='d-none baseurl'>{% url 'answer' %}</p>
+    <p class='d-none stored_option'>{{question.correct_answer}}</p>
+    <p class='d-none level_no'>{{level_no}}</p>
     <!-- main-container -->
     <div class="row m-0 p-0">
       <div class="m-0 p-0 d-flex justify-content-center">
@@ -159,7 +170,6 @@
                         </p>
                   </div>
               </div>
-
               <div class="col-sm-3 col-order-sm-reverse-1 m-0 p-0 d-flex justify-content-center align-items-center">
                   <div class="d-flex justify-content-end gap-1  ">
                       <div class=" position-relative time-counter-container gap-sm">
@@ -179,6 +189,7 @@
 
             </div>
 
+            
             <!-- Question container -->
             <div class="row ">
               <div class="p-0">
@@ -192,9 +203,10 @@
                     <p class="question__body " >{{question.question_description | safe}}</p>
                   </div>
                   <!-- Question image  -->
+                  {% if question.question_image %}
                   <div class="">
-                    <img class="question__img w-50" src="{% if question.question_image %}{{question.question_image.url}}{% endif %}" alt="">
-                  </div>
+                    <img class="question__img w-50" src="{{question.question_image.url}}" alt="">
+                  </div>{% endif %}
               </div>
               </div>
             </div>
@@ -284,24 +296,24 @@
               <div class="row  w-75  ">
                   <div class="col p-0 m-0">
                     <div class="mt-2">
-                      <a
+                      {% if question.option_a %} <a
                         class=" options d-flex justify-content-start align-items-center text-decoration-none"
                         data-value='A'
                         ><p class="first-p p-0 m-0">(A)</p>
-                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_a}}{% else %}6.5 meters per hour{% endif %}</p></a
-                      >
+                        <p class="last-p m-0 ps-1">{{question.option_a}}</p></a
+                      >{% endif %}
                     </div>
                   </div>
                   <div class="col m-0 p-0">
                     <div class="mt-2">
-                      <a
+                      {% if question.option_b %}<a
                         class=" options d-flex justify-content-start align-items-center text-decoration-none"
                         data-value='B'
                         ><p class="first-p p-0 m-0">(B)</p>
-                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_b}}{% else %}3 meters per hour{% endif %}</p></a
+                        <p class="last-p m-0 ps-1">{{question.option_b}}</p>
                         
                         </a
-                      >
+                      >{% endif %}
                     </div>
                   </div>
               </div>
@@ -309,23 +321,23 @@
               <div class="row  w-75">
                   <div class="col p-0 m-0">
                     <div class="mt-2">
-                      <a
+                      {% if question.option_c %}<a
                         class=" options d-flex justify-content-start align-items-center text-decoration-none"
                         data-value='C'
                         ><p class="first-p p-0 m-0">(C)</p>
-                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_c}}{% else %}3.54 meters per hour{% endif %}</p></a>
-                      </a>
+                        <p class="last-p m-0 ps-1">{{question.option_c}}</p>
+                      </a>{% endif %}
                     </div>
                   </div>
                   <div class="col m-0 p-0">
                     <div class="mt-2">
-                      <a
+                      {% if question.option_d %}<a
                         class=" options d-flex justify-content-start align-items-center text-decoration-none"
                         data-value='D'  
                         ><p class="first-p p-0 m-0">(D)</p>
-                        <p class="last-p m-0 ps-1">{% if question.option_a %}{{question.option_d}}{% else %}None of these{% endif %}</p></a
+                        <p class="last-p m-0 ps-1">{{question.option_d}}</p>
                         </a
-                      >
+                      >{% endif %}
                     </div>
                   </div>
               </div>
@@ -430,65 +442,7 @@
     </div>
   </div>
   <script>
-    var options = document.querySelectorAll('.options');
-    selectedoption = false
-    question_id = document.querySelector('.question-id').textContent
-    category_id = document.querySelector('.category-id').textContent
-    level_no = document.querySelector('.level_no').textContent
-    baseurl = "{% url 'answer' %}"
-    {% comment %} baseurl = '{% url "answer" pk=0 %}'.replace('0', category_id) {% endcomment %}
-    var stored_option = '{{question.correct_answer}}';
-    console.log(stored_option)
-    modal_btn = document.querySelector('.modal-button')
-    options.forEach(function(option) {
-      option.addEventListener("click", function() {
-        if (!selectedoption){
-          selectedoption = true
-          var stored_option = '{{question.correct_answer}}';
-          var selected_option = this.getAttribute("data-value");
-          options.forEach(function(option) {
-            option.classList.remove('option-selected');
-            option.classList.remove('option-selected-wrong');
-          });
-          if (selected_option == stored_option) {
-            this.classList.add('option-selected');
-            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-            myModal.show();
-            modal_btn.href = baseurl+'?level='+level_no+'&selected_option='+selected_option+'&qsid='+question_id+'&category_id='+category_id
-          } else {
-            this.classList.add('option-selected-wrong');
-            showError();
-            checkAnswer(category_id ,level_no, selected_option, question_id)
-          }
-        }
-      });
-    });
-
-    function checkAnswer(category_id ,level_no, selected_option, qsid) {
-      console.log('answer is being verifeid...')
-      $.ajax({
-        type: "GET",
-        url: baseurl+'?level='+level_no+'&selected_option='+selected_option+'&qsid='+question_id+'&category_id='+category_id,
-        data: {
-            "category_id": category_id,
-            "level_no": level_no,
-            "selected_option": selected_option,
-            "qsid": qsid,
-        },
-        dataType: "json",
-  
-        success: function (data) {
-  
-          if (data.error){
-              alert('Error')
-          }else{
-            console.log('response ', data)
-          }
-          
-        }
-        
-    });
-    }
+   
     
  
   </script>
@@ -497,6 +451,7 @@
   <script src="{% static 'user/js/roundSlider.js'%}"></script>
   <script src="{% static 'user/js/timeCounter.js'%}"></script>
   <script src="{% static 'user/js/main.js'%}"></script>
+  <script src="{% static 'user/js/load_question.js'%}"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

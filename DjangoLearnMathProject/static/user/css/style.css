@@ -94,4 +94,11 @@ body{
   .index{
     position:fixed;
     z-index: 1;
+    width: 50%;
+  }
+
+  @media (max-width: 540px) {
+    .index{
+        width: 75%;
+      } 
   }

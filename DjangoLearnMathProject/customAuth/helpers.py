@@ -1,8 +1,11 @@
-from .forms import OTPForm,SecondOTPForm
+from .forms import OTPForm
 from customAuth.sendEmail import Email
-from customAuth.models import User
-from customAuth.models import OTP 
+from customAuth.models import User,OTP
 from django.utils import timezone
+from adminDashboard.models import Question, Level
+from django.contrib import messages
+from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist 
 import datetime
 import secrets
 import random
@@ -102,3 +105,22 @@ def reset_passwrod(request,email):
     return response
 
 
+def get_next_question(request, category, level_no, qsid):
+    try:
+        category_level = Level.objects.get(level_category=category, level_no=level_no)
+        qs = Question.objects.filter(question_level=category_level)
+        current_question_id = qsid
+        qs_list = list(qs)
+        if current_question_id:
+            current_qs = qs.get(id=current_question_id)
+            current_question_index = qs_list.index(current_qs)
+            
+            # If there is a next question, return its URL
+            if current_question_index < len(qs_list) - 1:
+                next_question_id = qs_list[current_question_index + 1].id
+                return reverse('category', args=[category]) + f'?level={level_no}&qsid={next_question_id}&qs_no={current_question_index+1}'
+
+    except ObjectDoesNotExist:
+        messages.error(request, 'Error occurred while getting next question')
+
+    return None
