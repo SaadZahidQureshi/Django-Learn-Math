@@ -8,7 +8,7 @@ from django.shortcuts import render,redirect
 from django.db.models import Q, Sum
 from django.urls import reverse
 from customAuth.models import User
-from adminDashboard.models import CATEGORY_LIST, Category, Level, Question
+from adminDashboard.models import CATEGORY_LIST, Category, Level, Question,Answer
 from adminDashboard.forms import CategoryForm, LevelForm, QuestionForm
 
 
@@ -69,9 +69,9 @@ def profile(request):
 @login_required(login_url='admin-login')
 def users(request):
 
-    search = request.GET.get('search-bar', None)
-    start_date = request.GET.get('startdate', None)
-    end_date = request.GET.get('enddate', None)
+    search = request.GET.get('search-bar', '')
+    start_date = request.GET.get('startdate', '')
+    end_date = request.GET.get('enddate', '')
     context={
         'seachbar': search,
         'startdate': start_date,
@@ -88,7 +88,7 @@ def users(request):
 
     # Filter based on name
     if search:
-        records = records.filter(Q(name__icontains=search) | Q(email__icontains=search))
+        records = records.filter(Q(name__icontains=search) | Q(email__icontains=search) | Q(id__icontains = search))
 
     # Pagination
     paginator = Paginator(records, 4)
@@ -114,7 +114,18 @@ def users(request):
 @login_required(login_url='admin-login')
 def usersDetails(request, pk):
     user = User.objects.get(id=pk)
-    return render (request, 'admin_dashboard/user-details.html',{'user':user})
+    answered_by_user = Answer.objects.filter(user__id = pk)
+    list_questions=[]
+    list_levels = []
+    for answer in answered_by_user:
+        list_questions.append(answer.question.id)
+        level = answer.question.question_level
+        if level not in list_levels:
+            list_levels.append(level)
+    questions_attempted = len(list_questions)
+    levels_worked_on = len(list_levels)
+
+    return render (request, 'admin_dashboard/user-details.html',{'user':user, 'questions_attempted': questions_attempted, 'levels_worked_on': levels_worked_on})
 
 @login_required(login_url='admin-login')
 def usersDelete(request,pk):
@@ -137,7 +148,6 @@ def categories(request):
     }
 
     records = Category.objects.all()
-
     if start_date and end_date:
         records = records.filter(created_at__range=(start_date, end_date))
     elif start_date:
@@ -147,7 +157,7 @@ def categories(request):
 
     # Filter based on name
     if search:
-        records = records.filter(Q(category_title__icontains=search) | Q(category_description__icontains=search))
+        records = records.filter(Q(category_title__icontains=search) | Q(category_description__icontains=search) | Q(id__icontains=search))
 
     paginator = Paginator(records,4)
     page = request.GET.get('page')
@@ -180,7 +190,6 @@ def addCategory(request):
             category = form.cleaned_data['category_title']
             form.save()
             return redirect(reverse('categories')+f'?addAlert=true&category={category}')
-        print(form.errors)
     return render(request, 'admin_dashboard/add-category.html', context)
 
 @login_required(login_url='admin-login')
@@ -215,9 +224,9 @@ def deleteCategory(request,pk):
 @login_required(login_url='admin-login')
 def levels(request):
     context={
-        'startdate': request.GET.get('startdate',None),
-        'enddate': request.GET.get('enddate',None),
-        'seachbar': request.GET.get('search-bar',None),
+        'startdate': request.GET.get('startdate',''),
+        'enddate': request.GET.get('enddate',''),
+        'seachbar': request.GET.get('search-bar',''),
         'records' : Level.objects.all(),
         'records_count' : Level.objects.all().count,
         'levelno': request.GET.get('levelno',None)
@@ -232,7 +241,7 @@ def levels(request):
 
     # Filter based on name
     if context['seachbar']:
-        context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']))
+        context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']) | Q(id__icontains = context['seachbar']))
 
     paginator = Paginator(context['records'],4)
     page = request.GET.get('page')
@@ -245,6 +254,8 @@ def levels(request):
     except EmptyPage:
         # If the page is out of range, show the last page
         records_within_range = paginator.page(paginator.num_pages)
+        
+    
 
     level_count = context['records'].count()
     context['records']= records_within_range
@@ -306,11 +317,11 @@ def deleteLevel(request,pk):
 def Questions(request):
     context = {
         'categories': Category.objects.all(),
-        'category': request.GET.get('category', None),
-        'level': request.GET.get('level', None),
-        'startdate': request.GET.get('startdate', None),
-        'enddate': request.GET.get('enddate', None),
-        'search': request.GET.get('search-bar', None)
+        'category': request.GET.get('category', ''),
+        'level': request.GET.get('level', ''),
+        'startdate': request.GET.get('startdate', ''),
+        'enddate': request.GET.get('enddate', ''),
+        'search': request.GET.get('search-bar', '')
     }
 
     selected_category_title = context['category']
@@ -342,7 +353,7 @@ def Questions(request):
     # Filter based on name
     if context['search']:
         context['records'] = context['records'].filter(
-            Q(question_title__icontains=context['search']) | Q(question_description__icontains=context['search'])
+            Q(question_description__icontains=context['search'])| Q(id__icontains = context['search'])
         )
 
     context['record_count'] = context['records'].count()

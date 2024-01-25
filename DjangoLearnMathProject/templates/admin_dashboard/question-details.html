@@ -163,7 +163,7 @@
                                         <div class="col  ">
                                             <div class="d-flex flex-column h-100 w-100 gap-4 ">
 
-                                                <div class="row w-100 ">
+                                                <div class="row w-100 d-none">
                                                     <div class="col">
                                                       <div class="position-relative mt-3 pb-0">
                                                         <div class="input-control-text-area p-3"   readonly>{{record.question_title | safe}}</div>
@@ -171,13 +171,13 @@
                                                         <!-- <img class="input-svg bit-wide position-absolute" src="../assets/svgs/password-svg.svg" alt="level"> -->
                                                       </div>
                                                     </div>
-                                                  </div>
+                                                </div>
                                             
                                                  
 
                                                   <div class="row w-100">
                                                     <div class="col">
-                                                        <div class="">
+                                                        <div class="mt-3">
                                                             <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                                 {% if record %}
                                                                 {{record.question_level}}
@@ -195,7 +195,7 @@
                                                     </div>
                                                   </div>
 
-                                                  <div class="row w-100 ">
+                                                  <div class="row w-100 d-none">
                                                     <div class="col">
                                                       <div class="position-relative  pb-0">
                                                         <div class="position-absolute svg-question ">
@@ -211,15 +211,11 @@
                                                   </div>
 
                                                 <div class="row w-100 ">
-                                                <div class="col">
-                                                    
-                                                <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                                    <img class="category-img rounded-1 w-100 h-100" src="{{record.question_image.url}}" alt="cateogry-img">
-                                                    
-                                                    
-                                                </div>
-                                                    
-                                                </div>
+                                                    <div class="col">
+                                                        <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
+                                                            {% if record.question_image %}<img class="category-img rounded-1 w-100 h-100" src="{{record.question_image.url}}" alt="question-img">{% else %}No Image{% endif %}
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="row w-100 ">
@@ -271,60 +267,28 @@
                                                                 Select right answer
                                                                 {% endif %}
                                                             </button>
-                                                            {% comment %} <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action two</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action three</a></li>
-                                                                <li><a class="dropdown-item" href="#">Action four</a></li>
-                                                            </ul> {% endcomment %}
                                                         </div>
                                                     </div>
-                                                  </div>
+                                                </div>
     
                                                 <div class="row w-100">
                                                     <div class="col">
                                                         <div class="">
                                                             <div class="">
-                                                                
-                                                                <div class="form-control  border-user-defind border-radius height-385px" id="exampleFormControlTextarea1"  placeholder="Add description here" readonly >{{record.question_description | safe}}</div>
+                                                                <div class="form-control  border-user-defind border-radius height-385px overflow-auto" id="exampleFormControlTextarea1"  placeholder="Add description here" readonly >{{record.question_description | safe}}</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="row w-100 ">
-                                                    <div class="col h-100">
-                                                        
-                                                        
-                                                    <div class=" video-container video-file-container-height d-flex flex-column justify-content-center align-items-center   border-user-defind border-radius">
-                                                         
-                                                        {% if record %}
-                                                        {{record.question_helping_video|safe}}
-                                                        {% else %}
-                                                        <img class="category-img d-none rounded-1" src="" alt="cateogry-img">
-                                                        <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
-                                                            <div class="">
-                                                                <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">                                                       
-                                                                    <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                                        <g clip-path="url(#clip0_1_11314)">
-                                                                        <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                                        </g>
-                                                                        <defs>
-                                                                        <clipPath id="clip0_1_11314">
-                                                                            <rect width="32" height="32" />
-                                                                        </clipPath>
-                                                                        </defs>
-                                                                    </svg>
-                                                                </a> 
-                                                            </div>  
-                                                                                                            
-                                                        </div>
-                                                        <div class="">
-                                                            <p class="m-0 p-0 upload-text upload-img-text">Upload an video</p> 
-                                                        </div> 
-                                                        {% endif %}
-                                                    </div>
-                                                        
+                                                    <div class="col h-50"> 
+                                                        <div class=" video-container d-flex flex-column justify-content-center align-items-center   border-user-defind border-radius">
+                                                            
+                                                            {% if record %}
+                                                            {{record.question_helping_video|safe}}                                                           
+                                                            {% endif %}
+                                                        </div>  
                                                     </div>
                                                 </div>
                                                 

@@ -80,3 +80,5 @@ class User(AbstractUser, BaseModel):
     REQUIRED_FIELDS = []
     objects = UserManager()
 
+    def __str__(self):
+        return str(self.id)

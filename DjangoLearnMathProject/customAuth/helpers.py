@@ -118,7 +118,13 @@ def get_next_question(request, category, level_no, qsid):
             # If there is a next question, return its URL
             if current_question_index < len(qs_list) - 1:
                 next_question_id = qs_list[current_question_index + 1].id
-                return reverse('category', args=[category]) + f'?level={level_no}&qsid={next_question_id}&qs_no={current_question_index+1}'
+                context = {
+                    'category': category,
+                    'level' : level_no,
+                    'next_qs_id': next_question_id,
+                    'next_qs_index': current_question_index+1
+                }
+                return context
 
     except ObjectDoesNotExist:
         messages.error(request, 'Error occurred while getting next question')

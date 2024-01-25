@@ -470,7 +470,9 @@
                                         {% for record in records %}
                                         <tr class="tr shadow-sm ">
                                           <td >{{record.id}}</td>
-                                          <td>{{record.question_title | safe}}</td>
+                                          <td class=''>
+                                            <div class="overflow-hidden" style='height:20px;'>{{record.question_description | safe}}</div>
+                                          </td>
                                           <td>{{record.question_level}}</td>
                                           <td>{{record.question_level.level_category}}</td>
                                           <td>{{record.created_at|date:"d/m/y"}}</td>
@@ -537,7 +539,7 @@
                     <li class="page-item">
                       <a
                         class="page-link text-dark border-0 prev"
-                        href="?page={{ records.previous_page_number }}"
+                        href="?page={{ records.previous_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}&category={{category}}&level={{level}}"
                         tabindex="-1"
                         aria-disabled="true"
                         >Prev</a
@@ -547,13 +549,13 @@
 
                     {% for page_num in records.paginator.page_range %}
                     <li class="page-item  d-flex justify-content-center align-items-center">
-                      <a class="page-link border-0 {% if records.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
+                      <a class="page-link border-0 {% if records.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}&category={{category}}&level={{level}}">{{ page_num }}</a>
                     </li>
                     {% endfor %}
 
                     {% if records.has_next %}
                     <li class="page-item">
-                      <a class="page-link next border-0" href="?page={{ records.next_page_number }}">Next</a>
+                      <a class="page-link next border-0" href="?page={{ records.next_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}&category={{category}}&level={{level}}">Next</a>
                     </li>
                     {% endif %}
 

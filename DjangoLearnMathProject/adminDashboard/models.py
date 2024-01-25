@@ -25,7 +25,7 @@ class Category(BaseModel):
     category_image = models.ImageField(upload_to='category_images')
 
     def __str__(self):
-        return self.category_title
+        return str(self.id)
     
     def total_questions(self):
         return Question.objects.filter(question_level__level_category = self).count()
@@ -53,7 +53,6 @@ class Level(BaseModel):
     
 
 class Question(BaseModel):
-    question_title = models.TextField()
     question_description = models.TextField()
     option_a = models.CharField(max_length=255)
     option_b = models.CharField(max_length=255)
@@ -63,10 +62,10 @@ class Question(BaseModel):
     question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     question_helping_video = models.TextField()
     question_image = models.ImageField(upload_to='questions_images', blank=True, null=True)
-    question_countdown_time = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.question_title
+        return str(self.id)
+
 
 class Answer(BaseModel):
     selected_option = models.CharField(max_length=255)
@@ -74,3 +73,6 @@ class Answer(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     number_of_attempts = models.PositiveIntegerField()
     time_taken = models.CharField(max_length = 255)
+
+    class Meta:
+        ordering = ('-updated_at',)

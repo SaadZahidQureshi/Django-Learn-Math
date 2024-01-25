@@ -94,8 +94,7 @@
       <div class="question-container__width ">
        
         <div class="mt-4 ">
-          <h2 class="question-category">{{category}}</h2>
-         
+          <h2 class="question-category">{{category.category_title}}</h2>
         </div>
       </div>
       </div>
@@ -150,7 +149,7 @@
     <p class='d-none level_no'>{{current_level.level_no}}</p>
     <p class='d-none baseurl'>{% url 'answer' %}</p>
     <p class='d-none stored_option'>{{question.correct_answer}}</p>
-    <p class='d-none level_no'>{{level_no}}</p>
+    {% comment %} <p class='d-none level_no'>{{level_no}}</p> {% endcomment %}
     <!-- main-container -->
     <div class="row m-0 p-0">
       <div class="m-0 p-0 d-flex justify-content-center">
@@ -441,11 +440,7 @@
       </div>
     </div>
   </div>
-  <script>
-   
-    
- 
-  </script>
+
   <script src="{% static 'user/js/ham-burger-menu.js'%}"></script>
   <script src="{% static 'user/js/slider.js'%}"></script>
   <script src="{% static 'user/js/roundSlider.js'%}"></script>

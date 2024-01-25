@@ -547,7 +547,7 @@
                   <li class="page-item">
                     <a
                       class="page-link text-dark border-0 prev"
-                      href="?page={{ users.previous_page_number }}"
+                      href="?page={{ users.previous_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}"
                       tabindex="-1"
                       aria-disabled="true"
                       >Prev</a
@@ -557,13 +557,13 @@
 
                   {% for page_num in users.paginator.page_range %}
                   <li class="page-item  d-flex justify-content-center align-items-center">
-                    <a class="page-link border-0 {% if users.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
+                    <a class="page-link border-0 {% if users.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}">{{ page_num }}</a>
                   </li>
                   {% endfor %}
 
                   {% if users.has_next %}
                   <li class="page-item">
-                    <a class="page-link next border-0" href="?page={{ users.next_page_number }}">Next</a>
+                    <a class="page-link next border-0" href="?page={{ users.next_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}">Next</a>
                   </li>
                   {% endif %}
 

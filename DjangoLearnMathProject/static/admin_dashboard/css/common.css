@@ -181,3 +181,17 @@ body{
     color: white;
 }
 
+::-webkit-scrollbar {
+    width: 6px !important;
+    margin-right: 5px !important;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #ffffff !important; 
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px !important;
+    -webkit-box-shadow: inset 0 0 12px 	#7b808139 !important; 
+}

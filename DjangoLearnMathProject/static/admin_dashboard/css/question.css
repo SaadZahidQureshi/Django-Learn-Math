@@ -4,11 +4,11 @@
 }
 
 .video-file-container-height{
-    height: 47vh;
+    height: 44vh;
 }
 
 .img-file-container-height{
-    height: 30vh;
+    height: 40vh;
 }
 #question_image_background
 {
@@ -39,7 +39,7 @@
 .video-container {
     position: relative;
     width: 100%; /* Set the width of the container */
-    padding-bottom: 56.25%; /* Assuming 16:9 aspect ratio, adjust as needed */
+    padding-bottom: 50.25%; /* Assuming 16:9 aspect ratio, adjust as needed */
     height: 0;
   }
   
@@ -62,5 +62,10 @@
     padding-left: 40px;
 }
 .height-385px{
-    height: 385px;
+    height: 300px;
 }
+.tox{
+    border: 1px solid #743FCB !important;
+    border-radius: 4px !important;
+}
+

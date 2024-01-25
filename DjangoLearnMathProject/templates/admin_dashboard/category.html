@@ -292,7 +292,7 @@
                           <h2 class="user-title m-0 p-0">Categories</h2>
                         </div>
                         <div>
-                          <h3 class="user-title-desc m-0 p-0">{{category_count }} results found</h3>
+                          <h3 class="user-title-desc m-0 p-0">{{category_count}} results found</h3>
                         </div>
                       </div>
                     </div>
@@ -558,7 +558,7 @@
                     <li class="page-item">
                       <a
                         class="page-link text-dark border-0 prev"
-                        href="?page={{ categories.previous_page_number }}"
+                        href="?page={{ categories.previous_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}"
                         tabindex="-1"
                         aria-disabled="true"
                         >Prev</a
@@ -568,13 +568,13 @@
 
                     {% for page_num in categories.paginator.page_range %}
                     <li class="page-item  d-flex justify-content-center align-items-center">
-                      <a class="page-link border-0 {% if categories.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
+                      <a class="page-link border-0 {% if categories.number == page_num %} custom_active {% endif %}" href="?page={{ page_num }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}">{{ page_num }}</a>
                     </li>
                     {% endfor %}
 
                     {% if categories.has_next %}
                     <li class="page-item">
-                      <a class="page-link next border-0" href="?page={{ categories.next_page_number }}">Next</a>
+                      <a class="page-link next border-0" href="?page={{ categories.next_page_number }}&search-bar={{seachbar}}&startdate={{startdate}}&enddate={{enddate}}">Next</a>
                     </li>
                     {% endif %}
 

@@ -28,4 +28,4 @@ class QuestionForm(StandardForm):
 
     class Meta:
         model= Question
-        fields = ['question_title', 'question_description','option_a','option_b','option_c','option_d','correct_answer','question_level','question_helping_video','question_image','question_countdown_time']
+        fields = ['question_description','option_a','option_b','option_c','option_d','correct_answer','question_level','question_helping_video','question_image']

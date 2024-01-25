@@ -151,7 +151,8 @@
                            <div class="row h-100 w-100">
                               <div class="col ">
                                  <div class="d-flex flex-column h-100 w-100 gap-4 ">
-                                    <div class="row w-100 ">
+
+                                    <div class="row w-100 d-none">
                                        <div class="col">
                                           <div class="position-relative mt-3 pb-0">
                                              <textarea class="input-control-text-area p-3 richtextfields" name="question_title"  rows="3" placeholder="Type question here...">{{record.question_title}}</textarea>
@@ -168,10 +169,10 @@
         
                                     <div class="row w-100">
                                        <div class="col">
-                                          <div class="">
+                                          <div class="mt-3">
                                              <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" id='level_btn' type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                              {% if record %}
-                                             {{record.question_level}}
+                                             {{record.question_level}}, {{record.question_level.level_category}}
                                              {% else %}
                                              Select Level
                                              {% endif %}
@@ -193,7 +194,7 @@
                                     </div>
                                     <input class='d-none'  id='selectedcategory' type="text" value='{{record.question_level.id}}'  name='question_level'>
 
-                                    <div class="row w-100 ">
+                                    <div class="row w-100 d-none">
                                        <div class="col">
                                           <div class="position-relative  pb-0">
                                              <div class="position-absolute svg-question ">
@@ -213,7 +214,8 @@
                                     </div>
                                     <div class="row w-100 ">
                                        <div class="col">
-                                          <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='question_image_background'  style='background:url("{{record.question_image.url}}");' >
+                                         
+                                          <div class="img-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius" id='question_image_background'  style='background:url(" {% if record.question_image %}{{record.question_image.url}}{% endif %}");' >
                                              {% comment %} <img class="category-img rounded-1 w-100 h-100" src="" alt="question-img"> {% endcomment %}
                                              <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
                                                 <div class="">
@@ -324,11 +326,12 @@
                                        {% endif %}
                                     </div>
                                     <input name='correct_answer' class='d-none' type="text" value='{% if record %}{{record.correct_answer}}{% endif %}' id="correct_answer">
+                                    
                                     <div class="row w-100">
                                        <div class="col">
                                           <div class="">
                                              <div class="">
-                                                <textarea class="form-control  border-user-defind border-radius richtextfields" name='question_description' id="exampleFormControlTextarea1" rows="14" placeholder="Add description here"  >{{record.question_description}}</textarea>
+                                                <textarea class="form-control  border-user-defind border-radius richtextfields overflow-auto" name='question_description' id="exampleFormControlTextarea1" rows="14" placeholder="Add description here"  >{{record.question_description}}</textarea>
                                              </div>
                                           </div>
                                        </div>
@@ -338,37 +341,14 @@
                                        {% endfor %}
                                        {% endif %}
                                     </div>
-                                    <div class="row w-100 d-none">
-                                       <div class="col h-100">
-                                          <div class="video-file-container-height d-flex flex-column justify-content-center align-items-center gap-2  border-user-defind border-radius">
-                                             <img class="category-img d-none rounded-1" src="" alt="cateogry-img">
-                                             <div class=" d-flex flex-column upload-category-img-container justify-content-center ">
-                                                <div class="">
-                                                   <a class=" nav-link nav-link-upload-file rounded-border bg-color " href="#" onclick="importData()">
-                                                      <svg class="sidebar__link-icon color-svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                                                         <g clip-path="url(#clip0_1_11314)">
-                                                            <path d="M2.4375 17.9375H14.0625V29.5625C14.0625 30.631 14.9315 31.5 16 31.5C17.0685 31.5 17.9375 30.631 17.9375 29.5625V17.9375H29.5625C30.631 17.9375 31.5 17.0685 31.5 16C31.5 14.9315 30.631 14.0625 29.5625 14.0625H17.9375V2.4375C17.9375 1.36896 17.0685 0.5 16 0.5C14.9315 0.5 14.0625 1.36896 14.0625 2.4375V14.0625H2.4375C1.36896 14.0625 0.5 14.9315 0.5 16C0.5 17.0685 1.36896 17.9375 2.4375 17.9375Z" />
-                                                         </g>
-                                                         <defs>
-                                                            <clipPath id="clip0_1_11314">
-                                                               <rect width="32" height="32" />
-                                                            </clipPath>
-                                                         </defs>
-                                                      </svg>
-                                                   </a>
-                                                </div>
-                                             </div>
-                                             <div class="">
-                                                <p class="m-0 p-0 upload-text upload-img-text">Upload an video</p>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
+                                    
+
+                                    
                                     <div class="row w-100">
                                        <div class="col">
                                           <div class="">
                                              <div class="">
-                                                <textarea class="form-control  border-user-defind border-radius" name='question_helping_video' id="exampleFormControlTextarea1" rows="17" placeholder="Add description here"  >{{record.question_helping_video}}</textarea>
+                                                <textarea class="form-control  border-user-defind border-radius overflow-auto" name='question_helping_video' id="exampleFormControlTextarea1" rows="9" placeholder="Add description here"  >{{record.question_helping_video}}</textarea>
                                              </div>
                                           </div>
                                        </div>

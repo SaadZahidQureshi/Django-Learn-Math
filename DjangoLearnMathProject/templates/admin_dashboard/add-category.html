@@ -245,16 +245,8 @@
                                                   <div class="row w-100  ">
                                                     <div class="col">
                                                         <div class="">
-                                                            {% comment %} <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" name='category_title' type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Select Category
-                                                            </button>
-                                                            
-                                                            <ul class="dropdown-menu">
-                                                              {% for category in categories %}
-                                                                <li><a class="dropdown-item" href="#" data-value = '{{category.1}}'>{{category.1}}</a></li>
-                                                                {% endfor %}
-                                                            </ul> {% endcomment %}
-                                                            <input class='input-control ps-3' type="text" name="category_title" id="">
+
+                                                            <input class='input-control ps-3' type="text" name="category_title" id="" placeholder='Add title here..'>
                                                         </div>
                                                         {% if form.errors %}
                                                  

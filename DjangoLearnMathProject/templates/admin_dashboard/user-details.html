@@ -129,7 +129,7 @@
                       <div class="d-flex">
                         <a
                           class="nav-link rounded-border bg-color"
-                          href="../html/question.html"
+                          href="{%url 'questions'%}"
                         
                         >
                           <svg
@@ -256,14 +256,14 @@
                             <div class="col-4 d-flex justify-content-start">
                               <div class="d-flex flex-column align-items-center">
                                   <div ><h3 class="user-detail__heading">No. of Levels</h3></div>
-                                  <div ><h5 class="user-details__desc">33</h5></div>
+                                  <div ><h5 class="user-details__desc">{{levels_worked_on}}</h5></div>
                               </div>
                           </div>
     
                             <div class="col-4 d-flex justify-content-center">
                                 <div class="d-flex flex-column align-items-center  ">
                                     <div ><h3 class="user-detail__heading">Quesions Attempted</h3></div>
-                                    <div ><h5 class="user-details__desc">39</h5></div>
+                                    <div ><h5 class="user-details__desc">{{questions_attempted}}</h5></div>
                                 </div>
                             </div>
     
