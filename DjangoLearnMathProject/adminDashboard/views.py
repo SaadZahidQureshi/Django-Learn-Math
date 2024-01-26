@@ -241,7 +241,7 @@ def levels(request):
 
     # Filter based on name
     if context['seachbar']:
-        context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']) | Q(id__icontains = context['seachbar']))
+        context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']) | Q(id__icontains = context['seachbar']) | Q(level_category__category_title__icontains = context['seachbar']))
 
     paginator = Paginator(context['records'],4)
     page = request.GET.get('page')
@@ -339,9 +339,12 @@ def Questions(request):
         context['records'] = Question.objects.all()
     
     if selected_level:
-        levels = Level.objects.get(id=selected_level)
-        context['level']= levels.level_no
-        context['records'] = Question.objects.filter(question_level = levels)
+        try:
+            level = Level.objects.get(level_no=selected_level, level_category = selected_category)
+            context['level']= level.level_no
+            context['records'] = Question.objects.filter(question_level = level)
+        except Level.DoesNotExist:
+            context['records'] = Level.objects.none()
 
     if context['startdate'] and context['enddate']:
         context['records'] = context['records'].filter(created_at__range=(context['startdate'], context['enddate']))
@@ -353,7 +356,7 @@ def Questions(request):
     # Filter based on name
     if context['search']:
         context['records'] = context['records'].filter(
-            Q(question_description__icontains=context['search'])| Q(id__icontains = context['search'])
+            Q(question_description__icontains=context['search'])| Q(id__icontains = context['search'] ) | Q(question_level__level_category__category_title__icontains = context['search'] )
         )
 
     context['record_count'] = context['records'].count()

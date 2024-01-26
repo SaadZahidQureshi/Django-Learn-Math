@@ -124,7 +124,7 @@
                   <ul class="d-flex list-unstyled slider-list m-0 p-2" id="slider-list" >
                     {% if levels %}
                     {% for level in levels %}
-                        <a class="slider-items text-center text-decoration-none" href="{% url 'category' pk=category.id%}?level={{level.level_no}}" data-name='{{level.level_no}}'>{{level}}</a>
+                        <a class="slider-items text-center text-decoration-none" href="{% url 'category' pk=category.id%}?level={{level.level_no}}" data-name='{{level.level_no}}'>Level {{level.level_no}}</a>
                     {% endfor %}
                     {% endif %}
                       
@@ -232,7 +232,7 @@
                           <p class="side-result__text  p-0 m-0 text-center">Answered Questions</p>
                         </div>
                         <div>
-                          <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                          <p class="side-result__text-marks p-0 m-0 text-center">{{attempted}}/{{total_questions}}</p>
                         </div>
                       </div>
                     </div>
@@ -257,7 +257,7 @@
                                 <p class="side-result__text p-0 m-0 text-center">Correct Questions</p>
                             </div>
                             <div>
-                                <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                                <p class="side-result__text-marks p-0 m-0 text-center">{{correct}}/{{total_questions}}</p>
                             </div>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                 <p class="side-result__text p-0 m-0 text-center">Wrong Questions</p>
                             </div>
                             <div>
-                                <p class="side-result__text-marks p-0 m-0 text-center">0/{{total_questions}}</p>
+                                <p class="side-result__text-marks p-0 m-0 text-center">{{wrong}}/{{total_questions}}</p>
                             </div>
                             </div>
                         </div>
@@ -387,7 +387,7 @@
                       <a class="re-attempt-or-skip text-decoration-none text-light" href="">Re-attempt</a>
                   </div>
                   <div class="me-2">
-                      <a class="re-attempt-or-skip bg-light text-decoration-none text-dark" href="">Skip and Continue</a>
+                      <a class="re-attempt-or-skip bg-light text-decoration-none text-dark" href="{% url 'category' pk=category.id %}?skip={{True}}" >Skip and Continue</a>
                   </div>
               </div>
           </div>

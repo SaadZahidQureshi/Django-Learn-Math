@@ -42,14 +42,17 @@ def resize_image(sender,instance, **kwargs):
 class Level(BaseModel):
     level_no = models.IntegerField()
     number_of_questions = models.IntegerField()
-    level_category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    level_category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='levels')
     
     class Meta:
         unique_together = ('level_no', 'level_category')
 
     def __str__(self):
-        return f"Level {self.level_no}"
+        return str(self.id)
         # return f"Level {self.level_no}"
+    
+    def total_questions(self):
+        return Question.objects.filter(question_level = self).count()
     
 
 class Question(BaseModel):
@@ -59,7 +62,7 @@ class Question(BaseModel):
     option_c = models.CharField(max_length=255)
     option_d = models.CharField(max_length=255)
     correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')])
-    question_level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    question_level = models.ForeignKey(Level, on_delete=models.CASCADE, related_name='questions')
     question_helping_video = models.TextField()
     question_image = models.ImageField(upload_to='questions_images', blank=True, null=True)
 
@@ -69,8 +72,8 @@ class Question(BaseModel):
 
 class Answer(BaseModel):
     selected_option = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
     number_of_attempts = models.PositiveIntegerField()
     time_taken = models.CharField(max_length = 255)
 

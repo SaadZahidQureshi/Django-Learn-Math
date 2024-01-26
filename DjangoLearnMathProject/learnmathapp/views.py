@@ -23,42 +23,113 @@ def popupQuiz(request):
 def category(request, pk):
     context={}
     category = Category.objects.get(id=pk)
-    
+    skip = request.GET.get('skip', False)
+    correct = 0
+    attempted = 0
+    wrong = 0
+    answers = Answer.objects.prefetch_related('question', 'question__question_level', 'question__question_level__level_category').filter(user=request.user, question__question_level__level_category_id=pk).order_by('-question__question_level__level_no')
+    print(answers.values())
+
     user = request.user
-    user_last_answer = Answer.objects.filter(user = user).first()
+    user_last_answer = answers.first()
+    print(user_last_answer)
     if user_last_answer:
-        user_last_answer_question = Question.objects.get(id = user_last_answer.question.id)
-        user_last_answer_question_level = Level.objects.filter(id = user_last_answer_question.question_level.id).first()
-        user_last_answer_question_level_category = Category.objects.get(id=user_last_answer_question_level.level_category.id)
-        all_levels_category = Level.objects.filter(level_category = user_last_answer_question_level_category)
-        all_questions_current_level_count = Question.objects.filter(question_level = user_last_answer_question_level).count()
-        all_questions_current_level = Question.objects.filter(question_level = user_last_answer_question_level)
+        user_last_answer_question = user_last_answer.question
+        user_last_answer_question_level = user_last_answer.question.question_level
+        user_last_answer_question_level_category = user_last_answer.question.question_level.level_category
+        all_levels_category = user_last_answer_question_level_category.levels.all()
+        all_questions_current_level = user_last_answer_question_level.questions.all()
+        all_questions_current_level_count = all_questions_current_level.count()
         
-        question_id = request.GET.get('question_id', None)
-        if question_id:
-            get_question = Question.objects.get(id = question_id)
-            if(get_question.correct_answer == user_last_answer.selected_option):
-                print('yes')
-        context['category']=user_last_answer_question_level_category
-        context['levels'] = all_levels_category
-        context['current_level'] = user_last_answer_question_level
-        context['total_questions'] = all_questions_current_level_count
+        if category == user_last_answer_question_level_category:
+            
+            context['category']=user_last_answer_question_level_category
+            context['levels'] = all_levels_category
+            context['current_level'] = user_last_answer_question_level
+            context['total_questions'] = all_questions_current_level_count
 
-        response = helpers.get_next_question(request, context['category'], context['current_level'].level_no, user_last_answer_question.id)
-        print(response)
 
-        try:
-            if response:
-                context['question'] = Question.objects.get(id = response['next_qs_id'])
-                context['questionno'] = response['next_qs_index']
-                context['current_level'] = response['level']
-                context['category'] = response['category']
+            for question in all_questions_current_level:
+                answer_of_question = Answer.objects.filter(question = question, user = request.user).first()
+                if answer_of_question:
+                    if question.correct_answer == answer_of_question.selected_option:
+                        correct += 1
+                        attempted += 1
+                    else:
+                        wrong += 1
+                        attempted += 1
+                
+            context['correct'] = correct
+            context['wrong'] = wrong
+            context['attempted'] = attempted
+            
+            if user_last_answer.selected_option == user_last_answer_question.correct_answer or skip == 'True':
+                question_response = helpers.get_next_question(request, context['category'], context['current_level'].level_no, user_last_answer_question.id)
+
+                try:
+                    if question_response:
+                        context['question'] = Question.objects.get(id = question_response['next_qs_id'])
+                        context['questionno'] = question_response['next_qs_index'] + 1
+                    else:
+                        if (all_questions_current_level_count > 3 and correct >= 3) or (all_questions_current_level_count < 3 and correct == all_questions_current_level_count) :
+                            level_response = helpers.get_next_level(request, context['category'], context['current_level'].level_no)
+
+                            if level_response:
+                                instance_new_level = Level.objects.get(id = level_response['next_level_id'])
+                                questions_of_new_level = Question.objects.filter(question_level = instance_new_level)
+
+                                context['question'] = questions_of_new_level.first()
+                                context['questionno'] = 1
+                                context['current_level'] = instance_new_level
+                                context['total_questions'] = questions_of_new_level.count()
+
+                                context['correct'] = 0
+                                context['wrong'] = 0
+                                context['attempted'] = 0
+                                    
+                                messages.success(request, 'Congratulations! You have completed all questions in this level.')
+                            else:
+                                messages.error(request, 'Error occured while loading next Level ')
+                        else:
+                            current_level = context['current_level']
+                            questions  = Question.objects.filter(question_level = current_level)
+                            context['question'] = questions.first()
+                            context['questionno'] = 1
+
+                            context['correct'] = 0
+                            context['wrong'] = 0
+                            context['attempted'] = 0
+                            
+                            messages.warning(request, 'You need to re-try this level')
+
+                except Exception as e:
+                    print({str(e)})
+                    messages.warning(request, f'Error : {str(e)} :(')  
+
             else:
-                messages.error(request, 'error ')
+                all_questions_current_level = list(all_questions_current_level)
+                index_of_last_question = all_questions_current_level.index(user_last_answer_question)
+                context['question'] = user_last_answer_question
+                context['questionno'] = index_of_last_question + 1
 
-        except Exception as e:
-            messages.warning(request, f'Error : {str(e)} :(')            
+        else:           
+            context['category']= category
+            # response = helpers.get_current_level_category(request,category)
 
+            context['levels'] = Level.objects.filter(level_category = category)
+            context['current_level'] = context['levels'][0]
+            questions = Question.objects.filter(question_level = context['levels'][0].id)
+
+            if questions.exists():
+                context['question']= questions.first()
+                context['questionno'] = 1
+                context['total_questions'] = questions.count()
+                
+                context['correct'] = 0
+                context['wrong'] = 0
+                context['attempted'] = 0
+            else:
+                messages.warning(request, 'this level have no questions yet.' )
     else:
         local_level_no = 1
         local_level_no_questions_count = Question.objects.filter(question_level = local_level_no).count()
@@ -72,6 +143,9 @@ def category(request, pk):
         context['question'] =local_level_no_questions[0]
         context['questionno'] =local_level_no_questions.index(context['question'])+1
 
+        context['correct'] = 0
+        context['wrong'] = 0
+        context['attempted'] = 0
 
     return render(request, 'user/Question-wrong-ans.html', context)
 
@@ -105,30 +179,17 @@ def answer(request):
             if question.correct_answer == selected_option :
                 is_answered = Answer.objects.filter(question = question, user = request.user).exists()
                 if is_answered:
-                    answer_instance = Answer.objects.get(question = question)
+                    answer_instance = Answer.objects.filter(question = question).first()
                     answer_instance.number_of_attempts = answer_instance.number_of_attempts + 1
                     answer_instance.selected_option = selected_option
                     answer_instance.time_taken = time
                     answer_instance.save()
                 else:
                     Answer.objects.create(user = request.user, question = current_qs, selected_option = selected_option, number_of_attempts = 0, time_taken = time)
-
-                next_question = helpers.get_next_question(request, category, level_no, qsid)
-                if next_question:
-                    category = next_question['category']
-                    level = next_question['level']
-                    next_qs_id = next_question['next_qs_id']
-                    next_qs_index = next_question['next_qs_index']
-                    return HttpResponseRedirect(reverse('category', args=[next_question['category']])+ f'?level={category}&level={level}&next_qs_id={next_qs_id}&next_qs_index={next_qs_index}')                    # return redirect('category', next_question)
-                else:
-                    messages.success(request, 'Congratulations! You have completed all questions in this level.')
-                    if current_level_index < len(levels_list) - 1:
-                        next_level_no = levels_list[current_level_index + 1].level_no
-                        return HttpResponseRedirect(reverse('category', args=[category])+ f'?level={next_level_no}')
             else:
                 is_answered = Answer.objects.filter(question = question, user = request.user).exists()
                 if is_answered:
-                    answer_instance = Answer.objects.get(question = question)
+                    answer_instance = Answer.objects.filter(question = question).first()
                     answer_instance.number_of_attempts = answer_instance.number_of_attempts + 1
                     answer_instance.selected_option = selected_option
                     answer_instance.time_taken = time
@@ -140,4 +201,4 @@ def answer(request):
         except ObjectDoesNotExist:
             messages.error(request, 'Question not found')
 
-    return HttpResponseRedirect(reverse('category', args=[category]) + f'?level={level_no}&question_id={question.id} ')
+    return HttpResponseRedirect(reverse('category', args=[category]))

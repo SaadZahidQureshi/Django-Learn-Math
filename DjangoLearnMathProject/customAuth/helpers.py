@@ -2,7 +2,7 @@ from .forms import OTPForm
 from customAuth.sendEmail import Email
 from customAuth.models import User,OTP
 from django.utils import timezone
-from adminDashboard.models import Question, Level
+from adminDashboard.models import Question, Level, Category, Answer
 from django.contrib import messages
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist 
@@ -111,22 +111,60 @@ def get_next_question(request, category, level_no, qsid):
         qs = Question.objects.filter(question_level=category_level)
         current_question_id = qsid
         qs_list = list(qs)
-        if current_question_id:
+
+
+        if current_question_id and qs_list.index(Question.objects.get(id=current_question_id)) < len(qs_list)-1:
             current_qs = qs.get(id=current_question_id)
             current_question_index = qs_list.index(current_qs)
-            
-            # If there is a next question, return its URL
-            if current_question_index < len(qs_list) - 1:
+
+            if current_question_index < len(qs_list)-1:
                 next_question_id = qs_list[current_question_index + 1].id
                 context = {
-                    'category': category,
-                    'level' : level_no,
                     'next_qs_id': next_question_id,
-                    'next_qs_index': current_question_index+1
+                    'next_qs_index': current_question_index + 1
                 }
                 return context
-
+        
     except ObjectDoesNotExist:
         messages.error(request, 'Error occurred while getting next question')
 
     return None
+
+
+def get_next_level(request, category, level_no):
+    try:
+        instance_current_level = Level.objects.get(level_category = category.id, level_no = level_no)
+        levels = Level.objects.filter(level_category = category)
+        list_of_levels = list(levels)
+        current_level_index = list_of_levels.index(instance_current_level)
+        current_level_id = instance_current_level.id
+
+        if current_level_id and list_of_levels.index(Level.objects.get(id=current_level_id)) < len(list_of_levels)-1:
+            next_level_no = list_of_levels[current_level_index +1].level_no
+            next_level_id = list_of_levels[current_level_index +1].id
+    
+            context={
+                'next_level_no': next_level_no,
+                'next_level_id': next_level_id,
+            }
+            return context
+        else:
+            messages.error(request, 'Error occured while loading next Level ')
+
+    except ObjectDoesNotExist:
+        messages.error(request, 'Error occurred while getting next Level')
+    return None
+
+def get_current_level_category(request, category):
+    user = request.user
+    user_answers = Answer.objects.filter(user = user)
+    print(user_answers)
+    print(user_answers.first())
+    user_answers_latest = user_answers.first()
+    user_answers_latest_question = Question.objects.filter(id = user_answers_latest.question.id).first()
+    print(user_answers_latest_question)
+    user_answers_latest_question_level = Level.objects.filter(id = user_answers_latest_question.question_level.id).first()
+    print(user_answers_latest_question_level)
+    user_answers_latest_question_level_category = Category.objects.filter(id = user_answers_latest_question_level.level_category.id).first()
+    print(user_answers_latest_question_level_category)
+    

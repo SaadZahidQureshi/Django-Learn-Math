@@ -291,7 +291,7 @@
                                 <!-- list items here -->
                                 {% if categories %}
                                 {% for category in categories %}
-                                <li class='list-items' data-value='{{category}}'>{{category}}</li>
+                                <li class='list-items' data-value='{{category.category_title}}'>{{category.category_title}}</li>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -319,7 +319,7 @@
                                 <!-- list items here -->
                                 {% if levels %}
                                 {% for level in levels %}                                
-                                <li class='list-items levels' data-value='{{level.id}}'>{{level}}</li>
+                                <li class='list-items levels' data-value='{{level.level_no}}'>Level {{level.level_no}}</li>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -474,7 +474,7 @@
                                             <div class="overflow-hidden" style='height:20px;'>{{record.question_description | safe}}</div>
                                           </td>
                                           <td>{{record.question_level}}</td>
-                                          <td>{{record.question_level.level_category}}</td>
+                                          <td>{{record.question_level.level_category.category_title}}</td>
                                           <td>{{record.created_at|date:"d/m/y"}}</td>
                                           <td>
                                             <div class="d-flex justify-content-center gap-1">
