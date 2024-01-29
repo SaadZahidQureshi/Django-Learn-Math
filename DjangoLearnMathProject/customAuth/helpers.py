@@ -112,6 +112,7 @@ def get_next_question(request, category, level_no, qsid):
         current_question_id = qsid
         qs_list = list(qs)
 
+        print(qs_list)
 
         if current_question_id and qs_list.index(Question.objects.get(id=current_question_id)) < len(qs_list)-1:
             current_qs = qs.get(id=current_question_id)

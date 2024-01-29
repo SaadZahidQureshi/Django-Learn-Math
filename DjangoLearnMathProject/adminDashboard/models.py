@@ -41,7 +41,7 @@ def resize_image(sender,instance, **kwargs):
 
 class Level(BaseModel):
     level_no = models.IntegerField()
-    number_of_questions = models.IntegerField()
+    # number_of_questions = models.IntegerField()
     level_category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='levels')
     
     class Meta:

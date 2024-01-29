@@ -172,7 +172,7 @@
                                           <div class="mt-3">
                                              <button class="btn w-100 dropdown-toggle border-user-defind height border-radius border-radius-hover" id='level_btn' type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                              {% if record %}
-                                             {{record.question_level}}, {{record.question_level.level_category}}
+                                             Level {{record.question_level.level_no}}, {{record.question_level.level_category.category_title}}
                                              {% else %}
                                              Select Level
                                              {% endif %}

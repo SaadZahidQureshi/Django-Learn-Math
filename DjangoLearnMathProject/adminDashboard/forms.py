@@ -18,7 +18,7 @@ class LevelForm(StandardForm):
 
     class Meta:
         model= Level
-        fields = ['level_no', 'number_of_questions','level_category']
+        fields = ['level_no','level_category']
 
 
 

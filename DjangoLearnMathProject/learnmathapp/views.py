@@ -27,12 +27,12 @@ def category(request, pk):
     correct = 0
     attempted = 0
     wrong = 0
-    answers = Answer.objects.prefetch_related('question', 'question__question_level', 'question__question_level__level_category').filter(user=request.user, question__question_level__level_category_id=pk).order_by('-question__question_level__level_no')
-    print(answers.values())
 
-    user = request.user
+    answers = Answer.objects.prefetch_related('question', 'question__question_level', 'question__question_level__level_category').filter(user=request.user, question__question_level__level_category_id=pk).order_by('-question__question_level__level_no')
+    # print(answers.values())
+
     user_last_answer = answers.first()
-    print(user_last_answer)
+    # print(user_last_answer.id)
     if user_last_answer:
         user_last_answer_question = user_last_answer.question
         user_last_answer_question_level = user_last_answer.question.question_level
@@ -65,7 +65,7 @@ def category(request, pk):
             
             if user_last_answer.selected_option == user_last_answer_question.correct_answer or skip == 'True':
                 question_response = helpers.get_next_question(request, context['category'], context['current_level'].level_no, user_last_answer_question.id)
-
+                print(user_last_answer_question.id)
                 try:
                     if question_response:
                         context['question'] = Question.objects.get(id = question_response['next_qs_id'])
@@ -131,21 +131,34 @@ def category(request, pk):
             else:
                 messages.warning(request, 'this level have no questions yet.' )
     else:
-        local_level_no = 1
-        local_level_no_questions_count = Question.objects.filter(question_level = local_level_no).count()
-        local_level_no_questions = Question.objects.filter(question_level = local_level_no)
-        local_level_no_questions = list(local_level_no_questions)
 
-        context['category']=category
-        context['levels'] = Level.objects.filter(level_category = category.id)
-        context['current_level'] = context['levels'].get(level_no = local_level_no)
-        context['total_questions'] = local_level_no_questions_count
-        context['question'] =local_level_no_questions[0]
-        context['questionno'] =local_level_no_questions.index(context['question'])+1
+        levels = Level.objects.filter(level_category = category.id).exists()
+        if levels:
+            all_levels = Level.objects.filter(level_category = category.id)
+            local_level_no = all_levels.first().level_no
+            local_level_no_questions_count = Question.objects.filter(question_level = all_levels.first().id).count()
+            local_level_no_questions = Question.objects.filter(question_level = all_levels.first().id)
+            local_level_no_questions = list(local_level_no_questions)
 
-        context['correct'] = 0
-        context['wrong'] = 0
-        context['attempted'] = 0
+            if local_level_no_questions_count > 0:
+
+                context['category']=category
+                context['levels'] = all_levels
+                context['current_level'] = context['levels'].get(level_no = local_level_no)
+                context['total_questions'] = local_level_no_questions_count
+                context['question'] =local_level_no_questions[0]
+                context['questionno'] =local_level_no_questions.index(context['question'])+1
+
+                context['correct'] = 0
+                context['wrong'] = 0
+                context['attempted'] = 0
+            else:
+                context['category']=category
+                context['levels'] = all_levels
+                messages.info(request, 'This category level has no questions yet')
+        else:
+            messages.info(request, 'This category has no levels yet')
+            return redirect('user-dashboard')
 
     return render(request, 'user/Question-wrong-ans.html', context)
 

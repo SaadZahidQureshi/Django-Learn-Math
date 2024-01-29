@@ -89,6 +89,14 @@
           </div>
       </nav>
 
+      {% if messages %}
+        <div class=''>
+          {% for message in messages  %}
+            <div class="d-flex justify-content-center mt-1"><p class= 'alert  text-center index {{message.tags}}'>{{message}}</p></div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <!-- banner container -->
       <div class="container-fluid">
         <div class="row justify-content-center mt-4 ">
