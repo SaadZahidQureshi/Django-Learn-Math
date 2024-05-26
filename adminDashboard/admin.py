@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Level)
 class LevelAdmin(admin.ModelAdmin):
-    list_display = ('level_no', 'number_of_questions', 'level_category')
+    list_display = ('level_no', 'level_category')
     readonly_fields = ('created_at', 'updated_at')
 
 @admin.register(Question)

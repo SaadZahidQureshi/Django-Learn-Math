@@ -46,7 +46,7 @@ def dashboard(request):
     context={
         'categories' : Category.objects.all().count(),
         'users' : User.objects.all().count(),
-        'questions': Level.objects.aggregate(total_questions=Sum('number_of_questions'))
+        # 'questions': Level.objects.aggregate(total_questions=Sum('number_of_questions'))
     }
     return render (request, 'admin_dashboard/dashboard.html',context)
 
