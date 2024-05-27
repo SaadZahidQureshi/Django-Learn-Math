@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate,logout
+from django.contrib.auth import login, authenticate,logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
@@ -16,25 +16,24 @@ from adminDashboard.forms import CategoryForm, LevelForm, QuestionForm
 
 # Admin views here
 def admin_login(request):
+    context = {}
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(request, email=email, password=password)
-
             if user is not None and user.is_staff:
                 login(request, user)
-                return redirect('dashboard')  # Redirect to your desired URL after successful login
+                return redirect('dashboard')
             else:
                 messages.error(request, 'You not authorised.')
-        print(form.errors)
         return render(request, 'admin_dashboard/login.html', {'form': form})
 
     else:
         form = AuthenticationForm()
-
-    return render(request, 'admin_dashboard/login.html', {'form': form})
+    context['form'] = form
+    return render(request, 'admin_dashboard/login.html',context)
 
 @login_required(login_url='admin-login')
 def admin_logout(request):
@@ -46,29 +45,28 @@ def dashboard(request):
     context={
         'categories' : Category.objects.all().count(),
         'users' : User.objects.all().count(),
-        # 'questions': Level.objects.aggregate(total_questions=Sum('number_of_questions'))
+        'questions': Question.objects.all().count()
     }
     return render (request, 'admin_dashboard/dashboard.html',context)
 
 @login_required(login_url='admin-login')
 def profile(request):
-    context={
-        'form':PasswordChangeForm(request.user)
-    }
+    context={}
     if request.method == 'POST':
         form = PasswordChangeForm(request.user,request.POST)
-        context['form'] = form
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, request.user)
+            messages.success(request, 'Your password was successfully updated!')
             return redirect('dashboard')
-        print(form.errors)
+        else:
+            context['form'] = form
     return render( request, 'admin_dashboard/profile.html',context)
 
 
 # users views here 
 @login_required(login_url='admin-login')
 def users(request):
-
     search = request.GET.get('search-bar', '')
     start_date = request.GET.get('startdate', '')
     end_date = request.GET.get('enddate', '')
@@ -78,7 +76,7 @@ def users(request):
         'enddate': end_date
     }
 
-    records = User.objects.all()
+    records = User.objects.all().order_by("-id")
     if start_date and end_date:
         records = records.filter(date_joined__range=(start_date, end_date))
     elif start_date:
@@ -86,33 +84,28 @@ def users(request):
     elif end_date:
         records = records.filter(date_joined__lte=end_date)
 
-    # Filter based on name
     if search:
         records = records.filter(Q(name__icontains=search) | Q(email__icontains=search) | Q(id__icontains = search))
 
-    # Pagination
     paginator = Paginator(records, 4)
     page = request.GET.get('page')
 
     try:
-        records_within_range = paginator.page(page)
+        records = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
-        records_within_range = paginator.page(1)
+        records = paginator.page(1)
     except EmptyPage:
-        # If the page is out of range, show the last page
-        records_within_range = paginator.page(paginator.num_pages)
-
+        records = paginator.page(paginator.num_pages)
 
     # users = User.objects.all()
-    users_count = records.count()
-    context['users']= records_within_range
-    context['users_count'] = users_count
+    context['users']= records
+    context['users_count'] = User.objects.all().count()
 
     return render(request, 'admin_dashboard/users.html', context)
 
 @login_required(login_url='admin-login')
 def usersDetails(request, pk):
+    context = {}
     user = User.objects.get(id=pk)
     answered_by_user = Answer.objects.filter(user__id = pk)
     list_questions=[]
@@ -125,12 +118,19 @@ def usersDetails(request, pk):
     questions_attempted = len(list_questions)
     levels_worked_on = len(list_levels)
 
-    return render (request, 'admin_dashboard/user-details.html',{'user':user, 'questions_attempted': questions_attempted, 'levels_worked_on': levels_worked_on})
+    context['user'] = user
+    context['questions_attempted'] = questions_attempted
+    context['levels_worked_on'] = levels_worked_on
+    return render (request, 'admin_dashboard/user-details.html',context)
 
 @login_required(login_url='admin-login')
 def usersDelete(request,pk):
     user = User.objects.get(id=pk)
-    user.delete()
+    if user is not None:
+        user.delete()
+        messages.success(request,f"user deleted successfully")
+    else:
+        messages.error(request,f"user not found.")
     return redirect('users')
 
 
@@ -147,7 +147,7 @@ def categories(request):
         'category': request.GET.get('category',None)
     }
 
-    records = Category.objects.all()
+    records = Category.objects.all().order_by('-id')
     if start_date and end_date:
         records = records.filter(created_at__range=(start_date, end_date))
     elif start_date:
@@ -155,7 +155,6 @@ def categories(request):
     elif end_date:
         records = records.filter(created_at__lte=end_date)
 
-    # Filter based on name
     if search:
         records = records.filter(Q(category_title__icontains=search) | Q(category_description__icontains=search) | Q(id__icontains=search))
 
@@ -163,17 +162,14 @@ def categories(request):
     page = request.GET.get('page')
 
     try:
-        records_within_range = paginator.page(page)
+        records = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
-        records_within_range = paginator.page(1)
+        records = paginator.page(1)
     except EmptyPage:
-        # If the page is out of range, show the last page
-        records_within_range = paginator.page(paginator.num_pages)
+        records = paginator.page(paginator.num_pages)
 
-    category_count = records.count()
-    context['categories']= records_within_range
-    context['category_count'] = category_count
+    context['categories']= records
+    context['category_count'] = Category.objects.all().count()
 
     return render(request, 'admin_dashboard/category.html', context)
 
@@ -185,11 +181,14 @@ def addCategory(request):
     }
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
-        context['form']=form
         if form.is_valid():
-            category = form.cleaned_data['category_title']
+            context['category'] = form.cleaned_data['category_title']
             form.save()
-            return redirect(reverse('categories')+f'?addAlert=true&category={category}')
+            messages.success(request,f"{context['category']} added successfully")
+            return redirect('categories')
+        else:
+            messages.error(request,"Something bad happend.")
+            context['form'] = form
     return render(request, 'admin_dashboard/add-category.html', context)
 
 @login_required(login_url='admin-login')
@@ -209,14 +208,22 @@ def updateCategory(request,pk):
         form = CategoryForm(request.POST, request.FILES,instance=category)
         context['form']= form
         if form.is_valid():
+            context['category'] = form.cleaned_data['category_title']
             form.save()
+            messages.success(request,f"{context['category']} updated successfully")
             return redirect(reverse('categories')+f'?updateAlert=true&category={category.category_title}')
+        else:
+            context['form'] = form
     return render(request, 'admin_dashboard/update-category.html',context)
 
 @login_required(login_url='admin-login')
 def deleteCategory(request,pk):
     category = Category.objects.get(id=pk)
-    category.delete()
+    if category is not None:
+        category.delete()
+        messages.success(request, "category deleted successfully")
+    else:
+        messages.error(request, "category not found.")
     return redirect('categories')
 
 
@@ -227,7 +234,7 @@ def levels(request):
         'startdate': request.GET.get('startdate',''),
         'enddate': request.GET.get('enddate',''),
         'seachbar': request.GET.get('search-bar',''),
-        'records' : Level.objects.all(),
+        'records' : Level.objects.all().order_by("-id"),
         'records_count' : Level.objects.all().count,
         'levelno': request.GET.get('levelno',None)
     }
@@ -239,7 +246,6 @@ def levels(request):
     elif context['enddate']:
         context['records'] = context['records'].filter(created_at__lte=context['enddate'])
 
-    # Filter based on name
     if context['seachbar']:
         context['records'] = context['records'].filter(Q(level_no__icontains=context['seachbar']) | Q(number_of_questions__icontains=context['seachbar']) | Q(id__icontains = context['seachbar']) | Q(level_category__category_title__icontains = context['seachbar']))
 
@@ -249,35 +255,28 @@ def levels(request):
     try:
         records_within_range = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
         records_within_range = paginator.page(1)
     except EmptyPage:
-        # If the page is out of range, show the last page
         records_within_range = paginator.page(paginator.num_pages)
         
-    
-
     level_count = context['records'].count()
     context['records']= records_within_range
     context['level_count'] = level_count
-
-    
     return render(request,'admin_dashboard/level.html' ,context)
 
 @login_required(login_url='admin-login')
 def addLevel(request):
     context={
-        'categories': Category.objects.all(),
-        'form': LevelForm()
+        'categories': Category.objects.all()
     }
     if request.method =='POST':
         form = LevelForm(request.POST)
-        context['form'] = form
         if form.is_valid():
             form.save()
-            messages.success = (request, True)
-            return redirect(reverse('levels')+f'?addlevelAlert=true')
-        print(form.errors)
+            messages.success(request, "level added successfully")
+            return redirect('levels')
+        else:
+            context['form'] = form
     return render(request, 'admin_dashboard/add-level.html',context)
 
 @login_required(login_url='admin-login')
@@ -294,21 +293,26 @@ def levelUpdate(request,pk):
         'record': level,
         'categories': Category.objects.all(),
         'form' : LevelForm(instance=level),
-       
+        'number_of_questions': level.number_of_questions
     }
     if request.method == 'POST':
         form = LevelForm(request.POST,instance=level)
-        context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect(reverse('levels')+f'?updatelevelAlert=true&levelno={level.level_no}')
-
+            messages.success(request, f"Level {level.level_no} of {level.level_category.category_title} updated successfully")
+            return redirect('levels')
+        else:
+            context['form'] = form
     return render(request, 'admin_dashboard/update-level.html',context)
 
 @login_required(login_url='admin-login')
 def deleteLevel(request,pk):
     record = Level.objects.get(id=pk)
-    record.delete()
+    if record is not None:
+        record.delete()
+        messages.success(request, "Level deleted successfully")
+    else:
+        messages.error(request, "record not found.")
     return redirect('levels')
 
 
@@ -323,7 +327,6 @@ def Questions(request):
         'enddate': request.GET.get('enddate', ''),
         'search': request.GET.get('search-bar', '')
     }
-
     selected_category_title = context['category']
     selected_level = context['level']
 
@@ -353,24 +356,20 @@ def Questions(request):
     elif context['enddate']:
         context['records'] = context['records'].filter(created_at__lte=context['enddate'])
 
-    # Filter based on name
     if context['search']:
         context['records'] = context['records'].filter(
             Q(question_description__icontains=context['search'])| Q(id__icontains = context['search'] ) | Q(question_level__level_category__category_title__icontains = context['search'] )
         )
 
     context['record_count'] = context['records'].count()
-
     paginator = Paginator(context['records'],4)
     page = request.GET.get('page')
 
     try:
         records_within_range = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
         records_within_range = paginator.page(1)
     except EmptyPage:
-        # If the page is out of range, show the last page
         records_within_range = paginator.page(paginator.num_pages)
 
     question_count = context['records'].count()
@@ -382,17 +381,18 @@ def Questions(request):
 
 @login_required(login_url='admin-login')
 def addQuestion(request):
-    
     context={
         'levels':Level.objects.all(),
         'form': QuestionForm()
     }
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
-        context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect(reverse('questions')+f'?questionAddedAlert=true')
+            messages.success(request, "question added successfully")
+            return redirect('questions')
+        else:
+            context['form'] = form
     return render(request, 'admin_dashboard/add-question.html',context)
 
 @login_required(login_url='admin-login')
@@ -411,16 +411,22 @@ def updateQuestion(request, pk):
     }
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES, instance=Question.objects.get(id=pk))
-        context['form'] = form
         if form.is_valid():
             form.save()
-            return redirect(reverse('questions')+f'?questionUpdateAlert=true')
+            messages.success(request, "question updated successfully")
+            return redirect('questions')
+        else:
+            complex['form'] =form
     return render(request, 'admin_dashboard/update-question.html', context)
 
 @login_required(login_url='admin-login')
 def deleteQuestion(request,pk):
     record = Question.objects.get(id=pk)
-    record.delete()
+    if record is not None:
+        record.delete()
+        messages.success(request, "question deleted successfully")
+    else:
+        messages.error(request, 'record not found.')
     return redirect('questions')
 
 

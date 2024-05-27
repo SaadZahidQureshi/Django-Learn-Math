@@ -209,7 +209,7 @@
                                                             {% endif %}
                                                         </ul> 
                                                     </div>
-                                                    {% if form.errors %}
+                                                    {% if form.question_level.errors %}
                                                     {% for error in form.question_level.errors %}
                                                     <small class='text-danger'>{{error}}</small>
                                                     {% endfor %}
@@ -269,7 +269,7 @@
                                                     </div>
                                                         
                                                 </div>
-                                                {% if form.errors %}
+                                                {% if form.question_image.errors %}
                                                 {% for error in form.question_image.errors %}
                                                 <small class='text-danger'>{{error}}</small>
                                                 {% endfor %}
