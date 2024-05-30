@@ -10,6 +10,10 @@ from django.urls import reverse
 from customAuth.models import User
 from adminDashboard.models import CATEGORY_LIST, Category, Level, Question,Answer
 from adminDashboard.forms import CategoryForm, LevelForm, QuestionForm
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+from django.utils.timezone import now
+import json
 
 
 # Create your views here.
@@ -47,7 +51,24 @@ def dashboard(request):
         'users' : User.objects.all().count(),
         'questions': Question.objects.all().count()
     }
+    
+    user_counts = get_monthly_user_counts()
+    print(user_counts)
+    # months = [entry['month'].strftime('%Y-%m') for entry in user_counts]
+    # counts = [entry['count'] for entry in user_counts]
+    
+    # context['months'] = json.dumps(months)
+    # context['counts'] = json.dumps(counts)
     return render (request, 'admin_dashboard/dashboard.html',context)
+
+def get_monthly_user_counts():
+    context={}
+    users = User.objects.all().order_by("date_joined")
+    users_count = User.objects.all().order_by("date_joined").count()
+    context['users'] = users
+    context['user_count'] = users_count
+    return users
+
 
 @login_required(login_url='admin-login')
 def profile(request):

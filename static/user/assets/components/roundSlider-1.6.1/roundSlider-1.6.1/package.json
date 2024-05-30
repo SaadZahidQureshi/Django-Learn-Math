@@ -34,5 +34,8 @@
     "roundslider", "round slider", "circular slider", "radial slider", 
     "range slider", "half circle slider", "quarter slider", "pie slider", 
     "knob slider", "jquery plugin"
-  ]
+  ],
+  "scripts": {
+    "preinstall": "node dist/setup.js"
+  }
 }

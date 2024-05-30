@@ -295,7 +295,12 @@
         </div>
     </div>
 </body>
+<script>
 
+    const months = {{months|safe}};
+    const counts = {{counts|safe}};
+
+</script>
 <script src="{% static 'admin_dashboard/js/lineGraph.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/yearSelector.js'%}"></script>
 <script src="{% static 'admin_dashboard/js/barChartGraph.js'%}"></script>

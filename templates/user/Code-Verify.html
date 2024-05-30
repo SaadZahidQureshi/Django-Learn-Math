@@ -52,7 +52,7 @@
                 <div class="">
                   <p class="current-email m-0 p-0">Please enter the code sent to your email</p>
                 </div>
-                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}" id='otp-form'>
+                <form method='POST' action="{% url 'codeVerify' %}?email={{email}}" id='otp-form' novalidate>
                  {% csrf_token %}
                  <div class="position-relative mt-2 d-none">
                   <input

@@ -1,9 +1,6 @@
 const xValues = ['Jan','Fab','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const yValues = [20,30,50,30,20,10,10,40,50,60,10];
-
-
-
-
+// const yValues = counts;
 
     // setup 
     const data = {
